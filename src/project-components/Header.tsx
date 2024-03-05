@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import RegisterModal from './RegisterModel';
 import {clientId,clientSecreat,refreshToken, base_adobe_url} from "../AppConfig"
+import { Link, useLocation } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -130,7 +131,7 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  const history = useLocation();
   const handleLogin = async () => {
     try {
       const response = await axios.post('https://viku.space/renault/reapi.php', {
@@ -162,27 +163,18 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
                 },
             }
         );
-        // Extract the refresh token from the response
         const tokenData = responseToken.data;
-      // const refreshTokenResponse = await axios.post(
-      //   'https://learningmanager.adobe.com/oauth/token/refresh',
-      //   {
-      //     client_id: clientId,
-      //     client_secret: clientSecreat,
-      //     refresh_token: refresh_token, // Assuming refreshToken is received in the login response
-      //   }
-      // );
-  
-      // Store the access token received in the response to localStorage
       localStorage.setItem(
         'access_token',
         tokenData.access_token
       );
+
       const userDataResponse = await axios.get(
         `${base_adobe_url}/primeapi/v2/users?page[offset]=0&page[limit]=10&sort=id&ids=email:${username}`,
         {
           headers: {
-            Authorization: `Bearer ${tokenData.access_token}`,
+            // Authorization: `Bearer ${tokenData.access_token}`,
+            Authorization: `Bearer dea088ff9bbdca4e8cbbd5fa7de2d290`,
           },
         }
       );
@@ -192,12 +184,15 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
   
       // Store the user ID in localStorage
       localStorage.setItem('userId', userId);
-  
-      // Navigate to the dashboard page
-      // Replace '/dashboard' with the actual path to your dashboard component
-      // You may need to use a routing library like react-router-dom for navigation
-      window.location.href = '/dashboard';
-  
+      const isManager = userDataResponse.data?.data?.[0]?.attributes?.roles.includes('Manager');
+
+      // Navigate based on the user's role
+      const newPath = isManager ? '/managerDashboard' : '/dashboard';
+      
+      if (location.pathname !== newPath) {
+        window.location.href = newPath; // Redirect to the new path
+      }
+
       console.log('Login successful', response.data);
       setShowLoginModal(false);
       setAgencyId('');
@@ -261,7 +256,7 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
               onChange={(e) => setAgencyId(e.target.value)}/>
             <InputField type="email" placeholder="Email Address"  value={username}
               onChange={(e) => setUsername(e.target.value)}/>
-            <InputField type="password" placeholder="Password"  value={username}
+            <InputField type="password" placeholder="Password"  value={password}
               onChange={(e) => setPassword(e.target.value)}/>
             {/* Error message display */}
             {error && <div style={{ color: 'red' }}>{error}</div>}
