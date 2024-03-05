@@ -221,7 +221,7 @@ const ManagerDashboard = () => {
             ))}
           </div>
         </CardsData>
-        <TableData>
+        <TableData className="overflow-hidden">
           <table className="w-full mx-auto text-lg rounded-lg shadow-custom">
             <thead>
               <tr className="bg-gray-50">
