@@ -2,7 +2,7 @@ import React from 'react'
 
 const DashboardHeading = () => {
   return ( <div>
-    <div className="grid grid-rows-3 grid-flow-col gap-4">
+    <div className="grid grid-rows-1 grid-flow-col gap-4">
       <div className="row-start-1 row-span-2 mt-10 px-20 mx-20">
       <div className="text-6xl font-semibold mb-4">Prepare to Grow Wings!</div>
 
