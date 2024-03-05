@@ -6,9 +6,19 @@ import ProfileCard from './ProfileCard';
 import Badges from './Badges';
 import CertificateCard from './Certificate';
 import axios from 'axios';
+import NewProduct from './NewProducts';
+import ComplianceTraining from './ComplainceTraining';
+import SkillProgress from './SkillProgress';
+import Network from './Network';
+import Leaderboard from './Leaderboard';
+import CourseExplore from './ExploreCourse';
+import CalendarCourse from './CalenderCourse';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const Dashboard = () => {
   const [certificate, setCertificate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -45,10 +55,14 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
   return (
     <>
       <Header isLogin={false} />
-      <div className="mt-5 px-10">
+      <div className="mt-5">
         <DashboardHeading />
         <div className="grid grid-rows-3 grid-flow-col gap-4 ">
           <div className="row-start-1 row-span-4 max-w-xs">
@@ -62,17 +76,39 @@ const Dashboard = () => {
               />
             )}
           </div>
-          <div className="row-start-1 row-end-4"><LineChart /></div>
-          {/* Render the certificate card only if certificate data exists */}
-          {certificate && (
-            <div className="row-start-1 row-end-4">
-              <CertificateCard
-                imageUrl={certificate.imageUrl}
-                name={certificate.name}
-                description={certificate.description}
-              />
+          <div className="row-start-1 row-end-4">
+            <LineChart />
+            <NewProduct/>
+          </div>
+          <div className="row-start-1 row-end-4">
+            <ComplianceTraining/>
+            <SkillProgress/>
+          </div>
+        </div>
+        <div className="flex mt-4">
+          <div style={{width:"23rem"}}>
+            <Network/>
+          </div>
+          <div className="ml-4 flex-grow" style={{marginTop: "-45px"}}>
+            <Leaderboard />
+            <div className='mt-4'>              
+              <CourseExplore/>
             </div>
-          )}
+            <div className='mt-4 mb-10' style={{ display: 'flex'}}>
+              <div style={{ width: '40%', marginRight: '10px' }}>
+                <CalendarCourse date={selectedDate.toISOString()} />
+              </div>
+              <div style={{ width: '30%' }}>
+                <Calendar
+                  onChange={handleDateChange}
+                  value={selectedDate}
+                  calendarType="US"
+                  locale="en-US"
+                  tileHeight={30} // Adjust the tileHeight property to reduce the height of the calendar
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
