@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import RegisterModal from './RegisterModel';
+import {clientId,clientSecreat,refreshToken, base_adobe_url} from "../AppConfig"
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -136,7 +137,67 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
         action: 'login',
         username: username,
         password: password,
+      },{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InlhdGluIn0.SXp3ID7mgUcLGYMVkvb3RJgc_tJ1hGv2NR_08s5SYNM'
+        }
       });
+        const client_id = clientId;
+        const client_secret = clientSecreat;
+        const refresh_token = refreshToken;
+
+        const params = new URLSearchParams({
+            client_id,
+            client_secret,
+            refresh_token
+        });
+        const url =  `${base_adobe_url}/oauth/token/refresh`;
+        const responseToken = await axios.post(
+            `${url}`,
+            params,
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            }
+        );
+        // Extract the refresh token from the response
+        const tokenData = responseToken.data;
+      // const refreshTokenResponse = await axios.post(
+      //   'https://learningmanager.adobe.com/oauth/token/refresh',
+      //   {
+      //     client_id: clientId,
+      //     client_secret: clientSecreat,
+      //     refresh_token: refresh_token, // Assuming refreshToken is received in the login response
+      //   }
+      // );
+  
+      // Store the access token received in the response to localStorage
+      localStorage.setItem(
+        'access_token',
+        tokenData.access_token
+      );
+      const userDataResponse = await axios.get(
+        `${base_adobe_url}/primeapi/v2/users?page[offset]=0&page[limit]=10&sort=id&ids=email:${username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${tokenData.access_token}`,
+          },
+        }
+      );
+  
+      // Extract user ID from the response data
+      const userId = userDataResponse.data?.data?.[0]?.id;
+  
+      // Store the user ID in localStorage
+      localStorage.setItem('userId', userId);
+  
+      // Navigate to the dashboard page
+      // Replace '/dashboard' with the actual path to your dashboard component
+      // You may need to use a routing library like react-router-dom for navigation
+      window.location.href = '/dashboard';
+  
       console.log('Login successful', response.data);
       setShowLoginModal(false);
       setAgencyId('');

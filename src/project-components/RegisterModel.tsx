@@ -101,6 +101,12 @@ const RegisterModal = ({ onClose }) => {
           const response = await axios.post('https://viku.space/renault/reapi.php', {
             action: 'checkUsername',
             username: formData.username
+          },{
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InlhdGluIn0.SXp3ID7mgUcLGYMVkvb3RJgc_tJ1hGv2NR_08s5SYNM',
+              'header1': 'test'
+            }
           });
     
           if (response.data.exists) {
