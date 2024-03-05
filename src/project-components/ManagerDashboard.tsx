@@ -172,20 +172,20 @@ const ManagerDashboard = () => {
           <Card className="">
             <CardContent>
               {States.map((state) => (                
-                <div className="grid grid-cols-3 gap-4 flex items-center space-x-4">
-                  <div className="flex-none">
+                <div className="grid grid-cols-12 gap-1 flex items-center space-x-1">
+                  <div className="col-span-3">
                     <span className="text-sm font-medium text-gray-700">
                       {state.state}
                     </span>
                   </div>
 
-                  <div className="flex-auto m-4 bg-gray-200 rounded-full h-4 overflow-hidden">
+                  <div className="col-span-8 mt-5 mb-4 bg-gray-200 rounded-full h-4 overflow-hidden">
                     <div
                       className="bg-blue-500 h-4 rounded-full"
                       style={{ width: `${state.percent}%` }}
                     ></div>
                   </div>
-                  <div className="flex-none">
+                  <div className="col-span-1 text-center">
                     <span className="text-sm font-medium text-gray-700">
                       {state.percent}%
                     </span>
@@ -240,7 +240,7 @@ const ManagerDashboard = () => {
                   <td className="border-b px-3 py-2">{data.booking}</td>
                   <td className="border-b px-3 py-2">{data.quarter}</td>
 
-                  <td className="border-b px-3 py-2">{data.tcs}</td>
+                  <td className={`border-b px-3 py-2 ${data.status}`}>{data.tcs}</td>
                 </tr>
               ))}
             </tbody>
