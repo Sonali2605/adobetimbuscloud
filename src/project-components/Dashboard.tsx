@@ -64,7 +64,7 @@ const Dashboard = () => {
       <Header isLogin={false} />
       <div className="mt-5">
         <DashboardHeading />
-        <div className="grid grid-rows-3 grid-flow-col gap-4 ">
+        <div className="grid grid-rows-3 grid-flow-col gap-4 px-10 ">
           <div className="row-start-1 row-span-4 max-w-xs">
             <ProfileCard name="Olivia Clarke" />
             <Badges />
@@ -85,7 +85,7 @@ const Dashboard = () => {
             <SkillProgress/>
           </div>
         </div>
-        <div className="flex mt-4">
+        <div className="flex mt-4 px-10">
           <div style={{width:"23rem"}}>
             <Network/>
           </div>
