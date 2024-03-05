@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from React Router
 
 const CourseExplore = () => {
   // Dummy data for courses taken by peers
@@ -25,8 +26,9 @@ const CourseExplore = () => {
               <div className="absolute top-0 left-0 w-full text-center py-2">
                 <h2 className="text-sm text-white font-bold">{course.name}</h2>
               </div>
-              <div className="absolute bottom-0 left-0 w-full text-center py-2">
-                <button className="text-blue-500 text-sm bg-white px-4 py-2 rounded-md">Explore</button>
+              <div className="absolute bottom-0 left-0 w-full text-center py-2 mb-3">
+                {/* Replace button with Link component */}
+                <Link to="/detailspage" className="text-blue-500 text-sm bg-white px-4 py-2 rounded-md">Explore</Link>
               </div>
             </div>
           </div>
