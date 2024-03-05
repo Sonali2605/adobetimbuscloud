@@ -163,43 +163,15 @@ const ManagerDashboard = () => {
         <div className="grid gap-4 grid-cols-2">
           <Card className="">
             <CardContent>
-              <div>
-                <img src="" alt="Manager Dashboard" />
+              <div className="p-1">
+                <img src="./images/Dashboard/ManagerDashboard-1.png" alt="Manager Dashboard" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="">
             <CardContent>
-              {States.map((state) => (
-                // <table>
-                //   <tbody>
-                //     <tr className="flex items-center space-x-4">
-                //       {/* <div className="flex items-center space-x-4"> */}
-                //       <td>
-                //         <span className="text-sm font-medium text-gray-700">
-                //           {state.state}
-                //         </span>
-                //       </td>
-                //       <td className="flex-auto m-4 bg-gray-200 rounded-full h-4 overflow-hidden">
-                //         {/* <div > */}
-                //         <div
-                //           className="bg-blue-500 h-4 rounded-full"
-                //           style={{ width: `${state.percent}%` }}
-                //         ></div>
-                //         {/* </div> */}
-                //       </td>
-                //       <td>
-                //         <span className="text-sm font-medium text-gray-700">
-                //           {state.percent}%
-                //         </span>
-                //       </td>
-                //       {/* </div> */}
-                //     </tr>
-                //   </tbody>
-                // </table>
-
-                // <div className="">
+              {States.map((state) => (                
                 <div className="grid grid-cols-3 gap-4 flex items-center space-x-4">
                   <div className="flex-none">
                     <span className="text-sm font-medium text-gray-700">
@@ -228,13 +200,15 @@ const ManagerDashboard = () => {
           <div className="grid gap-4 grid-cols-4">
             {details.map((detail) => (
               <Card>
-                <CardHeader className="p-5 border-b border-gray border-opacity-13">
+                <CardHeader className="p-5 border-b border-gray border-opacity-13 min-h-[72px]">
                   <CardTitle>
+                    <span className="inline-block align-top w-7/12">
                     {detail.cardtitle}{" "}
+                    </span>
                     <FontAwesomeIcon
                       icon={faArrowUp}
-                      className="text-green-500 text-right"
-                      style={{ float: "inline-end" }}
+                      className="text-green-500 text-right align-top"
+                      style={{ float: "inline-end"}}
                     />
                   </CardTitle>
                 </CardHeader>
