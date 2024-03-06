@@ -32,9 +32,13 @@ const Detailspage = () => {
     "Congratulations on completing the “Negotiations 101” course"
   );
   const [errorMsg] = useState("You have earned your badge!");
-  const [img] = useState(
+  /* const [img] = useState(
     "https://cpcontents.adobe.com/public/account/107442/accountassets/107442/badges/8f41853356a8453d9e263f39d4377d74/badge_blackbelt.png"
+  ); */
+  const [img] = useState(
+    "./images/Asset_7_4x.png"
   );
+
 
   const [progressPercentage, setProgressPercentage] = useState(0);
   const navigate = useNavigate();
@@ -206,7 +210,10 @@ const Detailspage = () => {
               ></div>
             </div>
             <button
-              className="bg-blue-300 rounded-lg w-full p-2 mb-8"
+              /* className="bg-blue-300 rounded-lg w-full p-2 mb-8" */
+              className={`  ${progressPercentage === 100
+                ? "bg-green-500"
+                : "bg-blue-500"} rounded-lg w-full p-2 mb-8 text-white` }
               onClick={() => handleplayer(cid)}
             >
               {progressPercentage === 100

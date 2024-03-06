@@ -48,6 +48,7 @@ const ModalCloseButton = styled.button`
 const ModalTitle = styled.div`
   font-size: 24px;
   font-weight: bold;
+  font: normal normal normal 24px Impact;
 `;
 
 const ModalSubheader = styled.div`
@@ -230,7 +231,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
           placeholder="Password"
         />
 
-        <SecondaryButton onClick={handleSubmit}>Register</SecondaryButton>
+        <SecondaryButton onClick={handleSubmit}>REGISTER</SecondaryButton>
 
       </ModalContent>
     </ModalContainer>
