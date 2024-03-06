@@ -256,8 +256,8 @@ const ManagerDashboard = () => {
             ))}
           </div>
         </CardsData>
-        <TableData>
-          <table className="w-full mx-auto text-lg rounded-lg shadow-custom bg-white">
+        <TableData className="overflow-hidden">
+          <table className="w-full mx-auto text-lg rounded-lg shadow-custom">
             <thead>
               <tr className="" style={{ backgroundColor: "#FAFAFA" }}>
                 <th className="px-3 py-2 border-b">Growth Associate</th>
