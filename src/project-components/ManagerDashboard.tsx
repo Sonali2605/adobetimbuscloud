@@ -173,7 +173,9 @@ const ManagerDashboard = () => {
           </div>
         </div> */}
         <div className="absolute top-0 right-0 p-4 mr-10 flex items-center space-x-2">
-          <span className="text-gray-800 font-medium">Mary Jane Stewart</span>
+          <span className="text-gray-800 font-medium mr-3">
+            Mary Jane Stewart
+          </span>
           <img
             src="./images/maryJaneStewart.png"
             alt="Image"
@@ -199,7 +201,7 @@ const ManagerDashboard = () => {
               {States.map((state) => (
                 <div className="grid grid-cols-12 gap-1 flex items-center space-x-1">
                   <div className="col-span-3">
-                    <span className="text-lg font-medium ">{state.state}</span>
+                    <span className="text-lg font-bold ">{state.state}</span>
                   </div>
 
                   <div className="col-span-8 mt-5 mb-4 bg-gray-200 rounded-full h-4 overflow-hidden">
