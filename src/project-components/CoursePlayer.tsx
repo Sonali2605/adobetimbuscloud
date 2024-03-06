@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import ".././styles/CoursePlayer.css";
-import {learnerToken} from "../AppConfig"
+import { apis } from '.././apiServices/apis'
 
 interface CoursePlayerProps {
     cid: string;
@@ -16,21 +16,18 @@ function CoursePlayer(props: CoursePlayerProps ) {
     const navigate = useNavigate();
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const { cid, mid, goBackUrl } = props;
-    // const token = "Bearer dea088ff9bbdca4e8cbbd5fa7de2d290";
-    // const learnerToken = "46eda135e6f14690eb744a422730d0a0";
-    // const learnerToken = "56ce0ccf96e1197a6e247ac611cf94f3";
-    
+    const[learnerToken , setlearnerToken]=useState()
+    const courseplayerapi = async () =>{
+    const response = await apis.getRefreshToken()
+    setlearnerToken(response.access_token)
+    }
+
     useEffect(() => {
-        // const cid = "course:9179792"
-        // const cid = "course:9180283"
         // if (typeof window !== 'undefined') {
         //     document.body.style.overflowY = 'hidden';
         // }
+        courseplayerapi()
         const url = `https://learningmanager.adobe.com/app/player?lo_id=${props.cid}&access_token=${learnerToken}`;
-
-        // if (mid) {
-        //     url = url + `&module_id=${mid}`;
-        // }
  
         if (url && iframeRef?.current) {
             iframeRef.current.src = url;
@@ -63,8 +60,6 @@ function CoursePlayer(props: CoursePlayerProps ) {
             >
                 <iframe
                     ref={iframeRef}
-              
-                  
                     id="pplayer_iframe"
                     name="pfplayer_frame"
                     title="Player"

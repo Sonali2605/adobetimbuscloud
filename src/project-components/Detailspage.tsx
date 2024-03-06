@@ -10,6 +10,8 @@ import CoursePlayer from "./CoursePlayer";
 import ModalforSuccess from ".././common/Modal/Modal";
 import jsonData from "./resdata.json";
 import { cid } from "../AppConfig";
+import { apis } from '.././apiServices/apis'
+import axios from "axios";
 
 interface Details {
   data?: {
@@ -27,6 +29,9 @@ const Detailspage = () => {
   const [isCiid, setIsCiid] = useState<string | null>(null);
   const location = useLocation();
   const currentUrl = location.pathname;
+  const[learnerToken , setlearnerToken]=useState()
+
+  
   const [showDateValidationModal, setShowDateValidationModal] = useState(false);
   const [title] = useState(
     "Congratulations on completing the “Negotiations 101” course"
@@ -39,20 +44,31 @@ const Detailspage = () => {
   const [progressPercentage, setProgressPercentage] = useState(0);
   const navigate = useNavigate();
   const [details, setDetails] = useState<Details | undefined>();
+
+
+//   const detailsPageApi = async () =>{
+    
+// }
+
+
+
+
   async function getLearningObjects() {
     try {
-      // const loId = "course:9180283"
-      // const config = {
-      //   // headers: { Authorization: "Bearer dea088ff9bbdca4e8cbbd5fa7de2d290" },
-      //   headers: { Authorization: "Bearer b09cdf4e0b972e2cc595f17e341f3b3b" },
-      // };
-      // const response = await axios.get(
-      //   `https://learningmanager.adobe.com/primeapi/v2/learningObjects/course:9180283?include=instances.loResources.resources%2Cskills.skillLevel.skill%2CsubLOs.instances.subLoInstances%2CsupplementaryLOs.instances.loResources.resources%2csubLOs.instances.loResources.resources%2CprerequisiteLOs%2cenrollment.learnerBadge.badge`,
+      const res = await apis.getRefreshToken()
+      setlearnerToken(res.access_token)
+      console.log(res?.access_token ,"response")
+      const config = {
+        // headers: { Authorization: "Bearer dea088ff9bbdca4e8cbbd5fa7de2d290" },
+        headers: { Authorization: `oauth ${res.access_token}` },
+      };
+      const response = await axios.get(
+        `https://learningmanager.adobe.com/primeapi/v2/learningObjects/${cid}?include=instances.loResources.resources%2Cskills.skillLevel.skill%2CsubLOs.instances.subLoInstances%2CsupplementaryLOs.instances.loResources.resources%2csubLOs.instances.loResources.resources%2CprerequisiteLOs%2cenrollment.learnerBadge.badge`,
 
-      //   config
-      // );
-      const result = jsonData?.data;
-      setDetails(jsonData);
+        config
+      );
+      const result = response?.data;
+      setDetails(result);
       return result;
     } catch (error) {
       console.error("Error fetching learning objects:", error);
@@ -61,7 +77,10 @@ const Detailspage = () => {
 
   useEffect(() => {
     console.log(jsonData, "jsonData");
+    // detailsPageApi();
     getLearningObjects();
+    
+    
   }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
