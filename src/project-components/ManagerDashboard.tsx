@@ -213,9 +213,9 @@ const ManagerDashboard = () => {
           <div className="grid gap-4 grid-cols-4">
             {details.map((detail) => (
               <Card>
-                <CardHeader className="p-5 border-b border-gray border-opacity-13 min-h-[97px]">
+                <CardHeader className="p-5 border-b border-gray border-opacity-13 min-h-[80px]">
                   <CardTitle>
-                    <span className="text-lg inline-block align-top w-7/12">
+                    <span className=" leading-tight inline-block align-top w-7/12">
                       {detail.cardtitle}{" "}
                     </span>
                     <FontAwesomeIcon
