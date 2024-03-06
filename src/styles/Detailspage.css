@@ -1,102 +1,3 @@
-/* Detailspage.css
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  .image {
-    display: block;
-    margin: 20px auto;
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .heading {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .description {
-    margin-bottom: 1rem;
-  }
-  
-  .card {
-    max-width: 400px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    overflow: hidden;
-    margin: 20px auto;
-  }
-  
-  .card-content {
-    padding: 1rem;
-  }
-  
-  .card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-   */
-
-/* Detailspage.css */
-
-/* .container {
-    max-width: 1336px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-  }
-  
-  .image {
-    display: block;
-    margin: 20px auto;
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .heading {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .description {
-    margin-bottom: 1rem;
-  }
-  
-  .card {
-    max-width: 400px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    overflow: hidden;
-    margin: 20px;
-  }
-  
-  .card-content {
-    padding: 1rem;
-  }
-  
-  .card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  
-  .author-info {
-    display: flex;
-    align-items: center;
-  }
-  
-  .author-info img {
-    margin-right: 1rem;
-  } */
-
 .container {
   max-width: 1336px;
   margin: 0 auto;
@@ -114,11 +15,9 @@
 }
 
 .heading {
-  /* font-size: 2rem; */
-  /* font-weight: bold;*/
   margin-bottom: 27px;
   text-align: left;
-  font: normal normal bold 38px Adobe Clean;
+  font: normal normal bold 38px Adobe;
   letter-spacing: 0.76px;
   color: #202020;
   opacity: 1;
@@ -127,14 +26,14 @@
 .description-self {
   margin-bottom: 9px;
   text-align: left;
-  font: normal normal bold 18px Adobe Clean;
+  font: normal normal bold 18px Adobe;
   letter-spacing: 0.36px;
   color: #505050;
   opacity: 1;
 }
 .description-content {
   text-align: left;
-  font: normal normal normal 22px Adobe Clean;
+  font: normal normal normal 22px/32px Adobe;
   letter-spacing: 0px;
   color: #505050;
   opacity: 1;
@@ -142,7 +41,7 @@
 }
 .tab-active {
   text-align: left;
-  font: normal normal bold 20px Adobe Clean;
+  font: normal normal bold 20px Adobe;
   letter-spacing: 0.4px;
   color: #202020;
   border-bottom: 5px solid #4471e8;
@@ -150,14 +49,14 @@
 }
 .tab-unactive {
   text-align: left;
-  font: normal normal bold 20px Adobe Clean;
+  font: normal normal bold 20px Adobe;
   letter-spacing: 0.4px;
   color: #808080;
   opacity: 1;
 }
 .core-content {
   text-align: left;
-  font: normal normal bold 18px Adobe Clean;
+  font: normal normal bold 18px Adobe;
   letter-spacing: 0.36px;
   color: #202020;
   opacity: 1;
@@ -165,7 +64,7 @@
 }
 .module-title {
   text-align: left;
-  font: normal normal bold 24px Adobe Clean;
+  font: normal normal bold 24px Adobe;
   letter-spacing: 0px;
   color: #202020;
   opacity: 1;
@@ -173,7 +72,7 @@
 }
 .module-type {
   text-align: left;
-  font: normal normal normal 24px Adobe Clean;
+  font: normal normal normal 24px Adobe;
   letter-spacing: 0px;
   color: #808080;
   opacity: 1;
@@ -205,7 +104,7 @@
 }
 .course-progress {
   text-align: left;
-  font: normal normal bold 20px/25px Adobe Clean;
+  font: normal normal bold 20px/25px Adobe;
   letter-spacing: 0.4px;
   color: #000000;
   opacity: 1;
@@ -213,7 +112,7 @@
 }
 .modules-completed {
   text-align: left;
-  font: normal normal normal 16px/20px Adobe Clean;
+  font: normal normal normal 16px/20px Adobe;
   letter-spacing: 0.8px;
   color: #303030;
   opacity: 1;
@@ -227,48 +126,48 @@
   padding: 26px;
   max-height: 451px;
 }
-.levels-achieved{
-    text-align: left;
-font: normal normal bold 20px/25px Adobe Clean;
-letter-spacing: 0.2px;
-color: #000000;
-opacity: 1;
-margin-bottom: 6px;
+.levels-achieved {
+  text-align: left;
+  font: normal normal bold 20px/25px Adobe;
+  letter-spacing: 0.2px;
+  color: #000000;
+  opacity: 1;
+  margin-bottom: 6px;
 }
-.levels-achieved-credit{
-    text-align: left;
-font: normal normal normal 16px/10px Adobe Clean;
-letter-spacing: 0.32px;
-color: #303030;
-opacity: 1;
-margin-bottom: 32px;
+.levels-achieved-credit {
+  text-align: left;
+  font: normal normal normal 16px/10px Adobe;
+  letter-spacing: 0.32px;
+  color: #303030;
+  opacity: 1;
+  margin-bottom: 32px;
 }
-.author{
-    text-align: left;
-font: normal normal bold 20px/25px Adobe Clean;
-letter-spacing: 0.4px;
-color: #000000;
-opacity: 1;
-margin-bottom: 9px;
+.author {
+  text-align: left;
+  font: normal normal bold 20px/25px Adobe;
+  letter-spacing: 0.4px;
+  color: #000000;
+  opacity: 1;
+  margin-bottom: 9px;
 }
 .card-title {
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
-.username{
-    text-align: left;
-font: normal normal bold 16px/20px Adobe Clean;
-letter-spacing: 0.32px;
-color: #303030;
-opacity: 1;
+.username {
+  text-align: left;
+  font: normal normal bold 16px/20px Adobe;
+  letter-spacing: 0.32px;
+  color: #303030;
+  opacity: 1;
 }
-.post{
-    text-align: left;
-font: normal normal normal 15px/19px Adobe Clean;
-letter-spacing: 0.3px;
-color: #6F6C6C;
-opacity: 1;
+.post {
+  text-align: left;
+  font: normal normal normal 15px/19px Adobe;
+  letter-spacing: 0.3px;
+  color: #6f6c6c;
+  opacity: 1;
 }
 .author-info {
   display: flex;
