@@ -1,3 +1,4 @@
+import ".././styles/common.css";
 const ComplianceTraining = () => {
   // Dummy data for product name and due date
   const products = [
@@ -18,7 +19,7 @@ const ComplianceTraining = () => {
   };
 
   return (
-    <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4">
+    <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4 rounded-md">
       <h2 className="text-md font-bold mb-4">Pending Compliance Training</h2>
       {products.map((product, index) => (
         <div key={index} className="flex justify-between items-center border-b pb-2">
@@ -28,8 +29,8 @@ const ComplianceTraining = () => {
               <p className={`text-gray-700 text-xs ${getColor(index)}`}>{product.dueDate}</p> {/* Apply color based on the index */}
             </div>
           </div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-6 rounded">
-            Start
+          <button className="adobe-font bg-blue-500 hover:bg-blue-700 text-white py-1 px-6 rounded">
+            START
           </button>
         </div>
       ))}

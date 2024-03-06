@@ -27,7 +27,7 @@ const CourseExplore = () => {
               </div>
               <div className="absolute bottom-0 left-0 w-full text-center py-2 mb-3">
                 {/* Replace button with Link component */}
-                <Link to="/detailspage" className="text-blue-500 text-sm bg-white px-4 py-2 rounded-md">Explore</Link>
+                <Link to="/detailspage" className="text-blue-500 text-sm bg-white px-4 py-2 rounded-md">ENROLL</Link>
               </div>
             </div>
           </div>

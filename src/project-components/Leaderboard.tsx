@@ -33,7 +33,7 @@ const Leaderboard = () => {
   };
 
   return (
-    <div className="mx-auto bg-white overflow-hidden shadow-lg p-4">
+    <div className="mx-auto bg-white overflow-hidden shadow-lg p-4 pt-4 mt-4 rounded-md">
       <h2 className="text-md font-bold mb-2">Leaderboard</h2>
       <div className="grid grid-cols-5 gap-4">
         {networkMembers.slice(0, 5).map((member, index) => (
@@ -53,7 +53,7 @@ const Leaderboard = () => {
         ))}
       </div>
       {!expanded && 
-      <div className="text-center mt-8">
+      <div className="text-center mt-8 mb-4">
         <button
           className="border border-blue-500 hover:border-blue-700 text-blue-500 text-sm py-2 px-2 rounded"
           onClick={toggleExpanded}

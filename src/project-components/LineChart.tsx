@@ -116,7 +116,7 @@ const options = {
 const LineChart = () => {
   return (
     <div className="App max-w-lg"> {/* Adjust width here */}
-      <div className="bg-white p-4 rounded-md">
+      <div className="bg-white p-4 pb-6 rounded-md shadow-lg">
         <h3 className="text-l font-bold">Performance Graph</h3>
         <Line data={data} options={options as any} />
       </div>
