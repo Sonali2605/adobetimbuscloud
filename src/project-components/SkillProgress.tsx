@@ -7,7 +7,7 @@ const SkillProgress = () => {
   ];
 
   return (
-    <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4 mt-4">
+    <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4 mt-4 pb-6 rounded-md">
       <h2 className="text-lg font-bold mb-4">Skill Progress</h2>
       {products.map((product, index) => (
         <div key={index} className="flex justify-between items-center border-b pb-2 mb-1">

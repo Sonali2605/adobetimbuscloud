@@ -18,7 +18,7 @@ const ComplianceTraining = () => {
   };
 
   return (
-    <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4">
+    <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4 rounded-md">
       <h2 className="text-md font-bold mb-4">Pending Compliance Training</h2>
       {products.map((product, index) => (
         <div key={index} className="flex justify-between items-center border-b pb-2">
