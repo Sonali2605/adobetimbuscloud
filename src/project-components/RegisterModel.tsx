@@ -28,18 +28,20 @@ const ModalHeader = styled.div`
 
 const ModalCloseButton = styled.button`
   position: absolute;
-  top: -21px;
-  right: -18px;
+  top: -13px;
+  right: -13px;
   background: none;
-  border: none;
+  border: 2px solid rgba(142, 161, 180, 1);
   cursor: pointer;
   font-size: 14px;
-  width: 30px;
-  height: 30px;
+  width: 23px;
+  height: 23px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size:12px;
+  color:rgba(142, 161, 180, 1);
 `;
 
 const ModalTitle = styled.div`
@@ -84,122 +86,122 @@ interface RegisterModalProps {
 }
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
-    const [formData, setFormData] = useState({
-        id: '',
-        username: '',
-        password: '',
+  const [formData, setFormData] = useState({
+    id: '',
+    username: '',
+    password: '',
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+
+  const checkUsername = async () => {
+    try {
+      const response = await axios.post('https://viku.space/renault/reapi.php', {
+        action: 'checkUsername',
+        username: formData.username
+      }, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InlhdGluIn0.SXp3ID7mgUcLGYMVkvb3RJgc_tJ1hGv2NR_08s5SYNM',
+          'header1': 'test'
+        }
       });
-    
-      const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData({
-          ...formData,
-          [name]: value
-        });
-      };
-      
-    
-      const checkUsername = async () => {
-        try {
-          const response = await axios.post('https://viku.space/renault/reapi.php', {
-            action: 'checkUsername',
-            username: formData.username
-          },{
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InlhdGluIn0.SXp3ID7mgUcLGYMVkvb3RJgc_tJ1hGv2NR_08s5SYNM',
-              'header1': 'test'
-            }
-          });
-    
-          if (response.data.exists) {
-            alert('Username already exists. Please choose another one.');
-            return false;
-          } else {
-            return true;
-          }
-        } catch (error) {
-          console.error('Error:', error);
-          alert('An error occurred. Please try again.');
-          return false;
+
+      if (response.data.exists) {
+        alert('Username already exists. Please choose another one.');
+        return false;
+      } else {
+        return true;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+      return false;
+    }
+  };
+
+  const handleSubmit = async () => {
+    // Validation: Check if any field is empty
+    if (formData.username === '' || formData.password === '') {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    // Check if username already exists
+    const usernameAvailable = await checkUsername();
+    if (!usernameAvailable) {
+      return;
+    }
+
+    // Proceed with registration if username is available
+    try {
+      // API Call for registration using Axios
+      const response = await axios.post('https://viku.space/renault/reapi.php', {
+        action: 'register',
+        username: formData.username,
+        password: formData.password
+      }, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InlhdGluIn0.SXp3ID7mgUcLGYMVkvb3RJgc_tJ1hGv2NR_08s5SYNM'
         }
-      };
-    
-      const handleSubmit = async () => {
-        // Validation: Check if any field is empty
-        if (formData.username === '' || formData.password === '') {
-          alert('Please fill in all fields.');
-          return;
-        }
-    
-        // Check if username already exists
-        const usernameAvailable = await checkUsername();
-        if (!usernameAvailable) {
-          return;
-        }
-    
-        // Proceed with registration if username is available
-        try {
-          // API Call for registration using Axios
-          const response = await axios.post('https://viku.space/renault/reapi.php', {
-            action: 'register',
-            username: formData.username,
-            password: formData.password
-          }, {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InlhdGluIn0.SXp3ID7mgUcLGYMVkvb3RJgc_tJ1hGv2NR_08s5SYNM'
-            }
-          });
-    
-          // Handle API response
-          console.log(response.data);
-          // Close modal and show success message if API call is successful
-          if (response.data.success) {
-            onClose(); // Close modal
-            alert('Registration successful!');
-          } else {
-            // Handle API response indicating failure
-            alert('Registration failed. Please try again.');
-          }
-        } catch (error) {
-          // Handle errors
-          console.error('Error:', error);
-          alert('An error occurred. Please try again.');
-        }
-      };
-    
+      });
+
+      // Handle API response
+      console.log(response.data);
+      // Close modal and show success message if API call is successful
+      if (response.data.success) {
+        onClose(); // Close modal
+        alert('Registration successful!');
+      } else {
+        // Handle API response indicating failure
+        alert('Registration failed. Please try again.');
+      }
+    } catch (error) {
+      // Handle errors
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    }
+  };
+
   return (
     <ModalContainer>
       <ModalContent>
         <ModalHeader>
-          <ModalCloseButton onClick={onClose}>X</ModalCloseButton>
+          <ModalCloseButton onClick={onClose}>&#10005;</ModalCloseButton>
           <ModalTitle>Welcome</ModalTitle>
         </ModalHeader>
         <ModalSubheader>Register</ModalSubheader>
-        <InputField 
-        type="text" 
-        value={formData.id} 
-        onChange={handleChange}
-        name="id"
-        placeholder="Agency ID" 
+        <InputField
+          type="text"
+          value={formData.id}
+          onChange={handleChange}
+          name="id"
+          placeholder="Agency ID"
         />
-        <InputField 
-        type="email" 
-        value={formData.username} 
-        onChange={handleChange}
-        name="username"
-        placeholder="Email Address" 
+        <InputField
+          type="email"
+          value={formData.username}
+          onChange={handleChange}
+          name="username"
+          placeholder="Email Address"
         />
-        <InputField 
-        type="password" 
-        value={formData.password}
-        onChange={handleChange}
-        name="password"
-        placeholder="Password" 
+        <InputField
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          name="password"
+          placeholder="Password"
         />
 
-<SecondaryButton onClick={handleSubmit}>Register</SecondaryButton>
+        <SecondaryButton onClick={handleSubmit}>Register</SecondaryButton>
 
       </ModalContent>
     </ModalContainer>

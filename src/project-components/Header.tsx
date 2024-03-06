@@ -54,18 +54,20 @@ const ModalHeader = styled.div`
 
 const ModalCloseButton = styled.button`
   position: absolute;
-  top: -21px;
-  right: -18px;
+  top: -13px;
+  right: -13px;
   background: none;
-  border: none;
+  border: 2px solid rgba(142, 161, 180, 1);
   cursor: pointer;
   font-size: 14px;
-  width: 30px;
-  height: 30px;
+  width: 23px;
+  height: 23px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size:12px;
+  color:rgba(142, 161, 180, 1);
 `;
 
 const ModalTitle = styled.div`
@@ -247,7 +249,7 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
         <ModalContainer>
           <ModalContent>
           <ModalHeader>
-              <ModalCloseButton onClick={() => setShowLoginModal(false)}>X</ModalCloseButton>
+              <ModalCloseButton onClick={() => setShowLoginModal(false)}>&#10005;</ModalCloseButton>
               <ModalTitle>Welcome</ModalTitle>
             </ModalHeader>
             <InputField type="text" placeholder="Agency ID"  value={agencyId}
