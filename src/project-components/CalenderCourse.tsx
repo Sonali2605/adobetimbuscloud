@@ -1,14 +1,17 @@
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
-const CalendarCourse = ({date}) => {
+interface CalendarCourseProps {
+  date: string | null; // Update the type to accept string or null
+}
+
+const CalendarCourse: React.FC<CalendarCourseProps> = ({ date }) => {
   return (
     <div className="max-w-xs mx-auto overflow-hidden shadow-lg text-white relative">
-      <div className="bg-black p-10 relative" style={{height:'150px'}}>
-        <div className="absolute top-0" style={{right:'10px'}}>
+      <div className="bg-black p-10 relative" style={{ height: '150px' }}>
+        <div className="absolute top-0" style={{ right: '10px' }}>
           <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
-          <span className="text-xs">{date}</span>
+          <span className="text-xs">{date ? date : 'No Date'}</span> {/* Handle null case */}
         </div>
         <div className="px-4 py-2 absolute bottom-0 left-0 w-full">
           <div className="font-bold text-sm mb-1">Achieving Peak Performance in Insurance Sale</div>

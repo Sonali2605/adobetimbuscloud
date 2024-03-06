@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import RegisterModal from './RegisterModel';
 import {clientId,clientSecreat,refreshToken, base_adobe_url} from "../AppConfig"
-import { Link, useLocation } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -74,13 +73,13 @@ const ModalTitle = styled.div`
   font-weight: bold;
 `;
 
-const ModalSubheader = styled.div`
-  font-size: 18px;
-  margin-top: 10px;
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 10px;
-`;
+// const ModalSubheader = styled.div`
+//   font-size: 18px;
+//   margin-top: 10px;
+//   text-align: center;
+//   margin-top: 5px;
+//   margin-bottom: 10px;
+// `;
 
 const InputField = styled.input`
   width: 93%;
@@ -130,8 +129,7 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
   const [agencyId, setAgencyId] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const history = useLocation();
+  const [error, setError] = useState<string>('');
   const handleLogin = async () => {
     try {
       const response = await axios.post('https://viku.space/renault/reapi.php', {
@@ -200,7 +198,7 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
       setPassword('');
       setError('');
     } catch (error) {
-      setError(error.message);
+      setError("Issue with Login");
     }
   };
   

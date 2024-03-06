@@ -1,5 +1,3 @@
-import React from 'react'
-
 const DashboardHeading = () => {
   return ( <div>
     <div className="grid grid-rows-1 grid-flow-col gap-4">
