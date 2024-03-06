@@ -8,7 +8,7 @@ interface CalendarCourseProps {
 const CalendarCourse: React.FC<CalendarCourseProps> = ({ date }) => {
   return (
     <div className="max-w-xs mx-auto overflow-hidden shadow-lg text-white relative">
-      <h2 className="font-bold p-4 text-black text-md">Courses Enrolled</h2>
+      <h2 className="font-bold py-4 text-black text-lg">Courses Enrolled</h2>
       <div className="bg-black p-10 relative" style={{ height: '150px' }}>
         <div className="absolute top-0" style={{ right: '10px' }}>
           <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
