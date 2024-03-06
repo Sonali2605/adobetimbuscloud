@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Adobe';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Adobe'), url('.././src//assets/adobefont/AdobeCleanRegular.otf') format('woff');
+}
  
 @layer base {
   :root {
@@ -73,5 +80,6 @@
   body {
     @apply bg-background text-foreground;
     background-color: #F5F9FC;
+    font-family: "Adobe";
   }
 }

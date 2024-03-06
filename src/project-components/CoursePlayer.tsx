@@ -1,27 +1,27 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
-// import { useRouter } from 'next/router';
-// import { getToken } from 'services/Auth';
-// import styles from './CoursePlayer.module.scss';
 import ".././styles/CoursePlayer.css";
-// import { coursePlayerProps } from 'types/coursePlayer';
-function CoursePlayer(props: any) {
+function CoursePlayer(props: any  ) {
     const navigate = useNavigate();
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const { cid, mid, goBackUrl } = props;
-    const token = "Bearer dea088ff9bbdca4e8cbbd5fa7de2d290";
-    // let history = useHistory()
+    // const token = "Bearer dea088ff9bbdca4e8cbbd5fa7de2d290";
+    // const learnerToken = "46eda135e6f14690eb744a422730d0a0";
+    const learnerToken = "b09cdf4e0b972e2cc595f17e341f3b3b";
     
     useEffect(() => {
+        // const cid = "course:9179792"
+        const cid = "course:9180283"
         // if (typeof window !== 'undefined') {
         //     document.body.style.overflowY = 'hidden';
         // }
-        let url = `https://learningmanager.adobe.com/app/player?lo_id=${cid}&access_token=${token}`;
+        const url = `https://learningmanager.adobe.com/app/player?lo_id=${cid}&access_token=${learnerToken}`;
+        
 
        
-        if (mid) {
-            url = url + `&module_id=${mid}`;
-        }
+        // if (mid) {
+        //     url = url + `&module_id=${mid}`;
+        // }
  
         if (url && iframeRef?.current) {
             iframeRef.current.src = url;
@@ -29,11 +29,16 @@ function CoursePlayer(props: any) {
             iframeRef.current.setAttribute('allowFullScreen', 'true');
         }
         const closePlayer = (event: MessageEvent) => {
+            // alert("start")
             if (event.data === "status:close") {
                 // window.document.body.style.overflowY = 'auto';
                 window.removeEventListener("message", closePlayer);
                 // history.push(goBackUrl as string);
                 navigate(goBackUrl as string);
+                props.setShowDateValidationModal(true)
+                // window.location.reload();
+                props.setProgressPercentage(100)
+                props.setIsPlayCourse(false)
             }
         };
         window.addEventListener("message", closePlayer);
@@ -41,7 +46,7 @@ function CoursePlayer(props: any) {
             window.document.body.style.overflowY = 'auto';
             window.removeEventListener("message", closePlayer);
         };
-    }, [navigate, token, cid, mid, goBackUrl]);
+    }, [navigate, learnerToken, cid, mid, goBackUrl]);
  
     return (
         <div 
