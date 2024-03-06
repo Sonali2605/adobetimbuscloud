@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import RegisterModal from './RegisterModel';
-import {clientId,clientSecreat,refreshToken, base_adobe_url} from "../AppConfig"
+import { clientId, clientSecreat, refreshToken, base_adobe_url } from "../AppConfig"
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -42,9 +42,10 @@ const ModalContainer = styled.div`
 
 const ModalContent = styled.div`
   background-color: white;
-  padding: 20px;
+  padding: 40px 20px;
   border-radius: 8px;
-  width: 300px; /* Adjust the width as needed */
+  width: 360px; /* Adjust the width as needed */
+
 `;
 
 const ModalHeader = styled.div`
@@ -54,7 +55,7 @@ const ModalHeader = styled.div`
 
 const ModalCloseButton = styled.button`
   position: absolute;
-  top: -13px;
+  top: -30px;
   right: -13px;
   background: none;
   border: 2px solid rgba(142, 161, 180, 1);
@@ -100,7 +101,6 @@ const Button = styled.button`
   margin: 0 auto; /* Align button to center */
   margin-top: 20px;
 `;
-
 // const PrimaryButton = styled(Button)`
 //   background-color: #FFFFFF;
 //   color: #4471E8;
@@ -125,7 +125,26 @@ const SecondaryButton = styled(Button)`
   border: 1px solid #4471E8;
   padding: 10px 40px;
 `;
-const Header = ({isLogin}:{isLogin: boolean}) => {
+
+const LoginLineRight = styled.span`
+display: inline-block;
+    width: 95px;
+    height: 2px;
+    background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+    opacity: 1;
+    vertical-align: middle;
+    margin: 0 10px;
+`;
+const LoginLineLeft = styled.span`
+display: inline-block;
+    width: 95px;
+    height: 2px;
+    background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+    opacity: 1;
+    vertical-align: middle;
+    margin: 0 10px;
+`;
+const Header = ({ isLogin }: { isLogin: boolean }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [agencyId, setAgencyId] = useState('');
@@ -138,32 +157,32 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
         action: 'login',
         username: username,
         password: password,
-      },{
+      }, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InlhdGluIn0.SXp3ID7mgUcLGYMVkvb3RJgc_tJ1hGv2NR_08s5SYNM'
         }
       });
-        const client_id = clientId;
-        const client_secret = clientSecreat;
-        const refresh_token = refreshToken;
+      const client_id = clientId;
+      const client_secret = clientSecreat;
+      const refresh_token = refreshToken;
 
-        const params = new URLSearchParams({
-            client_id,
-            client_secret,
-            refresh_token
-        });
-        const url =  `${base_adobe_url}/oauth/token/refresh`;
-        const responseToken = await axios.post(
-            `${url}`,
-            params,
-            {
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-            }
-        );
-        const tokenData = responseToken.data;
+      const params = new URLSearchParams({
+        client_id,
+        client_secret,
+        refresh_token
+      });
+      const url = `${base_adobe_url}/oauth/token/refresh`;
+      const responseToken = await axios.post(
+        `${url}`,
+        params,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      );
+      const tokenData = responseToken.data;
       localStorage.setItem(
         'access_token',
         tokenData.access_token
@@ -178,17 +197,17 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
           },
         }
       );
-  
+
       // Extract user ID from the response data
       const userId = userDataResponse.data?.data?.[0]?.id;
-  
+
       // Store the user ID in localStorage
       localStorage.setItem('userId', userId);
       const isManager = userDataResponse.data?.data?.[0]?.attributes?.roles.includes('Manager');
 
       // Navigate based on the user's role
       const newPath = isManager ? '/managerDashboard' : '/dashboard';
-      
+
       if (location.pathname !== newPath) {
         window.location.href = newPath; // Redirect to the new path
       }
@@ -203,29 +222,29 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
       setError("Issue with Login");
     }
   };
-  
+
   return (
     <HeaderContainer>
       <Logo>Premier Protect Academy</Logo>
       <Menu>
         {isLogin ? (
-        <>
-          <MenuItem onClick={() => setShowLoginModal(true)}>
-            <SecondaryButton>Login</SecondaryButton>
-          </MenuItem>
-          <MenuItem onClick={() => setShowRegisterModal(true)}>
-            <PrimaryButton>Register</PrimaryButton>
-          </MenuItem>
-        </>
-        ):(
-        <>
-          <MenuItem>Home</MenuItem>
-          <MenuItem>Products</MenuItem>
-          <MenuItem>Claims</MenuItem>
-          <MenuItem>Services</MenuItem>
-        </>
+          <>
+            <MenuItem onClick={() => setShowLoginModal(true)}>
+              <SecondaryButton>Login</SecondaryButton>
+            </MenuItem>
+            <MenuItem onClick={() => setShowRegisterModal(true)}>
+              <PrimaryButton>Register</PrimaryButton>
+            </MenuItem>
+          </>
+        ) : (
+          <>
+            <MenuItem>Home</MenuItem>
+            <MenuItem>Products</MenuItem>
+            <MenuItem>Claims</MenuItem>
+            <MenuItem>Services</MenuItem>
+          </>
         )
-      }
+        }
       </Menu>
 
       {/* Login Modal */}
@@ -245,30 +264,38 @@ const Header = ({isLogin}:{isLogin: boolean}) => {
           </ModalContent>
         </ModalContainer>
       )} */}
-       {showLoginModal && (
+      {showLoginModal && (
         <ModalContainer>
           <ModalContent>
-          <ModalHeader>
+            <ModalHeader>
               <ModalCloseButton onClick={() => setShowLoginModal(false)}>&#10005;</ModalCloseButton>
               <ModalTitle>Welcome</ModalTitle>
+              <div className='w-full pt-4 pb-4'>
+                <LoginLineLeft>&nbsp;</LoginLineLeft>
+                <span className='text-black'>Login</span>
+                <LoginLineRight>&nbsp;</LoginLineRight>
+              </div>
             </ModalHeader>
-            <InputField type="text" placeholder="Agency ID"  value={agencyId}
-              onChange={(e) => setAgencyId(e.target.value)}/>
-            <InputField type="email" placeholder="Email Address"  value={username}
-              onChange={(e) => setUsername(e.target.value)}/>
-            <InputField type="password" placeholder="Password"  value={password}
-              onChange={(e) => setPassword(e.target.value)}/>
+            <InputField className='border-2 rounded-md' type="text" placeholder="Agency ID" value={agencyId}
+              onChange={(e) => setAgencyId(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="email" placeholder="Email Address" value={username}
+              onChange={(e) => setUsername(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="password" placeholder="Password" value={password}
+              onChange={(e) => setPassword(e.target.value)} />
             {/* Error message display */}
             {error && <div style={{ color: 'red' }}>{error}</div>}
             {/* Login button */}
-            <PrimaryButton onClick={handleLogin}>Login</PrimaryButton>
+            <PrimaryButton className='w-8/12' onClick={handleLogin}>Login</PrimaryButton>
           </ModalContent>
         </ModalContainer>
-      )}
- {showRegisterModal && (
-        <RegisterModal onClose={()=>setShowRegisterModal(false)}/>
-      )}
-    </HeaderContainer>
+      )
+      }
+      {
+        showRegisterModal && (
+          <RegisterModal onClose={() => setShowRegisterModal(false)} />
+        )
+      }
+    </HeaderContainer >
   );
 };
 
