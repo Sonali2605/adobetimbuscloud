@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import "../../styles/modal.css"; // Import the CSS file
+import styled from 'styled-components';
 
 interface ModalProps {
   show: boolean;
@@ -8,23 +9,31 @@ interface ModalProps {
   title: string;
   imageUrl?: string;
 }
-
+const ModalCloseButton = styled.button`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: 2px solid rgba(142, 161, 180, 1);
+  cursor: pointer;
+  font-size: 14px;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:12px;
+  color:rgba(142, 161, 180, 1);
+`;
 const ModalforSuccess: React.FC<ModalProps> = ({ show, handleClose, msg, title, imageUrl }) => {
   return (
     <Fragment>
       {show && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="modal bg-white rounded-lg overflow-hidden shadow-xl relative">
-            <div className="absolute top-0 right-0 p-4 cursor-pointer" onClick={handleClose}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-gray-600 hover:text-gray-900"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+            <div className="p-4 cursor-pointer relative h-12">
+              <ModalCloseButton onClick={handleClose}>&#10005;</ModalCloseButton>
             </div>
             <div className="modal-content bg-white p-4">
               <h2 className=" text-center mb-4 modal-title">{title}</h2>

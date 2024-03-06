@@ -16,7 +16,7 @@ const HeaderContainer = styled.div`
 
 const Logo = styled.div`
   font-weight: bold;
-  font: normal normal bold 18px Adobe Clean;
+  font: normal normal normal 24px Impact;
 `;
 
 const Menu = styled.div`
@@ -75,6 +75,7 @@ const ModalCloseButton = styled.button`
 const ModalTitle = styled.div`
   font-size: 24px;
   font-weight: bold;
+  font: normal normal normal 24px Impact;
 `;
 
 // const ModalSubheader = styled.div`
@@ -231,10 +232,10 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
         {isLogin ? (
           <>
             <MenuItem onClick={() => setShowLoginModal(true)}>
-              <SecondaryButton className='adobe-font'>Login</SecondaryButton>
+              <SecondaryButton className='adobe-font'>LOGIN</SecondaryButton>
             </MenuItem>
             <MenuItem onClick={() => setShowRegisterModal(true)}>
-              <PrimaryButton className='adobe-font'>Register</PrimaryButton>
+              <PrimaryButton className='adobe-font'>REGISTER</PrimaryButton>
             </MenuItem>
           </>
         ) : (
@@ -286,7 +287,10 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
             {/* Error message display */}
             {error && <div style={{ color: 'red' }}>{error}</div>}
             {/* Login button */}
-            <PrimaryButton className='w-8/12' onClick={handleLogin}>Login</PrimaryButton>
+            <div className='text-center mt-3'>
+              <a href="javascript:void(0)" className='text-blue-500' rel="noopener noreferrer">Forgot Password?</a>
+            </div>
+            <PrimaryButton className='w-8/12' onClick={handleLogin}>LOGIN</PrimaryButton>
           </ModalContent>
         </ModalContainer>
       )
