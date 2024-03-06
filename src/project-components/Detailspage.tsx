@@ -1,23 +1,34 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import dpageone from "../assets/images/dpageone.png";
 import playiconone from "../assets/images/playiconone.png";
 import profileimage from "../assets/images/profileimage.png";
 import ".././styles/Detailspage.css";
-import axios from "axios";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+// import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 import CoursePlayer from "./CoursePlayer";
 import ModalforSuccess from ".././common/Modal/Modal";
+import jsonData from "./resdata.json";
+import { cid } from "../AppConfig";
+
+interface Details {
+  data?: {
+    attributes?: {
+      loFormat?: string;
+      localizedMetadata?: Array<{ name?: string; overview?: string }>;
+    };
+  };
+}
 
 const Detailspage = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [isPlayCourse, setIsPlayCourse] = useState(false);
-  const [isCid, setIsCid] = useState();
-  const [isCiid, setIsCiid] = useState(null);
+  const [isCid, setIsCid] = useState<string | undefined>();
+  const [isCiid, setIsCiid] = useState<string | null>(null);
   const location = useLocation();
   const currentUrl = location.pathname;
   const [showDateValidationModal, setShowDateValidationModal] = useState(false);
-  const [title,] = useState(
+  const [title] = useState(
     "Congratulations on completing the “Negotiations 101” course"
   );
   const [errorMsg] = useState("You have earned your badge!");
@@ -27,30 +38,34 @@ const Detailspage = () => {
 
   const [progressPercentage, setProgressPercentage] = useState(0);
   const navigate = useNavigate();
-
-  const [details, setDetails] = useState();
+  const [details, setDetails] = useState<Details | undefined>();
   async function getLearningObjects() {
-    // const loId = "course:9180283"
-    const config = {
-      // headers: { Authorization: "Bearer dea088ff9bbdca4e8cbbd5fa7de2d290" },
-      headers: { Authorization: "Bearer b09cdf4e0b972e2cc595f17e341f3b3b" },
-    };
-    const response = await axios.get(
-      `https://learningmanager.adobe.com/primeapi/v2/learningObjects/course:9180283?include=instances.loResources.resources%2Cskills.skillLevel.skill%2CsubLOs.instances.subLoInstances%2CsupplementaryLOs.instances.loResources.resources%2csubLOs.instances.loResources.resources%2CprerequisiteLOs%2cenrollment.learnerBadge.badge`,
+    try {
+      // const loId = "course:9180283"
+      // const config = {
+      //   // headers: { Authorization: "Bearer dea088ff9bbdca4e8cbbd5fa7de2d290" },
+      //   headers: { Authorization: "Bearer b09cdf4e0b972e2cc595f17e341f3b3b" },
+      // };
+      // const response = await axios.get(
+      //   `https://learningmanager.adobe.com/primeapi/v2/learningObjects/course:9180283?include=instances.loResources.resources%2Cskills.skillLevel.skill%2CsubLOs.instances.subLoInstances%2CsupplementaryLOs.instances.loResources.resources%2csubLOs.instances.loResources.resources%2CprerequisiteLOs%2cenrollment.learnerBadge.badge`,
 
-      config
-    );
-    const result = response?.data;
-    setDetails(result);
-    return result;
+      //   config
+      // );
+      const result = jsonData?.data;
+      setDetails(jsonData);
+      return result;
+    } catch (error) {
+      console.error("Error fetching learning objects:", error);
+    }
   }
 
   useEffect(() => {
+    console.log(jsonData, "jsonData");
     getLearningObjects();
   }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const playCourse = (cid: any, mid?: any) => {
+  const playCourse = (cid: string, mid?: string) => {
     setIsCid(cid);
     if (mid) {
       setIsCiid(mid);
@@ -58,13 +73,12 @@ const Detailspage = () => {
   };
 
   const handleplayer = (id: string) => {
-    if(progressPercentage === 100){
-      navigate("/dashboard")
-    }else{
+    if (progressPercentage === 100) {
+      navigate("/dashboard");
+    } else {
       setIsPlayCourse(true);
       playCourse(id);
     }
- 
   };
 
   const handleTabClick = (tabNumber: number) => {
@@ -83,7 +97,7 @@ const Detailspage = () => {
           setIsPlayCourse={setIsPlayCourse}
         />
       ) : null}
-      <Header />
+      <Header isLogin={false} />
       <img src={dpageone} alt="Logo" />
 
       <div className="container flex ">
@@ -93,11 +107,11 @@ const Detailspage = () => {
               {details?.data?.attributes?.loFormat}
             </p>
             <h1 className="heading">
-              {details?.data?.attributes?.localizedMetadata[0].name}
+              {details?.data?.attributes?.localizedMetadata?.[0]?.name}
             </h1>
           </div>
           <p className="description-content">
-            {details?.data?.attributes?.localizedMetadata[0].overview}
+            {details?.data?.attributes?.localizedMetadata?.[0]?.overview}
           </p>
           <div className="">
             <div className="">
@@ -138,7 +152,7 @@ const Detailspage = () => {
                         <div>
                           <span className="module-title">
                             {
-                              details?.data?.attributes?.localizedMetadata[0]
+                              details?.data?.attributes?.localizedMetadata?.[0]
                                 .name
                             }
                           </span>
@@ -193,9 +207,11 @@ const Detailspage = () => {
             </div>
             <button
               className="bg-blue-300 rounded-lg w-full p-2 mb-8"
-              onClick={() => handleplayer("course:9180283")}
+              onClick={() => handleplayer(cid)}
             >
-            {progressPercentage ===100 ?  "COMPLETE COURSE" : "CONTINUE COURSE"}
+              {progressPercentage === 100
+                ? "COMPLETE COURSE"
+                : "CONTINUE COURSE"}
             </button>
             <p className="levels-achieved">Levels achieved after completion</p>
             <p className="levels-achieved-credit">
@@ -210,7 +226,8 @@ const Detailspage = () => {
               <div>
                 <p className="author">Author</p>
                 <p className="username">
-                  {details?.data?.attributes?.authorNames[0]}
+                  {/* {details?.data?.attributes?.authorNames[0]} */}
+                  Sonali Dhiman
                 </p>
                 <p className="post">Director of Partnerships</p>
               </div>
