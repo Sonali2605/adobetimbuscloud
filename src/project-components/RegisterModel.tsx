@@ -16,9 +16,9 @@ const ModalContainer = styled.div`
 
 const ModalContent = styled.div`
   background-color: white;
-  padding: 20px;
+ padding: 40px 20px;
   border-radius: 8px;
-  width: 300px; /* Adjust the width as needed */
+ width: 360px; /* Adjust the width as needed */
 `;
 
 const ModalHeader = styled.div`
@@ -28,7 +28,7 @@ const ModalHeader = styled.div`
 
 const ModalCloseButton = styled.button`
   position: absolute;
-  top: -13px;
+  top: -30px;
   right: -13px;
   background: none;
   border: 2px solid rgba(142, 161, 180, 1);
@@ -81,6 +81,26 @@ const SecondaryButton = styled(Button)`
   border: 1px solid #4471E8;
   padding: 10px 40px;
 `;
+
+const LoginLineRight = styled.span`
+display: inline-block;
+    width: 95px;
+    height: 2px;
+    background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+    opacity: 1;
+    vertical-align: middle;
+    margin: 0 10px;
+`;
+const LoginLineLeft = styled.span`
+display: inline-block;
+    width: 95px;
+    height: 2px;
+    background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+    opacity: 1;
+    vertical-align: middle;
+    margin: 0 10px;
+`;
+
 interface RegisterModalProps {
   onClose: () => void; // Define the type of onClose prop
 }
@@ -178,22 +198,30 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
           <ModalCloseButton onClick={onClose}>&#10005;</ModalCloseButton>
           <ModalTitle>Welcome</ModalTitle>
         </ModalHeader>
-        <ModalSubheader>Register</ModalSubheader>
-        <InputField
+        <ModalSubheader>
+
+          <div className='w-full pt-4 pb-4'>
+            <LoginLineLeft>&nbsp;</LoginLineLeft>
+            <span className='text-black'>Register</span>
+            <LoginLineRight>&nbsp;</LoginLineRight>
+          </div>
+
+        </ModalSubheader>
+        <InputField className='border-2 rounded-md'
           type="text"
           value={formData.id}
           onChange={handleChange}
           name="id"
           placeholder="Agency ID"
         />
-        <InputField
+        <InputField className='border-2 rounded-md'
           type="email"
           value={formData.username}
           onChange={handleChange}
           name="username"
           placeholder="Email Address"
         />
-        <InputField
+        <InputField className='border-2 rounded-md'
           type="password"
           value={formData.password}
           onChange={handleChange}
