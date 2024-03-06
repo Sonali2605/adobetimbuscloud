@@ -1,5 +1,3 @@
-import React from 'react';
-
 const NewProduct = () => {
   // Define two products statically
   const products = [

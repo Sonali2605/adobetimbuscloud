@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SkillProgress = () => {
   // Dummy data for product name and progress
   const products = [

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Network = () => {
   // Dummy data for network members with existing user images
   const networkMembers = [

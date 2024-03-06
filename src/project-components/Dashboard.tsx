@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import Header from './Header';
 import DashboardHeading from './DashboardHeading';
 import LineChart from './LineChart';
@@ -16,9 +16,15 @@ import CalendarCourse from './CalenderCourse';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
+interface Certificate {
+  imageUrl: string;
+  name: string;
+  description: string;
+}
+
 const Dashboard = () => {
-  const [certificate, setCertificate] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [certificate, setCertificate] = useState<Certificate | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -36,7 +42,7 @@ const Dashboard = () => {
         const certificateData = response.data?.data?.[0];
         if (certificateData) {
           const certificateName = certificateData.attributes.localizedMetadata.find(
-            (metadata) => metadata.name === 'Consultative Selling'
+            (metadata: { name: string }) => metadata.name === 'Consultative Selling'
           );
 
           if (certificateName) {
@@ -55,7 +61,7 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  const handleDateChange = (date) => {
+  const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
   };
 
@@ -96,15 +102,14 @@ const Dashboard = () => {
             </div>
             <div className='mt-4 mb-10' style={{ display: 'flex'}}>
               <div style={{ width: '40%', marginRight: '10px' }}>
-                <CalendarCourse date={selectedDate.toISOString()} />
+                <CalendarCourse date={selectedDate ? selectedDate.toISOString() : null} />
               </div>
               <div style={{ width: '30%' }}>
                 <Calendar
-                  onChange={handleDateChange}
+                  onChange={handleDateChange as any} // Explicitly cast to any to avoid TypeScript error
                   value={selectedDate}
                   calendarType="US"
                   locale="en-US"
-                  tileHeight={30} // Adjust the tileHeight property to reduce the height of the calendar
                 />
               </div>
             </div>

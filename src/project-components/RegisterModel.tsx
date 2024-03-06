@@ -1,4 +1,4 @@
-import React,{ useState }from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -79,15 +79,18 @@ const SecondaryButton = styled(Button)`
   border: 1px solid #4471E8;
   padding: 10px 40px;
 `;
+interface RegisterModalProps {
+  onClose: () => void; // Define the type of onClose prop
+}
 
-const RegisterModal = ({ onClose }) => {
+const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
     const [formData, setFormData] = useState({
         id: '',
         username: '',
         password: '',
       });
     
-      const handleChange = (e) => {
+      const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({
           ...formData,
