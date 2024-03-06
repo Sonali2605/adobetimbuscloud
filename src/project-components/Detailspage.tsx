@@ -29,7 +29,7 @@ const Detailspage = () => {
   const [isCiid, setIsCiid] = useState<string | null>(null);
   const location = useLocation();
   const currentUrl = location.pathname;
-  const[learnerToken , setlearnerToken]=useState()
+  const[ , setlearnerToken]=useState()
 
   
   const [showDateValidationModal, setShowDateValidationModal] = useState(false);
