@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Leaderboard = () => {
   // Dummy data for network members with existing user images

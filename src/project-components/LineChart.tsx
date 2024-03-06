@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto'; // Import chart.js auto bundle
 
@@ -71,7 +70,7 @@ const options = {
         drawTicks: false,
       },
       ticks: {
-        callback: (value, index, values) => {
+        callback: (index: number) => {
           if (index === 1) return quarterLabels[0];
           if (index === 4) return quarterLabels[1];
           if (index === 7) return quarterLabels[2];
@@ -88,7 +87,7 @@ const options = {
   plugins: {
     tooltip: {
       callbacks: {
-        label: (context) => {
+        label: (context:any) => {
           const month = context.label;
           const monthData = reducedYellowData.filter(({ month: m }) => m === month);
           if (monthData.length > 0) {
@@ -98,6 +97,10 @@ const options = {
           return `${month.substring(0, 3)}`;
         }
       }
+    },
+    legend: {
+      display: true,
+      position: 'top' // Set the position to "top"
     }
   },
   layout: {
@@ -107,12 +110,6 @@ const options = {
       top: 20,
       bottom: 20
     }
-  },
-  plugins: {
-    legend: {
-      display: true,
-      position: 'top'
-    }
   }
 };
 
@@ -121,7 +118,7 @@ const LineChart = () => {
     <div className="App max-w-lg"> {/* Adjust width here */}
       <div className="bg-white p-4 rounded-md">
         <h3 className="text-l font-bold">Performance Graph</h3>
-        <Line data={data} options={options} />
+        <Line data={data} options={options as any} />
       </div>
     </div>
   );

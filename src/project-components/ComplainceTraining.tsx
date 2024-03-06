@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ComplianceTraining = () => {
   // Dummy data for product name and due date
   const products = [
@@ -9,7 +7,7 @@ const ComplianceTraining = () => {
   ];
 
   // Function to determine the color based on the index
-  const getColor = (index) => {
+  const getColor = (index: number) => {
     if (index === 0) {
       return 'text-red-500'; // Red color for index 0
     } else if (index === 1) {

@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProfileCard = ({ name }) => {
+interface ProfileCardProps {
+  name: string; // Define the type of name prop
+}
+const ProfileCard: React.FC<ProfileCardProps> = ({ name }) => {
   return (
     <Link to="/profile">
       <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4">
