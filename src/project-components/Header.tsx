@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import RegisterModal from './RegisterModel';
 import { clientId, clientSecreat, refreshToken, base_adobe_url } from "../AppConfig"
+import ".././styles/common.css";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const HeaderContainer = styled.div`
 
 const Logo = styled.div`
   font-weight: bold;
-  font: normal normal normal 24px Impact;
+  font: normal normal bold 18px Adobe Clean;
 `;
 
 const Menu = styled.div`
@@ -230,18 +231,18 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
         {isLogin ? (
           <>
             <MenuItem onClick={() => setShowLoginModal(true)}>
-              <SecondaryButton>Login</SecondaryButton>
+              <SecondaryButton className='adobe-font'>Login</SecondaryButton>
             </MenuItem>
             <MenuItem onClick={() => setShowRegisterModal(true)}>
-              <PrimaryButton>Register</PrimaryButton>
+              <PrimaryButton className='adobe-font'>Register</PrimaryButton>
             </MenuItem>
           </>
         ) : (
           <>
-            <MenuItem>Home</MenuItem>
-            <MenuItem>Products</MenuItem>
-            <MenuItem>Claims</MenuItem>
-            <MenuItem>Services</MenuItem>
+            <MenuItem className='adobe-font'>Home</MenuItem>
+            <MenuItem className='adobe-font'>Products</MenuItem>
+            <MenuItem className='adobe-font'>Claims</MenuItem>
+            <MenuItem className='adobe-font'>Services</MenuItem>
           </>
         )
         }

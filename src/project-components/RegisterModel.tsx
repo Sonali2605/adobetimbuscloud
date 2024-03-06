@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import ".././styles/common.css";
 
 const ModalContainer = styled.div`
   position: fixed;

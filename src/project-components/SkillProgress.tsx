@@ -1,3 +1,5 @@
+import ".././styles/common.css";
+
 const SkillProgress = () => {
   // Dummy data for product name and progress
   const products = [
@@ -19,8 +21,8 @@ const SkillProgress = () => {
               </div>
             </div>
           </div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-1 px-5 rounded-md">
-            Explore
+          <button className="adobe-font bg-blue-500 hover:bg-blue-700 text-white font-normal py-1 px-5 rounded-md">
+            EXPLORE
           </button>
         </div>
       ))}

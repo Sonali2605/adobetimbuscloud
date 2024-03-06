@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from './Header';
 import RegisterModal from './RegisterModel';
+import ".././styles/common.css";
 const Login = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   return (
