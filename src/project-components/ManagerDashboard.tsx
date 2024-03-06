@@ -55,56 +55,56 @@ const tabledata = [
     booking: "$55000",
     quarter: "$15000",
     tcs: "3 course pending",
-    status: "pending",
+    status: "text-red-500",
   },
   {
     name: "Brandon Yu",
     booking: "$35000",
     quarter: "$5000",
     tcs: "3 course pending",
-    status: "pending",
+    status: "text-red-500",
   },
   {
     name: "Amit Sehgal",
     booking: "$40000",
     quarter: "$12000",
     tcs: "5 course pending",
-    status: "pending",
+    status: "text-red-500",
   },
   {
     name: "Shane Donaughan",
     booking: "$50000",
     quarter: "$12000",
     tcs: "No new course",
-    status: "notStarted",
+    status: "text-gray-500",
   },
   {
     name: "Rebecca Wild",
     booking: "$60000",
     quarter: "$30000",
     tcs: "No new course",
-    status: "notStarted",
+    status: "text-gray-500",
   },
   {
     name: "Jo Chen",
     booking: "$42000",
     quarter: "$12000",
     tcs: "1 course pending",
-    status: "pending",
+    status: "text-red-500",
   },
   {
     name: "Samuel Portier",
     booking: "$28000",
     quarter: "$13000",
     tcs: "Course completed",
-    status: "completed",
+    status: "text-green-500",
   },
   {
     name: "David Rush",
     booking: "$40000",
     quarter: "$10000",
     tcs: "1 course pending",
-    status: "pending",
+    status: "text-red-500",
   },
 ];
 
@@ -131,49 +131,62 @@ const textBlue = {
   color: "#0975CC",
 };
 
-// const pending = {
-//   color: "#EB4444",
-// };
-
-// const notStarted = {
-//   color: "#A0A0A0",
-// };
-
-// const completed = {
-//   color: "#44982A",
-// };
-
 const ManagerDashboard = () => {
   return (
     <>
       <AnalysisGrid>
-        <div className="grid gap-4 grid-cols-2">
+        <div className="absolute top-0 right-0 p-4 mr-10 flex items-center space-x-2">
+          <span className="text-gray-800 font-medium mr-3">
+            Mary Jane Stewart
+          </span>
+          <img
+            src="./images/maryJaneStewart.png"
+            alt="Image"
+            className="h-8 w-8 rounded-full"
+          />
+        </div>
+
+        <div className="grid gap-4 pt-6 grid-cols-2">
           <Card className="">
-            <CardContent>
+            <CardContent className="pt-6">
               <div className="p-1">
-                <img src="./images/Dashboard/ManagerDashboard-1.png" alt="Manager Dashboard" />
+                <img
+                  src="./images/Dashboard/ManagerDashboard-1.png"
+                  alt="Manager Dashboard"
+                  style={{ margin: "0 auto" }}
+                />
               </div>
             </CardContent>
           </Card>
 
           <Card className="">
-            <CardContent>
-              {States.map((state) => (                
+            <CardContent className="pt-6">
+              {States.map((state) => (
                 <div className="grid grid-cols-12 gap-1 flex items-center space-x-1">
                   <div className="col-span-3">
-                    <span className="text-sm font-medium text-gray-700">
-                      {state.state}
-                    </span>
+                    <span className="text-lg font-bold ">{state.state}</span>
                   </div>
 
                   <div className="col-span-8 mt-5 mb-4 bg-gray-200 rounded-full h-4 overflow-hidden">
                     <div
-                      className="bg-blue-500 h-4 rounded-full"
-                      style={{ width: `${state.percent}%` }}
+                      className="h-4 rounded-full"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(90deg, rgb(126, 191, 226) 0%, rgb(68, 113, 232) 100%)",
+                        backgroundPositionX: "0%",
+                        backgroundPositionY: "0%",
+                        backgroundSize: "initial",
+                        backgroundRepeat: "no-repeat",
+                        backgroundAttachment: "initial",
+                        backgroundOrigin: "padding-box",
+                        backgroundClip: "padding-box",
+                        backgroundColor: "transparent",
+                        width: `${state.percent}%`,
+                      }}
                     ></div>
                   </div>
                   <div className="col-span-1 text-center">
-                    <span className="text-sm font-medium text-gray-700">
+                    <span className="text-lg font-medium">
                       {state.percent}%
                     </span>
                   </div>
@@ -187,20 +200,20 @@ const ManagerDashboard = () => {
           <div className="grid gap-4 grid-cols-4">
             {details.map((detail) => (
               <Card>
-                <CardHeader className="p-5 border-b border-gray border-opacity-13 min-h-[72px]">
+                <CardHeader className="p-5 border-b border-gray border-opacity-13 min-h-[80px]">
                   <CardTitle>
-                    <span className="inline-block align-top w-7/12">
-                    {detail.cardtitle}{" "}
+                    <span className=" leading-tight inline-block align-top w-7/12">
+                      {detail.cardtitle}{" "}
                     </span>
                     <FontAwesomeIcon
                       icon={faArrowUp}
                       className="text-green-500 text-right align-top"
-                      style={{ float: "inline-end"}}
+                      style={{ float: "inline-end" }}
                     />
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center items-center justify-center p-6">
-                  <span className="text-4xl font-semibold" style={textBlue}>
+                  <span className="text-6xl" style={textBlue}>
                     {detail.cardData}
                   </span>
                 </CardContent>
@@ -208,10 +221,10 @@ const ManagerDashboard = () => {
             ))}
           </div>
         </CardsData>
-        <TableData>
-          <table className="w-full mx-auto text-lg rounded-lg shadow-custom">
+        <TableData className="overflow-hidden">
+          <table className="w-full mx-auto text-lg rounded-lg bg-white shadow-custom">
             <thead>
-              <tr className="bg-gray-50">
+              <tr className="" style={{ backgroundColor: "#FAFAFA" }}>
                 <th className="px-3 py-2 border-b">Growth Associate</th>
                 <th className="px-3 py-2 border-b">Booking YTD</th>
                 <th className="px-3 py-2 border-b">Current Quarter</th>
@@ -227,7 +240,9 @@ const ManagerDashboard = () => {
                   <td className="border-b px-3 py-2">{data.booking}</td>
                   <td className="border-b px-3 py-2">{data.quarter}</td>
 
-                  <td className={`border-b px-3 py-2 ${data.status}`}>{data.tcs}</td>
+                  <td className={`border-b px-3 py-2 ${data.status}`}>
+                    {data.tcs}
+                  </td>
                 </tr>
               ))}
             </tbody>

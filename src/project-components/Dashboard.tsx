@@ -15,6 +15,7 @@ import CourseExplore from './ExploreCourse';
 import CalendarCourse from './CalenderCourse';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import ".././styles/common.css";
 
 interface Certificate {
   imageUrl: string;

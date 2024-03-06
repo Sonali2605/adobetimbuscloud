@@ -1,3 +1,5 @@
+import ".././styles/common.css";
+
 const SkillProgress = () => {
   // Dummy data for product name and progress
   const products = [
@@ -7,7 +9,7 @@ const SkillProgress = () => {
   ];
 
   return (
-    <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4 mt-4">
+    <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4 mt-4 pb-6 rounded-md">
       <h2 className="text-lg font-bold mb-4">Skill Progress</h2>
       {products.map((product, index) => (
         <div key={index} className="flex justify-between items-center border-b pb-2 mb-1">
@@ -19,8 +21,8 @@ const SkillProgress = () => {
               </div>
             </div>
           </div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-normal py-1 px-5 rounded-md">
-            Explore
+          <button className="adobe-font bg-blue-500 hover:bg-blue-700 text-white font-normal py-1 px-5 rounded-md">
+            EXPLORE
           </button>
         </div>
       ))}
