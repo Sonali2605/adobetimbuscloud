@@ -13,14 +13,14 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="top-right inline-block w-10/12 align-top">
-            <h2 className="font-bold">Mary Jane Stewart</h2>
+            <h2 className="font-bold">Olivia Clarke</h2>
             <p>Business Growth Leader, </p>
             <p>True Blue Agents</p>
           </div>
         </div>
         <div className="bottom-element mt-3">
-          <p className='mb-2'>Mary Jane runs a full-house with a team of 13 agents spread across 6 states of United States. Mary Jane knows the importance of training in achieving high-performance sales numbers. Her Power BI dashboard is connected to Adobe Learning Manager so that she can view the performance of her sales team on the go and correlated with their learnings as well.</p>
-          <p className='mb-2'>Mary Jane’s dashboard looks like this.</p>
+          <p className='mb-2'>Olivia Clarke runs a full-house with a team of 13 agents spread across 6 states of United States. Olivia Clarke knows the importance of training in achieving high-performance sales numbers. Her Power BI dashboard is connected to Adobe Learning Manager so that she can view the performance of her sales team on the go and correlated with their learnings as well.</p>
+          <p className='mb-2'>Olivia Clarke’s dashboard looks like this.</p>
         </div>
 
       </div>
