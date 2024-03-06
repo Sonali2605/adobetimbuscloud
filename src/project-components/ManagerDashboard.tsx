@@ -144,34 +144,10 @@ const textBlue = {
   color: "#0975CC",
 };
 
-const pending = {
-  color: "#EB4444",
-};
-
-const notStarted = {
-  color: "#A0A0A0",
-};
-
-const completed = {
-  color: "#44982A",
-};
-
 const ManagerDashboard = () => {
   return (
     <>
       <AnalysisGrid>
-        {/* <div style={{}} className="top-left inline-block w-2/12 align-top">
-          <div
-            className="rounded-full overflow-hidden"
-            style={{ width: 50, height: 50 }}
-          >
-            <img
-              src="./images/maryJaneStewart.png"
-              alt="Image"
-              className="w-fit h-full"
-            />
-          </div>
-        </div> */}
         <div className="absolute top-0 right-0 p-4 mr-10 flex items-center space-x-2">
           <span className="text-gray-800 font-medium mr-3">
             Mary Jane Stewart
