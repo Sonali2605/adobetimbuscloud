@@ -105,7 +105,7 @@ const Dashboard = () => {
               <div style={{ width: '40%', marginRight: '10px' }}>
                 <CalendarCourse date={selectedDate ? selectedDate.toISOString() : null} />
               </div>
-              <div style={{ width: '30%' }}>
+              <div style={{ width: '30%', marginTop:'60px' }}>
                 <Calendar
                   onChange={handleDateChange as any} // Explicitly cast to any to avoid TypeScript error
                   value={selectedDate}
