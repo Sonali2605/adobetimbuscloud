@@ -1,13 +1,20 @@
+import React, { useState } from "react";
 import ".././styles/common.css";
+import CoursePlayer from "./CoursePlayer";
+import { useLocation } from "react-router-dom";
+
 const ComplianceTraining = () => {
-  // Dummy data for product name and due date
+  const location = useLocation();
+  const currentUrl = location.pathname;
+  const [showCoursePlayer, setShowCoursePlayer] = useState(false);
+
+  // Define products and getColor function
   const products = [
-    { name: "Third Party Risk Management", dueDate: "Due Date: 29th April 2023" },
-    { name: "Anti Money Laundering Solution", dueDate: "Due Date: 5th May 2023" },
-    { name: "Anti Money Laundering Solution", dueDate: "Due Date: 16th May 2023" }
+    { name: "Third Party Risk Management", dueDate: "Due Date: 29th April 2024" },
+    { name: "Anti Money Laundering Solution", dueDate: "Due Date: 5th May 2024" },
+    { name: "Anti Money Laundering Solution", dueDate: "Due Date: 16th May 2024" }
   ];
 
-  // Function to determine the color based on the index
   const getColor = (index: number) => {
     if (index === 0) {
       return 'text-red-500'; // Red color for index 0
@@ -18,6 +25,17 @@ const ComplianceTraining = () => {
     }
   };
 
+  // Function to handle the click event of the "START" button
+  const handleStartCourse = () => {
+    setShowCoursePlayer(true); // Set showCoursePlayer state to true to display the CoursePlayer
+  };
+
+  // Function to reload the dashboard
+  const reloadDashboard = () => {
+    window.location.reload();
+    window.location.reload();
+  };
+
   return (
     <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4 rounded-md">
       <h2 className="text-md font-bold mb-4">Pending Compliance Training</h2>
@@ -25,15 +43,22 @@ const ComplianceTraining = () => {
         <div key={index} className="flex justify-between items-center border-b pb-2">
           <div className="flex items-center">
             <div className="px-3 py-2">
-              <div className={`text-sm mb-1`}>{product.name}</div> {/* Apply color based on the index */}
-              <p className={`text-gray-700 text-xs ${getColor(index)}`}>{product.dueDate}</p> {/* Apply color based on the index */}
+              <div className={`text-sm mb-1`}>{product.name}</div>
+              <p className={`text-gray-700 text-xs ${getColor(index)}`}>{product.dueDate}</p>
             </div>
           </div>
-          <button className="adobe-font bg-blue-500 hover:bg-blue-700 text-white py-1 px-6 rounded">
+          <button className="adobe-font bg-blue-500 hover:bg-blue-700 text-white py-1 px-6 rounded" onClick={handleStartCourse}>
             START
           </button>
         </div>
       ))}
+      {showCoursePlayer && (
+        <CoursePlayer
+          cid="course:9180283"
+          mid=""
+          goBackUrl={currentUrl}
+        />
+      )}
     </div>
   );
 };
