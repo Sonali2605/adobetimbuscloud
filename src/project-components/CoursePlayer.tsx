@@ -15,7 +15,7 @@ interface CoursePlayerProps {
 function CoursePlayer(props: CoursePlayerProps ) {
     const navigate = useNavigate();
     const iframeRef = useRef<HTMLIFrameElement>(null);
-    const { cid, goBackUrl } = props;
+    const { goBackUrl } = props;
     const [learnerToken , setLearnerToken]=useState<string | undefined>();
     const [tokenFetched, setTokenFetched] = useState<boolean>(false);
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ".././styles/common.css";
 import CoursePlayer from "./CoursePlayer";
 import { useLocation } from "react-router-dom";
@@ -30,12 +30,7 @@ const ComplianceTraining = () => {
     setShowCoursePlayer(true); // Set showCoursePlayer state to true to display the CoursePlayer
   };
 
-  // Function to reload the dashboard
-  const reloadDashboard = () => {
-    window.location.reload();
-    window.location.reload();
-  };
-
+  
   return (
     <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4 rounded-md">
       <h2 className="text-md font-bold mb-4">Pending Compliance Training</h2>
