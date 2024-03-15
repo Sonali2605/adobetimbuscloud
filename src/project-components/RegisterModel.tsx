@@ -13,13 +13,14 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index:9999;
 `;
 
 const ModalContent = styled.div`
   background-color: white;
  padding: 40px 20px;
   border-radius: 8px;
- width: 360px; /* Adjust the width as needed */
+ width: 460px; /* Adjust the width as needed */
 `;
 
 const ModalHeader = styled.div`
@@ -210,18 +211,11 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
 
         </ModalSubheader>
         <InputField className='border-2 rounded-md'
-          type="text"
-          value={formData.id}
-          onChange={handleChange}
-          name="id"
-          placeholder="Agency ID"
-        />
-        <InputField className='border-2 rounded-md'
           type="email"
           value={formData.username}
           onChange={handleChange}
           name="username"
-          placeholder="Email Address"
+          placeholder="Company email"
         />
         <InputField className='border-2 rounded-md'
           type="password"
@@ -229,6 +223,34 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
           onChange={handleChange}
           name="password"
           placeholder="Password"
+        />
+        <InputField className='border-2 rounded-md'
+          type="text"
+          value={formData.id}
+          onChange={handleChange}
+          name="id"
+          placeholder="Industry"
+        />
+        <InputField className='border-2 rounded-md'
+          type="text"
+          value={formData.id}
+          onChange={handleChange}
+          name="id"
+          placeholder="Company"
+        />
+        <InputField className='border-2 rounded-md'
+          type="text"
+          value={formData.id}
+          onChange={handleChange}
+          name="id"
+          placeholder="Designation"
+        />
+        <InputField className='border-2 rounded-md'
+          type="text"
+          value={formData.id}
+          onChange={handleChange}
+          name="id"
+          placeholder="Country"
         />
 
         <SecondaryButton onClick={handleSubmit}>REGISTER</SecondaryButton>

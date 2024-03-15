@@ -18,17 +18,21 @@ const HeaderContainer = styled.div`
 
 const Logo = styled.div`
   font-weight: bold;
-  font: normal normal normal 24px Impact;
+  font: normal normal 24px Impact;
 `;
 
 const Menu = styled.div`
   display: flex;
   gap: 20px;
-  font: normal normal bold 25px Adobe Clean;
+  font: normal bold 25px bahnschrift;
 
   /* Nested Menu Items */
   & > .products-menu {
     position: relative;
+  }
+
+  & > .products-menu:hover{
+    color:#55c1e3;
   }
 
   /* Submenu Container */
@@ -36,7 +40,7 @@ const Menu = styled.div`
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
@@ -82,7 +86,7 @@ const ModalContent = styled.div`
   background-color: white;
   padding: 40px 20px;
   border-radius: 8px;
-  width: 360px;
+  width: 460px;
 `;
 
 const ModalHeader = styled.div`
@@ -243,20 +247,39 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
 
   return (
     <HeaderContainer>
-      <Logo>NIMBUS CLOUD</Logo>
+      <Logo>TIMBUS CLOUD</Logo>
       <Menu >
-        <MenuItem className='adobe-font products-menu'>
+        <MenuItem className='products-menu'>
           PRODUCTS
           <div className="submenu">
-            <MenuItem className='adobe-font'>Product 1</MenuItem>
-            <MenuItem className='adobe-font'>Product 2</MenuItem>
+            <MenuItem className=''>Product 1</MenuItem>
+            <MenuItem className=''>Product 2</MenuItem>
             {/* Add more submenu items as needed */}
           </div>
         </MenuItem>
-        <MenuItem className='adobe-font'>SOLUTIONS</MenuItem>
-        <MenuItem className='adobe-font'>DEVELOPER ACADEMY</MenuItem>
-        <MenuItem className='adobe-font'>PRICING</MenuItem>
-        <MenuItem className='adobe-font' onClick={() => setShowLoginModal(true)}>LOGIN</MenuItem>
+
+        <MenuItem className='  products-menu'>SOLUTIONS
+          <div className="submenu">
+            <MenuItem className=' '>Google</MenuItem>
+            <MenuItem className=' '>Microsoft</MenuItem>
+            {/* Add more submenu items as needed */}
+          </div>
+        </MenuItem>
+
+        <MenuItem className='  products-menu'>DEVELOPER ACADEMY
+          <div className="submenu">
+            <MenuItem className=' '>Facebook</MenuItem>
+            <MenuItem className=' '>Twitter</MenuItem>
+            {/* Add more submenu items as needed */}
+          </div>
+        </MenuItem>
+        <MenuItem className='  products-menu'>PRICING
+          <div className="submenu">
+            <MenuItem className=' '>Pricing</MenuItem>
+            {/* Add more submenu items as needed */}
+          </div>
+        </MenuItem>
+        <MenuItem className='  products-menu' onClick={() => setShowLoginModal(true)}>LOGIN</MenuItem>
       </Menu>
 
       {showLoginModal && (
@@ -271,12 +294,12 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
                 <LoginLineRight>&nbsp;</LoginLineRight>
               </div>
             </ModalHeader>
-            <InputField className='border-2 rounded-md' type="text" placeholder="Agency ID" value={agencyId}
-              onChange={(e) => setAgencyId(e.target.value)} />
-            <InputField className='border-2 rounded-md' type="email" placeholder="Email Address" value={username}
-              onChange={(e) => setUsername(e.target.value)} />
-            <InputField className='border-2 rounded-md' type="password" placeholder="Password" value={password}
-              onChange={(e) => setPassword(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="email" placeholder="Company email" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="text" placeholder="Industry" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="text" placeholder="Company" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="text" placeholder="Designation" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="text" placeholder="Country" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
             {error && <div style={{ color: 'red' }}>{error}</div>}
             <div className='text-center mt-3'>
               <a href="javascript:void(0)" className='text-blue-500' rel="noopener noreferrer">Forgot Password?</a>
