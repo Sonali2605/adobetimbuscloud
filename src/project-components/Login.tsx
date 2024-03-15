@@ -6,6 +6,9 @@ import ".././styles/common.css";
 const Login = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   
+  const ShowRegistrationModel=() =>{
+    setShowRegisterModal(true)
+  }
   return (
     <div className="relative">
       {/* Header */}
@@ -16,7 +19,7 @@ const Login = () => {
         {/* Power up in the Cloud */}
         <div className="absolute inset-0 flex flex-col text-white">          
           <div className='mb-20'>
-            <Header isLogin={false} />
+            <Header isLogin={true} />
           </div>
           <div className='justify-center items-left mt-24 px-24'>
             <h1 className="text-8xl font-bold mb-8">Power up in <br/>the Cloud</h1>
@@ -126,7 +129,7 @@ const Login = () => {
   </div>
 
 {/* Button */}
-<button className="mt-5 bg-[#55c1e3] text-white font-bold text-2xl py-2 px-6 rounded-full">Join the Academy</button>
+<button className="mt-5 bg-[#55c1e3] text-white font-bold text-2xl py-2 px-6 rounded-full" onClick={()=>setShowRegisterModal(true)} >Join the Academy</button>
       </div>
 
       {/* Our customer section */}
@@ -210,7 +213,7 @@ const Login = () => {
     <div>
       <p className='text-3xl px-32 mx-32'>Sign up now and you will be up and running on Nimbus ​Cloud in a few minutes. Get upto $200 off on your first 60 ​days</p>
     </div>
-    <button className="mt-5 bg-[#55c1e3] text-white font-bold text-2xl py-2 px-6 rounded-full">Sign up to get started</button>
+    <button className="mt-5 bg-[#55c1e3] text-white font-bold text-2xl py-2 px-6 rounded-full" onClick={()=>setShowRegisterModal(true)}>Sign up to get started</button>
 </div>
 
 <div className="relative z-10 bg-[#1a4789] text-white text-center py-10">

@@ -93,13 +93,13 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex mt-4 px-10">
-          <div style={{width:"23rem"}}>
+          <div style={{width:"112%"}}>
             <Network/>
           </div>
           <div className="ml-4 flex-grow" style={{marginTop: "-45px"}}>
             <Leaderboard />
             <div className='mt-4'>              
-              <CourseExplore/>
+              <CourseExplore isCustomer={false}/>
             </div>
             <div className='mt-4 mb-10' style={{ display: 'flex'}}>
               <div style={{ width: '40%', marginRight: '10px' }}>
