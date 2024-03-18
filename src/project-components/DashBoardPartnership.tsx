@@ -24,7 +24,7 @@ interface Certificate {
   description: string;
 }
 
-const DashBoardCustomer = () => {
+const DashBoardPartnership = () => {
     const [certificate, setCertificate] = useState<Certificate | null>(null);
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const courses = [
@@ -144,4 +144,4 @@ const DashBoardCustomer = () => {
     );
   }
 
-export default DashBoardCustomer;
+export default DashBoardPartnership;

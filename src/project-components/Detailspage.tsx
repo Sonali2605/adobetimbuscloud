@@ -86,6 +86,11 @@ const Detailspage = () => {
   // Extract the value after 'course:'
   const courseId = coursePart ? coursePart.split(':')[1] : '';
   
+  const isCustomerPart = parts.find(part => part.includes("isCustomer"));
+
+// Split the isCustomer part by "=" to get the value
+   const isCustomerValue = isCustomerPart?.split("=")[1];
+
   const [showDateValidationModal, setShowDateValidationModal] = useState(false);
   const [title] = useState(
     "Congratulations on completing the “Negotiations 101” course"
@@ -178,7 +183,11 @@ const Detailspage = () => {
       // playCourse(id);
       navigate(`/fludicPlayer?cid=${id}&mid=${iId}&back_url=${window.location.pathname}`)
     } else {
-      navigate('/dashboard')
+      if(isCustomerValue === "true"){
+        navigate('/DashBoardPartnership')
+      }else {
+       navigate('/dashboard')
+      }
     }
      setShowDateValidationModal(true);
   };

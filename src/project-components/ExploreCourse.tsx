@@ -126,10 +126,10 @@ const CourseExplore = ({ isCustomer }: { isCustomer: boolean }) => {
         });
 
         if (!response.ok) {
-            navigate('/dashboard')
+            navigate('/')
             throw new Error('Failed to enroll');
         } else {
-          navigate(`/learning_object/${cid}/instance/${Iid}/isLearning=false/detailspage`);
+          navigate(`/learning_object/${cid}/instance/${Iid}/isLearning=false/isCustomer=${isCustomer}/detailspage`);
         }
         setLoading(false);
     } catch (error) {

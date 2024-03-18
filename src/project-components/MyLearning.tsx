@@ -186,7 +186,7 @@ const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
         //     navigate('/dashboard')
         //     throw new Error('Failed to enroll');
         // } else {
-          navigate(`/learning_object/${cid}/instance/${Iid}/isLearning=false/detailspage`);
+          navigate(`/learning_object/${cid}/instance/${Iid}/isLearning=false/isCustomer=${isCustomer}/detailspage`);
         // }
         setLoading(false);
     } catch (error) {
