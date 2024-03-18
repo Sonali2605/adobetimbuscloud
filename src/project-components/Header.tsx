@@ -86,7 +86,7 @@ const ModalContent = styled.div`
   background-color: white;
   padding: 40px 20px;
   border-radius: 8px;
-  width: 460px;
+  width: 660px; /* Adjust the width as needed */
 `;
 
 const ModalHeader = styled.div`
@@ -116,12 +116,18 @@ const ModalTitle = styled.div`
   font-size: 24px;
   font-weight: bold;
   font: normal normal normal 24px Impact;
+  color: #000
 `;
 
 const InputField = styled.input`
-  width: 93%;
-  padding: 8px;
-  margin-top: 10px;
+width: 80%;
+padding: 1px;
+margin-top: 10px;
+text-align: center;
+transform: translateX(12%);
+border: 1px solid #000;
+border-radius: 0;
+color: #000
 `;
 
 const Button = styled.button`
@@ -137,9 +143,10 @@ const Button = styled.button`
 `;
 
 const PrimaryButton = styled(Button)`
-  background-color: #4471e8;
-  color: #ffffff;
-  padding: 10px 40px;
+background-color: #2d9dd8;
+color: #ffffff;
+border: 1px solid #000;
+padding: 0px 60px;
 `;
 
 const SecondaryButton = styled(Button)`
@@ -176,6 +183,7 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string>('');
+  const [dashboard, setDashboard] = useState('');
 
   const handleLogin = async () => {
     try {
@@ -240,6 +248,7 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
       setUsername('');
       setPassword('');
       setError('');
+      setDashboard('');
     } catch (error) {
       setError("Issue with Login");
     }
@@ -279,7 +288,7 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
             {/* Add more submenu items as needed */}
           </div>
         </MenuItem>
-        <MenuItem className='  products-menu' onClick={() => setShowLoginModal(true)}>LOGIN</MenuItem>
+        <MenuItem className='  products-menu' onClick={() => setShowLoginModal(true)}>Login</MenuItem>
       </Menu>
 
       {showLoginModal && (
@@ -287,19 +296,21 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
           <ModalContent>
             <ModalHeader>
               <ModalCloseButton onClick={() => setShowLoginModal(false)}>&#10005;</ModalCloseButton>
-              <ModalTitle>Welcome</ModalTitle>
-              <div className='w-full pt-4 pb-4'>
+              <ModalTitle>Login</ModalTitle>
+              {/* <div className='w-full pt-4 pb-4'>
                 <LoginLineLeft>&nbsp;</LoginLineLeft>
                 <span className='text-black'>Login</span>
                 <LoginLineRight>&nbsp;</LoginLineRight>
-              </div>
+              </div> */}
             </ModalHeader>
             <InputField className='border-2 rounded-md' type="email" placeholder="Company email" value={username} onChange={(e) => setUsername(e.target.value)} />
             <InputField className='border-2 rounded-md' type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <InputField className='border-2 rounded-md' type="text" placeholder="Industry" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="text" placeholder="Dashboard" value={dashboard} onChange={(e) => setDashboard(e.target.value)} />
+
+            {/* <InputField className='border-2 rounded-md' type="text" placeholder="Industry" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
             <InputField className='border-2 rounded-md' type="text" placeholder="Company" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
             <InputField className='border-2 rounded-md' type="text" placeholder="Designation" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
-            <InputField className='border-2 rounded-md' type="text" placeholder="Country" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="text" placeholder="Country" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} /> */}
             {error && <div style={{ color: 'red' }}>{error}</div>}
             <div className='text-center mt-3'>
               <a href="javascript:void(0)" className='text-blue-500' rel="noopener noreferrer">Forgot Password?</a>

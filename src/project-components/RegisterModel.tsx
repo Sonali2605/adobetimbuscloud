@@ -20,7 +20,7 @@ const ModalContent = styled.div`
   background-color: white;
  padding: 40px 20px;
   border-radius: 8px;
- width: 460px; /* Adjust the width as needed */
+ width: 660px; /* Adjust the width as needed */
 `;
 
 const ModalHeader = styled.div`
@@ -61,9 +61,14 @@ const ModalSubheader = styled.div`
 `;
 
 const InputField = styled.input`
-  width: 93%;
-  padding: 8px;
+  width: 80%;
+  padding: 1px;
   margin-top: 10px;
+  text-align: center;
+  transform: translateX(12%);
+  border: 1px solid #000;
+  border-radius: 0;
+  color: #000;
 `;
 
 const Button = styled.button`
@@ -79,10 +84,10 @@ const Button = styled.button`
 `;
 
 const SecondaryButton = styled(Button)`
-  background-color: #FFFFFF;
-  color: #4471E8;
-  border: 1px solid #4471E8;
-  padding: 10px 40px;
+background-color: #2d9dd8;
+color: #ffffff;
+border: 1px solid #000;
+padding: 0px 60px;
 `;
 
 const LoginLineRight = styled.span`
@@ -199,15 +204,15 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
       <ModalContent>
         <ModalHeader>
           <ModalCloseButton onClick={onClose}>&#10005;</ModalCloseButton>
-          <ModalTitle>Welcome</ModalTitle>
+          <ModalTitle>Thanks for showing interest in the Nimbus Cloud Academy. 
+            <br></br>Please fill in your details. </ModalTitle>
         </ModalHeader>
         <ModalSubheader>
 
-          <div className='w-full pt-4 pb-4'>
+          {/* <div className='w-full pt-4 pb-4'>
             <LoginLineLeft>&nbsp;</LoginLineLeft>
-            <span className='text-black'>Register</span>
             <LoginLineRight>&nbsp;</LoginLineRight>
-          </div>
+          </div> */}
 
         </ModalSubheader>
         <InputField className='border-2 rounded-md'
@@ -253,8 +258,15 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
           placeholder="Country"
         />
 
-        <SecondaryButton onClick={handleSubmit}>REGISTER</SecondaryButton>
+      <InputField className='border-2 rounded-md'
+          type="text"
+          value={formData.id}
+          onChange={handleChange}
+          name="id"
+          placeholder="Dashboard"
+        />
 
+        <SecondaryButton onClick={handleSubmit}>Submit</SecondaryButton>
       </ModalContent>
     </ModalContainer>
   );
