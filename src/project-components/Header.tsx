@@ -5,15 +5,15 @@ import RegisterModal from './RegisterModel';
 import { clientId, clientSecreat, refreshToken, base_adobe_url } from "../AppConfig"
 import ".././styles/common.css";
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.div<{ isLogin: boolean }>`
   position: relative;
   z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  margin: 1px 15px;
   color: #ffffff;
+  background-color: ${(props) => (props.isLogin ? 'transparent' : '#000')}; /* Conditionally set background color */
 `;
 
 const Logo = styled.div`
@@ -59,8 +59,6 @@ const Menu = styled.div`
     display: block;
   }
 `;
-
-
 
 const MenuItem = styled.div`
   cursor: pointer;
@@ -214,7 +212,7 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
         `${base_adobe_url}/primeapi/v2/users?page[offset]=0&page[limit]=10&sort=id&ids=email:${username}`,
         {
           headers: {
-            Authorization: `Bearer dea088ff9bbdca4e8cbbd5fa7de2d290`,
+            Authorization: `Bearer ${tokenData.access_token}`,
           },
         }
       );
@@ -242,7 +240,7 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
   };
 
   return (
-    <HeaderContainer>
+    <HeaderContainer isLogin={isLogin}>
       <Logo>NIMBUS CLOUD</Logo>
       <Menu >
         <MenuItem className='adobe-font products-menu'>

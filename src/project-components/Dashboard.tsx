@@ -16,6 +16,7 @@ import CalendarCourse from './CalenderCourse';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import ".././styles/common.css";
+import MyLearning from './MyLearning';
 
 interface Certificate {
   imageUrl: string;
@@ -42,17 +43,17 @@ const Dashboard = () => {
 
         const certificateData = response.data?.data?.[0];
         if (certificateData) {
-          const certificateName = certificateData.attributes.localizedMetadata.find(
-            (metadata: { name: string }) => metadata.name === 'Consultative Selling'
-          );
+          // const certificateName = certificateData.attributes.localizedMetadata.find(
+          //   (metadata: { name: string }) => metadata.name === 'Consultative Selling'
+          // );
 
-          if (certificateName) {
-            const imageUrl = certificateData.attributes.imageUrl;
-            const name = certificateName.name;
-            const description = certificateName.description;
-
+          // if (certificateName) {
+            const imageUrl = certificateData?.attributes?.imageUrl !== undefined ? certificateData.attributes.imageUrl : "/images/header4.png";
+            const name = certificateData?.attributes?.localizedMetadata[0]?.name || 'Consultative Selling';
+            const description = certificateData?.attributes?.localizedMetadata[0]?.description || 'Consultative Selling is a customer-centric approach to sales that prioritizes understanding and addressing the unique needs, challenges, and objectives of each individual customer.';
+            
             setCertificate({ imageUrl, name, description });
-          }
+          // }
         }
       } catch (error) {
         console.error('Error fetching certificate:', error);
@@ -93,13 +94,16 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex mt-4 px-10">
-          <div style={{width:"23rem"}}>
+          <div className='max-w-xs'>
             <Network/>
           </div>
           <div className="ml-4 flex-grow" style={{marginTop: "-45px"}}>
             <Leaderboard />
             <div className='mt-4'>              
-              <CourseExplore/>
+              <CourseExplore isCustomer={false}/>
+            </div>
+            <div className='mt-4'>              
+              <MyLearning/>
             </div>
             <div className='mt-4 mb-10' style={{ display: 'flex'}}>
               <div style={{ width: '40%', marginRight: '10px' }}>
