@@ -102,13 +102,26 @@ const DashBoardCustomer = () => {
             {/* <div style={{width:"60%"}}>
               <Network/>
             </div> */}
-            <div className="ml-4 flex-grow" style={{marginTop: "-45px"}}>
+            <div className="ml-4 flex-grow px-10" style={{marginTop: "-45px"}}>
             <div className='mt-4 mb-10 justify-center' style={{ display: 'flex'}}>
-                <div><img
-            className="w-60 h-60 rounded-full mt-10"
-            src="./images/maryJaneStewart.png"
-            alt="Profile"
-          /></div>
+          <div className='mt-14' style= {{ width: '30%' }} >
+          <div style={{backgroundImage: 'url("./images/customer_Heading1.png")', backgroundColor: 'black', padding: '30px 35px', position: 'relative', display: 'flex', alignItems: 'center'}}>
+  <img
+    className="w-20 h-20 rounded-full"
+    src="./images/maryJaneStewart.png"
+    alt="Profile"
+  />
+  <div style={{ marginLeft: '20px' }}>
+    <h1 className="text-white text-2xl mb-2">Welcome, <br/>Olivia Clarke</h1>
+    <div>
+      <img src="/images/level.png" alt="Level"/>
+      <p>Level 1</p>
+      <p className='font-bold'>Starter</p>
+    </div>
+  </div>
+</div>
+
+            </div>
                 <div style={{ width: '40%', marginRight: '10px' }}>
                   <CalendarCourse date={selectedDate ? selectedDate.toISOString() : null} />
                 </div>

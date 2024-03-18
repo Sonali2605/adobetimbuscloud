@@ -13,7 +13,7 @@ const Network = () => {
   ];
 
   return (
-    <div className="mx-auto bg-white overflow-hidden shadow-lg p-4" >
+    <div className="mx-auto bg-white overflow-hidden shadow-lg p-4" style={{ maxWidth: '100%' }}>
       <h2 className="text-md font-bold mb-2">Olivia's Network</h2>
       <div className="flex justify-between text-gray-500 text-sm mb-2">
         <span>Olivia's Network</span>
