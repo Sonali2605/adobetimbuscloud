@@ -50,7 +50,7 @@ interface LearningObjectInstanceEnrollment {
 }
 
 
-const MyLearning = () => {
+const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
   const [courseData, setCourseData] = useState<Course[]>([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -69,8 +69,14 @@ const MyLearning = () => {
       const config = {
         headers: { Authorization: `oauth ${token}` },
       };
+      let limit;
+      if (isCustomer){
+        limit = 1
+      } else {
+        limit = 10
+      }
       const response = await axios.get(
-        `https://learningmanager.adobe.com/primeapi/v2/learningObjects?include=enrollment&page[limit]=10&filter.catalogIds=174313&sort=name&filter.learnerState=enrolled&filter.learnerState=started&filter.learnerState=completed&filter.ignoreEnhancedLP=true`,
+        `https://learningmanager.adobe.com/primeapi/v2/learningObjects?include=enrollment&page[limit]=${limit}&filter.catalogIds=174313&sort=name&filter.learnerState=enrolled&filter.learnerState=started&filter.learnerState=completed&filter.ignoreEnhancedLP=true`,
         config
       );
       const result = response?.data?.data;

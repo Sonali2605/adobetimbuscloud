@@ -103,7 +103,7 @@ const Dashboard = () => {
               <CourseExplore isCustomer={false}/>
             </div>
             <div className='mt-4'>              
-              <MyLearning/>
+              <MyLearning isCustomer={false}/>
             </div>
             <div className='mt-4 mb-10' style={{ display: 'flex'}}>
               <div style={{ width: '40%', marginRight: '10px' }}>
