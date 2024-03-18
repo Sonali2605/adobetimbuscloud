@@ -139,7 +139,11 @@ const CourseExplore = ({ isCustomer }: { isCustomer: boolean }) => {
   }
   return (
     <div>
-      <h2 className="text-lg font-bold mb-4">{isCustomer? "Recomended by Timbus" :"Courses to Explore" }</h2>
+      {isCustomer? 
+       <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Courses Taken By Your Peers</h2>
+       :
+      <h2 className="text-lg font-bold mb-4">Courses to Explore</h2>
+      }
       <style>{customStyles}</style>
       <div className="course-carousel-container">
         <div className="course-carousel">

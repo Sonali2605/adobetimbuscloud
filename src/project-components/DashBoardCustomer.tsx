@@ -16,6 +16,7 @@ import CalendarCourse from './CalenderCourse';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import ".././styles/common.css";
+import MyLearning from './MyLearning';
 
 interface Certificate {
   imageUrl: string;
@@ -76,45 +77,23 @@ const DashBoardCustomer = () => {
       <>
         <Header isLogin={false} />
         <div className="mt-5 justify-center text-center">
-          <div className='text-4xl mb-10'>Welcome Olivia Clarke</div>
-          {/* <div className="grid grid-rows-3 grid-flow-col gap-4 px-10 ">
-            <div className="row-start-1 row-span-4 max-w-xs">
-              <ProfileCard name="Olivia Clarke" />
-              <Badges />
-              {certificate && (
-                <CertificateCard
-                  imageUrl={certificate.imageUrl}
-                  name={certificate.name}
-                  description={certificate.description}
-                />
-              )}
-            </div>
-            <div className="row-start-1 row-end-4">
-              <LineChart />
-              <NewProduct/>
-            </div>
-            <div className="row-start-1 row-end-4">
-              <ComplianceTraining/>
-              <SkillProgress/>
-            </div>
-          </div> */}
           <div className="flex mt-4">
             {/* <div style={{width:"60%"}}>
               <Network/>
             </div> */}
-            <div className="ml-4 flex-grow px-10" style={{marginTop: "-45px"}}>
-            <div className='mt-4 mb-10 justify-center' style={{ display: 'flex'}}>
+            <div className="ml-4 flex-grow px-0 ml-0" style={{marginTop: "-45px"}}>
+            <div className='mt-4 mb-10 justify-center ' style={{ display: 'flex'}}>
           <div className='mt-14' style= {{ width: '30%' }} >
           <div style={{backgroundImage: 'url("./images/customer_Heading1.png")', backgroundColor: 'black', padding: '30px 35px', position: 'relative', display: 'flex', alignItems: 'center'}}>
-  <img
-    className="w-20 h-20 rounded-full"
-    src="./images/maryJaneStewart.png"
-    alt="Profile"
-  />
+          <img
+            className="w-20 h-20 rounded-full"
+            src="./images/maryJaneStewart.png"
+            alt="Profile"
+          />
   <div style={{ marginLeft: '20px' }}>
-    <h1 className="text-white text-2xl mb-2">Welcome, <br/>Olivia Clarke</h1>
-    <div>
-      <img src="/images/level.png" alt="Level"/>
+    <h1 className="text-white text-xl mb-2 mt-4">Welcome, <br/>Olivia Clarke</h1>
+    <div className='text-white inline'>
+      <img src="/images/level.png" alt="Level" className='w-10 h-15'/>
       <p>Level 1</p>
       <p className='font-bold'>Starter</p>
     </div>
@@ -122,8 +101,8 @@ const DashBoardCustomer = () => {
 </div>
 
             </div>
-                <div style={{ width: '40%', marginRight: '10px' }}>
-                  <CalendarCourse date={selectedDate ? selectedDate.toISOString() : null} />
+                <div style={{ width: '25%', marginRight: '10px' }} className='mt-10'>
+                  <MyLearning isCustomer={true}/>
                 </div>
                 <div style={{ width: '30%', marginTop:'60px' }}>
                   <Calendar
@@ -134,13 +113,13 @@ const DashBoardCustomer = () => {
                   />
                 </div>
               </div>
-              <div className='mt-4 bg-[#1a4789]'>              
+              <div className='mt-4 bg-[#1a4789] py-6 px-12'>              
                 <CourseExplore isCustomer= {true}/>
                 <div className="mt-4">
-          <h2 className="text-2xl text-white font-bold mt-10 mb-8">Courses Taken By Your Peers</h2>
-          <div className="grid grid-cols-4 gap-6">
+          <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Courses Taken By Your Peers</h2>
+          <div className="grid grid-cols-4 gap-24">
             {courses.map((course, index) => (
-              <div key={index} className="max-w-xs bg-white overflow-hidden shadow-lg rounded-lg px-4">
+              <div key={index} className="max-w-xs overflow-hidden shadow-lg rounded-lg px-6">
                 <img
                   className="w-full h-40 object-cover mb-4 rounded-t-lg"
                   src={course.imageUrl}
