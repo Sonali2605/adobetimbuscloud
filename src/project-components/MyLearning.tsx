@@ -1,63 +1,21 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import {useNavigate, useParams } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 interface Course {
+  id: string; // Assuming 'id' is a required property in your data
   attributes: {
     imageUrl: string;
     localizedMetadata?: {
       name: string;
     }[];
   };
-}
-interface LearningObjectInstanceEnrollment {
-  id?: string;
-  type?: string;
-  attributes: {
-      dateEnrolled?: string;
-      dateStarted?: string;
-      enrollmentSource?: string;
-      hasPassed?: boolean;
-      progressPercent?: number;
-      score?: number;
-      state?: string;
-  };
-  relationships?: {
-      learner?: {
-          data?: {
-              id?: string;
-              type?: string;
-          };
-      };
-      learningObject?: {
-          data?: {
-              id?: string;
-              type?: string;
-          };
-      };
-      loInstance?: {
-          data?: {
-              id?: string;
-              type?: string;
-          };
-      };
-      loResourceGrades?: {
-          data?: {
-              id?: string;
-              type?: string;
-          }[];
-      };
-  };
+  state?: string; // Define 'state' as an optional property
 }
 
 
 const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
   const [courseData, setCourseData] = useState<Course[]>([]);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { isLearning } = useParams();
-
-  // Extract the value of isLearning from the URL
-  const isLearningValue = isLearning === 'true';
 
   useEffect(() => {
     getMyLearningData();
@@ -167,30 +125,15 @@ const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
     }
   `;
 
-  const  EnrollHandle = async(cid:number) =>{
+  const  EnrollHandle = async(cid:string) =>{
    const course = (courseData as any).find(obj => obj?.id === cid);
     const Iid =  course.relationships?.instances?.data?.[0].id;
     
-    setLoading(true);
-    const token = localStorage.getItem("access_token")
     try {
-        // const response = await fetch('https://learningmanager.adobe.com/primeapi/v2/enrollments?loId=' + cid + '&loInstanceId=' + encodeURIComponent(Iid), {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Authorization': `Bearer ${token}`
-        //     },
-        // });
-
-        // if (!response.ok) {
-        //     navigate('/dashboard')
-        //     throw new Error('Failed to enroll');
-        // } else {
           navigate(`/learning_object/${cid}/instance/${Iid}/isLearning=false/isCustomer=${isCustomer}/detailspage`);
-        // }
-        setLoading(false);
+        
     } catch (error) {
-        setLoading(false);
+      console.log("error")
     }
    
   }

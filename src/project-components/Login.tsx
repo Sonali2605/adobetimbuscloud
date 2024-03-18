@@ -5,10 +5,7 @@ import ".././styles/common.css";
 
 const Login = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  
-  const ShowRegistrationModel=() =>{
-    setShowRegisterModal(true)
-  }
+
   return (
     <div className="relative">
       {/* Header */}

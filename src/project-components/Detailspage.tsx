@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 import Header from "./Header";
-import dpageone from "../assets/images/dpageone.png";
 import playiconone from "../assets/images/playiconone.png";
-import profileimage from "../assets/images/profileimage.png";
 import ".././styles/Detailspage.css";
 // import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import CoursePlayer from "./CoursePlayer";
 import ModalforSuccess from ".././common/Modal/Modal";
 import jsonData from "./resdata.json";
-import { cid } from "../AppConfig";
 import { apis } from '.././apiServices/apis'
 import axios from "axios";
-
 interface Details {
   data?: {
+    id?: string; // Add id property
     attributes?: {
       loFormat?: string;
       localizedMetadata?: Array<{ name?: string; overview?: string }>;
+      bannerUrl?: string;
+      name?: string; // Add name property
+      avatarUrl?: string; // Add avatarUrl property
     };
   };
 }
+
 
 interface LearningObjectInstanceEnrollment {
   id?: string;
@@ -33,6 +33,9 @@ interface LearningObjectInstanceEnrollment {
       progressPercent?: number;
       score?: number;
       state?: string;
+      bannerUrl?: string;
+      name?: string; // Add name property
+      avatarUrl?: string; // Add avatarUrl property
   };
   relationships?: {
       learner?: {
@@ -65,11 +68,7 @@ interface LearningObjectInstanceEnrollment {
 
 const Detailspage = () => {
   const [activeTab, setActiveTab] = useState(1);
-  const [isPlayCourse, setIsPlayCourse] = useState(false);
-  const [isCid, setIsCid] = useState<string | undefined>();
-  const [isCiid, setIsCiid] = useState<string | null>(null);
   const location = useLocation();
-  const currentUrl = location.pathname;
   const[ , setlearnerToken]=useState();
   const[dateData, setDateData] =  useState<string | null>(null);
   const[enrollmentData, setEnrollmentData]= useState<LearningObjectInstanceEnrollment>();
@@ -170,14 +169,14 @@ const Detailspage = () => {
   }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const playCourse = (cid: string, mid?: string) => {
-    setIsCid(cid);
-    if (mid) {
-      setIsCiid(mid);
-    }
-  };
+  // const playCourse = (cid: string, mid?: string) => {
+  //   setIsCid(cid);
+  //   if (mid) {
+  //     setIsCiid(mid);
+  //   }
+  // };
 
-  const handleplayer = (id: string) => {
+  const handleplayer = (id: string | undefined) => {
     if (enrollmentData?.attributes?.progressPercent !== 100) {
       // setIsPlayCourse(true);
       // playCourse(id);

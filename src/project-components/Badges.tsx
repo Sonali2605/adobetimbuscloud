@@ -10,7 +10,6 @@ const Badges = () => {
     }, []);
 
     const callApi = async () => {
-        const userId = localStorage.getItem("userId");
         const token = localStorage.getItem("access_token");
         const config = {
             headers: { Authorization: `Bearer ${token}` }

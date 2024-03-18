@@ -1,18 +1,7 @@
 import  { useEffect, useState } from 'react';
 import Header from './Header';
-import DashboardHeading from './DashboardHeading';
-import LineChart from './LineChart';
-import ProfileCard from './ProfileCard';
-import Badges from './Badges';
-import CertificateCard from './Certificate';
 import axios from 'axios';
-import NewProduct from './NewProducts';
-import ComplianceTraining from './ComplainceTraining';
-import SkillProgress from './SkillProgress';
-import Network from './Network';
-import Leaderboard from './Leaderboard';
 import CourseExplore from './ExploreCourse';
-import CalendarCourse from './CalenderCourse';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import ".././styles/common.css";
@@ -25,7 +14,7 @@ interface Certificate {
 }
 
 const DashBoardPartnership = () => {
-    const [certificate, setCertificate] = useState<Certificate | null>(null);
+    const [ ,setCertificate] = useState<Certificate | null>(null);
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const courses = [
       { name: "React Fundamentals", imageUrl: "./images/Peers/img1.png" },

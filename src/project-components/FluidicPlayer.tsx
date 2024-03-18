@@ -1,5 +1,5 @@
 import ModalforSuccess from '@/common/Modal/Modal';
-import React, { useEffect, useRef , useState} from 'react';
+import { useEffect, useRef , useState} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 function FluidicPlayer() {

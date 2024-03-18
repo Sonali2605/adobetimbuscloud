@@ -136,13 +136,6 @@ const PrimaryButton = styled(Button)`
   padding: 10px 40px;
 `;
 
-const SecondaryButton = styled(Button)`
-  background-color: #ffffff;
-  color: #4471e8;
-  border: 1px solid #4471e8;
-  padding: 10px 40px;
-`;
-
 const LoginLineRight = styled.span`
   display: inline-block;
   width: 95px;
