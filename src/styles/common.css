@@ -2,3 +2,7 @@
   font-family: Adobe;
   /* letter-spacing: 0.56px; */
 }
+
+.min-w-xs{
+  min-width: 20rem;
+}

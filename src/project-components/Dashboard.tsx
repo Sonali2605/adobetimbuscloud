@@ -94,7 +94,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="flex mt-4 px-10">
-          <div className='max-w-xs'>
+          <div className='min-w-xs'>
             <Network/>
           </div>
           <div className="ml-4 flex-grow" style={{marginTop: "-45px"}}>
