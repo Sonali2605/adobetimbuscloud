@@ -117,15 +117,18 @@ interface LoginModalProps {
 
 const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
 
-  
-  const [agencyId, setAgencyId] = useState('');
+
+  let [industryId , setIndustryId] = useState('');
+  let [companyId , setCompanyId] = useState('');
+  let [designationId , setDesignationId] = useState('');
+  let [countryId , setCountryId] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string>('');
 
-  
+
   const handleLogin = async () => {
-   //  onClose(); // Close modal
+    //  onClose(); // Close modal
     try {
       const response = await axios.post('https://viku.space/renault/reapi.php', {
         action: 'login',
@@ -184,8 +187,11 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
 
       console.log('Login successful', response.data);
       onClose(); // Close modal
-      
-      setAgencyId('');
+
+      setIndustryId('');
+      setCompanyId('');
+      setDesignationId('');
+      setCountryId('');
       setUsername('');
       setPassword('');
       setError('');
@@ -208,12 +214,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose }) => {
         </ModalHeader>
         <InputField className='border-2 rounded-md' type="email" placeholder="Company email" value={username} onChange={(e) => setUsername(e.target.value)} />
         <InputField className='border-2 rounded-md' type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <InputField className='border-2 rounded-md' type="text" placeholder="Industry" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
-        <InputField className='border-2 rounded-md' type="text" placeholder="Company" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
-        <InputField className='border-2 rounded-md' type="text" placeholder="Designation" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
-        <InputField className='border-2 rounded-md' type="text" placeholder="Country" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
+        <InputField className='border-2 rounded-md' type="text" placeholder="Industry" value={industryId} onChange={(e) => setIndustryId(e.target.value)} />
+        <InputField className='border-2 rounded-md' type="text" placeholder="Company" value={companyId} onChange={(e) => setCompanyId(e.target.value)} />
+        <InputField className='border-2 rounded-md' type="text" placeholder="Designation" value={designationId} onChange={(e) => setDesignationId(e.target.value)} />
+        <InputField className='border-2 rounded-md' type="text" placeholder="Country" value={countryId} onChange={(e) => setCountryId(e.target.value)} />
         {error && <div style={{ color: 'red' }}>{error}</div>}
-       
+
         <PrimaryButton className='w-8/12' onClick={handleLogin}>Submit</PrimaryButton>
       </ModalContent>
     </ModalContainer>
