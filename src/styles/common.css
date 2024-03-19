@@ -96,12 +96,5 @@ margin-right: 35px;
    padding-left: 30px;
    padding-right: 30px;
 }
-.recommended-course .course-carousel .course-card {
-  width: 100%;
-}
-.recommended-course .course-carousel {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 20px;
-}
+
 /*** Dashboard Partnership Page CSS ***/
