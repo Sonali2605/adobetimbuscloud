@@ -114,7 +114,7 @@ interface RegisterModalProps {
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
   const [showCompletionPopup, setShowCompletionPopup] = useState(false);
- 
+
   const handleClosePopup = () => {
     setShowCompletionPopup(false);
   };
@@ -123,11 +123,11 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
     id: '',
     username: '',
     password: '',
-    dashboardId:'',
-    industryId:'',
-    companyId:'',
-    designationId:'',
-    countryId:'',
+    dashboardId: '',
+    industryId: '',
+    companyId: '',
+    designationId: '',
+    countryId: '',
 
 
   });
@@ -195,7 +195,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
       });
 
       // Handle API response
-     //  console.log(response.data);
+      //  console.log(response.data);
       // Close modal and show success message if API call is successful
       if (response.data.success) {
         setShowCompletionPopup(true);
@@ -214,66 +214,66 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
 
   return (
     <>
-   
-    <ModalContainer>
-      <ModalContent>
-        <ModalHeader>
-          <ModalCloseButton onClick={onClose}>&#10005;</ModalCloseButton>
-          <ModalTitle>Thanks for showing interest in the Nimbus Cloud Academy. 
-            <br></br>Please fill in your details. </ModalTitle>
-        </ModalHeader>
-        <ModalSubheader>
+      {!showCompletionPopup && (
+        <ModalContainer>
+          <ModalContent>
+            <ModalHeader>
+              <ModalCloseButton onClick={onClose}>&#10005;</ModalCloseButton>
+              <ModalTitle>Thanks for showing interest in the Nimbus Cloud Academy.
+                <br></br>Please fill in your details. </ModalTitle>
+            </ModalHeader>
+            <ModalSubheader>
 
-          {/* <div className='w-full pt-4 pb-4'>
+              {/* <div className='w-full pt-4 pb-4'>
             <LoginLineLeft>&nbsp;</LoginLineLeft>
             <LoginLineRight>&nbsp;</LoginLineRight>
           </div> */}
 
-        </ModalSubheader>
-        <InputField className='border-2 rounded-md'
-          type="email"
-          value={formData.username}
-          onChange={handleChange}
-          name="username"
-          placeholder="Company email"
-        />
-        <InputField className='border-2 rounded-md'
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          name="password"
-          placeholder="Password"
-        />
-        <InputField className='border-2 rounded-md'
-          type="text"
-          value={formData.industryId}
-          onChange={handleChange}
-          name="industryId"
-          placeholder="Industry"
-        />
-        <InputField className='border-2 rounded-md'
-          type="text"
-          value={formData.companyId}
-          onChange={handleChange}
-          name="companyId"
-          placeholder="Company"
-        />
-        <InputField className='border-2 rounded-md'
-          type="text"
-          value={formData.designationId}
-          onChange={handleChange}
-          name="designationId"
-          placeholder="Designation"
-        />
-        <InputField className='border-2 rounded-md'
-          type="text"
-          value={formData.countryId}
-          onChange={handleChange}
-          name="countryId"
-          placeholder="Country"
-        />
+            </ModalSubheader>
+            <InputField className='border-2 rounded-md'
+              type="email"
+              value={formData.username}
+              onChange={handleChange}
+              name="username"
+              placeholder="Company email"
+            />
+            <InputField className='border-2 rounded-md'
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              name="password"
+              placeholder="Password"
+            />
+            <InputField className='border-2 rounded-md'
+              type="text"
+              value={formData.industryId}
+              onChange={handleChange}
+              name="industryId"
+              placeholder="Industry"
+            />
+            <InputField className='border-2 rounded-md'
+              type="text"
+              value={formData.companyId}
+              onChange={handleChange}
+              name="companyId"
+              placeholder="Company"
+            />
+            <InputField className='border-2 rounded-md'
+              type="text"
+              value={formData.designationId}
+              onChange={handleChange}
+              name="designationId"
+              placeholder="Designation"
+            />
+            <InputField className='border-2 rounded-md'
+              type="text"
+              value={formData.countryId}
+              onChange={handleChange}
+              name="countryId"
+              placeholder="Country"
+            />
 
-      {/* <InputField className='border-2 rounded-md'
+            {/* <InputField className='border-2 rounded-md'
           type="text"
           value={formData.dashboardId}
           onChange={handleChange}
@@ -281,14 +281,14 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
           placeholder="Dashboard"
         /> */}
 
-        <SecondaryButton className="px-10 py-3 text-2xl rounded-full bg-[#55c1e3] text-white font-bold" onClick={handleSubmit}>Submit</SecondaryButton>
-      </ModalContent>
-    </ModalContainer>
-
-    {showCompletionPopup && (
- <CompletionPopup onClose={handleClosePopup} />
-    )}
-</>
+            <SecondaryButton className="px-10 py-3 text-2xl rounded-full bg-[#55c1e3] text-white font-bold" onClick={handleSubmit}>Submit</SecondaryButton>
+          </ModalContent>
+        </ModalContainer>
+      )}
+      {showCompletionPopup && (
+        <CompletionPopup onClose={handleClosePopup} />
+      )}
+    </>
   );
 };
 
