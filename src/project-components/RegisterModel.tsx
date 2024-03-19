@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import CompletionPopup from './CompletionPopup';
 import ".././styles/common.css";
 
 const ModalContainer = styled.div`
@@ -13,13 +14,14 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index:9999;
 `;
 
 const ModalContent = styled.div`
   background-color: white;
  padding: 40px 20px;
   border-radius: 8px;
- width: 360px; /* Adjust the width as needed */
+ width: 660px; /* Adjust the width as needed */
 `;
 
 const ModalHeader = styled.div`
@@ -30,9 +32,9 @@ const ModalHeader = styled.div`
 const ModalCloseButton = styled.button`
   position: absolute;
   top: -30px;
-  right: -13px;
+  right: -8px;
   background: none;
-  border: 2px solid rgba(142, 161, 180, 1);
+  border: 1px solid rgba(142, 161, 180, 1);
   cursor: pointer;
   font-size: 14px;
   width: 23px;
@@ -60,9 +62,14 @@ const ModalSubheader = styled.div`
 `;
 
 const InputField = styled.input`
-  width: 93%;
-  padding: 8px;
+  width: 80%;
+  padding: 1px;
   margin-top: 10px;
+  text-align: center;
+  transform: translateX(12%);
+  border: 1px solid #000;
+  border-radius: 0;
+  color: #000;
 `;
 
 const Button = styled.button`
@@ -78,40 +85,51 @@ const Button = styled.button`
 `;
 
 const SecondaryButton = styled(Button)`
-  background-color: #FFFFFF;
-  color: #4471E8;
-  border: 1px solid #4471E8;
-  padding: 10px 40px;
+border-radius: 9999px;
+padding: 0.5rem 3rem;
 `;
 
-const LoginLineRight = styled.span`
-display: inline-block;
-    width: 95px;
-    height: 2px;
-    background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
-    opacity: 1;
-    vertical-align: middle;
-    margin: 0 10px;
-`;
-const LoginLineLeft = styled.span`
-display: inline-block;
-    width: 95px;
-    height: 2px;
-    background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
-    opacity: 1;
-    vertical-align: middle;
-    margin: 0 10px;
-`;
+// const LoginLineRight = styled.span`
+// display: inline-block;
+//     width: 95px;
+//     height: 2px;
+//     background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+//     opacity: 1;
+//     vertical-align: middle;
+//     margin: 0 10px;
+// `;
+// const LoginLineLeft = styled.span`
+// display: inline-block;
+//     width: 95px;
+//     height: 2px;
+//     background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+//     opacity: 1;
+//     vertical-align: middle;
+//     margin: 0 10px;
+// `;
 
 interface RegisterModalProps {
   onClose: () => void; // Define the type of onClose prop
 }
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
+  const [showCompletionPopup, setShowCompletionPopup] = useState(false);
+ 
+  const handleClosePopup = () => {
+    setShowCompletionPopup(false);
+  };
+
   const [formData, setFormData] = useState({
     id: '',
     username: '',
     password: '',
+    dashboardId:'',
+    industryId:'',
+    companyId:'',
+    designationId:'',
+    countryId:'',
+
+
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -177,11 +195,12 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
       });
 
       // Handle API response
-      console.log(response.data);
+     //  console.log(response.data);
       // Close modal and show success message if API call is successful
       if (response.data.success) {
         onClose(); // Close modal
         alert('Registration successful!');
+        setShowCompletionPopup(true);
       } else {
         // Handle API response indicating failure
         alert('Registration failed. Please try again.');
@@ -194,34 +213,29 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
   };
 
   return (
+    <>
+   
     <ModalContainer>
       <ModalContent>
         <ModalHeader>
           <ModalCloseButton onClick={onClose}>&#10005;</ModalCloseButton>
-          <ModalTitle>Welcome</ModalTitle>
+          <ModalTitle>Thanks for showing interest in the Nimbus Cloud Academy. 
+            <br></br>Please fill in your details. </ModalTitle>
         </ModalHeader>
         <ModalSubheader>
 
-          <div className='w-full pt-4 pb-4'>
+          {/* <div className='w-full pt-4 pb-4'>
             <LoginLineLeft>&nbsp;</LoginLineLeft>
-            <span className='text-black'>Register</span>
             <LoginLineRight>&nbsp;</LoginLineRight>
-          </div>
+          </div> */}
 
         </ModalSubheader>
-        <InputField className='border-2 rounded-md'
-          type="text"
-          value={formData.id}
-          onChange={handleChange}
-          name="id"
-          placeholder="Agency ID"
-        />
         <InputField className='border-2 rounded-md'
           type="email"
           value={formData.username}
           onChange={handleChange}
           name="username"
-          placeholder="Email Address"
+          placeholder="Company email"
         />
         <InputField className='border-2 rounded-md'
           type="password"
@@ -230,11 +244,51 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
           name="password"
           placeholder="Password"
         />
+        <InputField className='border-2 rounded-md'
+          type="text"
+          value={formData.industryId}
+          onChange={handleChange}
+          name="industryId"
+          placeholder="Industry"
+        />
+        <InputField className='border-2 rounded-md'
+          type="text"
+          value={formData.companyId}
+          onChange={handleChange}
+          name="companyId"
+          placeholder="Company"
+        />
+        <InputField className='border-2 rounded-md'
+          type="text"
+          value={formData.designationId}
+          onChange={handleChange}
+          name="designationId"
+          placeholder="Designation"
+        />
+        <InputField className='border-2 rounded-md'
+          type="text"
+          value={formData.countryId}
+          onChange={handleChange}
+          name="countryId"
+          placeholder="Country"
+        />
 
-        <SecondaryButton onClick={handleSubmit}>REGISTER</SecondaryButton>
+      {/* <InputField className='border-2 rounded-md'
+          type="text"
+          value={formData.dashboardId}
+          onChange={handleChange}
+          name="dashboardId"
+          placeholder="Dashboard"
+        /> */}
 
+        <SecondaryButton className="px-10 py-3 text-2xl rounded-full bg-[#55c1e3] text-white font-bold" onClick={handleSubmit}>Submit</SecondaryButton>
       </ModalContent>
     </ModalContainer>
+
+    {showCompletionPopup && (
+ <CompletionPopup showCompletionPopup={true} onClose={handleClosePopup} />
+    )}
+</>
   );
 };
 

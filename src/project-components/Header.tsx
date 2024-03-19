@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import RegisterModal from './RegisterModel';
 import { clientId, clientSecreat, refreshToken, base_adobe_url } from "../AppConfig"
+import { useLocation } from 'react-router-dom'; // Import the useLocation hook
 import ".././styles/common.css";
 
 const HeaderContainer = styled.div<{ isLogin: boolean }>`
@@ -18,17 +19,36 @@ const HeaderContainer = styled.div<{ isLogin: boolean }>`
 
 const Logo = styled.div`
   font-weight: bold;
-  font: normal normal normal 24px Impact;
+  font: normal normal 24px Impact;
 `;
+
+const LoginRadio = styled.div`
+display: flex;
+color: #000;
+justify-content: center;
+& > label:nth-child(2) {
+  margin-left: 15px;
+}
+& > label > input {
+  width: auto;
+  margin-right: 8px;
+  top: 2px;
+  position: relative;
+}
+`
 
 const Menu = styled.div`
   display: flex;
   gap: 20px;
-  font: normal normal bold 25px Adobe Clean;
+  font: normal bold 25px bahnschrift;
 
   /* Nested Menu Items */
   & > .products-menu {
     position: relative;
+  }
+
+  & > .products-menu:hover{
+    color:#55c1e3;
   }
 
   /* Submenu Container */
@@ -36,7 +56,7 @@ const Menu = styled.div`
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
@@ -80,7 +100,7 @@ const ModalContent = styled.div`
   background-color: white;
   padding: 40px 20px;
   border-radius: 8px;
-  width: 360px;
+  width: 500px; /* Adjust the width as needed */
 `;
 
 const ModalHeader = styled.div`
@@ -91,9 +111,9 @@ const ModalHeader = styled.div`
 const ModalCloseButton = styled.button`
   position: absolute;
   top: -30px;
-  right: -13px;
+  right: -8px;
   background: none;
-  border: 2px solid rgba(142, 161, 180, 1);
+  border: 1px solid rgba(142, 161, 180, 1);
   cursor: pointer;
   font-size: 14px;
   width: 23px;
@@ -110,12 +130,18 @@ const ModalTitle = styled.div`
   font-size: 24px;
   font-weight: bold;
   font: normal normal normal 24px Impact;
+  color: #000
 `;
 
 const InputField = styled.input`
-  width: 93%;
-  padding: 8px;
-  margin-top: 10px;
+width: 80%;
+padding: 1px;
+margin-top: 10px;
+text-align: center;
+transform: translateX(12%);
+border: 1px solid #000;
+border-radius: 0;
+color: #000
 `;
 
 const Button = styled.button`
@@ -131,30 +157,29 @@ const Button = styled.button`
 `;
 
 const PrimaryButton = styled(Button)`
-  background-color: #4471e8;
-  color: #ffffff;
-  padding: 10px 40px;
+border-radius: 9999px;
+padding: 0.5rem 3rem;
 `;
 
-const LoginLineRight = styled.span`
-  display: inline-block;
-  width: 95px;
-  height: 2px;
-  background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
-  opacity: 1;
-  vertical-align: middle;
-  margin: 0 10px;
-`;
+// const LoginLineRight = styled.span`
+//   display: inline-block;
+//   width: 95px;
+//   height: 2px;
+//   background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+//   opacity: 1;
+//   vertical-align: middle;
+//   margin: 0 10px;
+// `;
 
-const LoginLineLeft = styled.span`
-  display: inline-block;
-  width: 95px;
-  height: 2px;
-  background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
-  opacity: 1;
-  vertical-align: middle;
-  margin: 0 10px;
-`;
+// const LoginLineLeft = styled.span`
+//   display: inline-block;
+//   width: 95px;
+//   height: 2px;
+//   background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+//   opacity: 1;
+//   vertical-align: middle;
+//   margin: 0 10px;
+// `;
 
 const Header = ({ isLogin }: { isLogin: boolean }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -163,6 +188,8 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string>('');
+  const [dashboard, setDashboard] = useState('customer'); // Default selection
+  const location = useLocation(); // Get the current location
 
   const handleLogin = async () => {
     try {
@@ -213,13 +240,13 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
       const userId = userDataResponse.data?.data?.[0]?.id;
 
       localStorage.setItem('userId', userId);
-      const isManager = userDataResponse.data?.data?.[0]?.attributes?.roles.includes('Manager');
+      // const isManager = userDataResponse.data?.data?.[0]?.attributes?.roles.includes('Manager');
 
-      const newPath = isManager ? '/managerDashboard' : '/dashboard';
+      const newPath = dashboard === 'customer' ? '/dashboard' : '/dashboardPartnership';
 
-      if (location.pathname !== newPath) {
+     if (location.pathname !== newPath) {
         window.location.href = newPath;
-      }
+      } 
 
       console.log('Login successful', response.data);
       setShowLoginModal(false);
@@ -227,52 +254,135 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
       setUsername('');
       setPassword('');
       setError('');
+      setDashboard('');
     } catch (error) {
       setError("Issue with Login");
     }
   };
 
   return (
-    <HeaderContainer isLogin={isLogin}>
-      <Logo>NIMBUS CLOUD</Logo>
-      <Menu >
-        <MenuItem className='adobe-font products-menu'>
-          PRODUCTS
-          <div className="submenu">
-            <MenuItem className='adobe-font'>Product 1</MenuItem>
-            <MenuItem className='adobe-font'>Product 2</MenuItem>
-            {/* Add more submenu items as needed */}
-          </div>
-        </MenuItem>
-        <MenuItem className='adobe-font'>SOLUTIONS</MenuItem>
-        <MenuItem className='adobe-font'>DEVELOPER ACADEMY</MenuItem>
-        <MenuItem className='adobe-font'>PRICING</MenuItem>
-        <MenuItem className='adobe-font' onClick={() => setShowLoginModal(true)}>LOGIN</MenuItem>
-      </Menu>
+    <HeaderContainer>
+      {location.pathname.toLowerCase().includes('dashboardpartnership') ? (
+        <> <Logo>Timbus Cloud Partner Pod</Logo>
+        <Menu >
+          <MenuItem className='products-menu'>
+            PRODUCTS
+            <div className="submenu">
+              <MenuItem className=''>Product 1</MenuItem>
+              <MenuItem className=''>Product 2</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+  
+          <MenuItem className='  products-menu'>SOLUTIONS
+            <div className="submenu">
+              <MenuItem className=' '>Google</MenuItem>
+              <MenuItem className=' '>Microsoft</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+  
+          <MenuItem className='  products-menu'>Learning
+            <div className="submenu">
+              <MenuItem className=' '>Facebook</MenuItem>
+              <MenuItem className=' '>Twitter</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+            {/* <div className="submenu">
+              <MenuItem className=' '>Pricing</MenuItem>
+            </div> */}
+          <MenuItem className='products-menu' onClick={() => setShowLoginModal(true)}>Sign Up</MenuItem>
+        </Menu>
+        </>
+      ):(
+        <> <Logo>TIMBUS CLOUD</Logo>
+        <Menu >
+          <MenuItem className='products-menu'>
+            PRODUCTS
+            <div className="submenu">
+              <MenuItem className=''>Product 1</MenuItem>
+              <MenuItem className=''>Product 2</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+  
+          <MenuItem className='  products-menu'>SOLUTIONS
+            <div className="submenu">
+              <MenuItem className=' '>Google</MenuItem>
+              <MenuItem className=' '>Microsoft</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+  
+          <MenuItem className='  products-menu'>DEVELOPER ACADEMY
+            <div className="submenu">
+              <MenuItem className=' '>Facebook</MenuItem>
+              <MenuItem className=' '>Twitter</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+          <MenuItem className='  products-menu'>PRICING
+            <div className="submenu">
+              <MenuItem className=' '>Pricing</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+          <MenuItem className='products-menu' onClick={() => setShowLoginModal(true)}>LOGIN</MenuItem>
+        </Menu>
+        </>
+      )}
+     
 
       {showLoginModal && (
         <ModalContainer>
           <ModalContent>
             <ModalHeader>
               <ModalCloseButton onClick={() => setShowLoginModal(false)}>&#10005;</ModalCloseButton>
-              <ModalTitle>Welcome</ModalTitle>
-              <div className='w-full pt-4 pb-4'>
+              <ModalTitle>Login</ModalTitle>
+              {/* <div className='w-full pt-4 pb-4'>
                 <LoginLineLeft>&nbsp;</LoginLineLeft>
                 <span className='text-black'>Login</span>
                 <LoginLineRight>&nbsp;</LoginLineRight>
-              </div>
+              </div> */}
             </ModalHeader>
-            <InputField className='border-2 rounded-md' type="text" placeholder="Agency ID" value={agencyId}
-              onChange={(e) => setAgencyId(e.target.value)} />
-            <InputField className='border-2 rounded-md' type="email" placeholder="Email Address" value={username}
-              onChange={(e) => setUsername(e.target.value)} />
-            <InputField className='border-2 rounded-md' type="password" placeholder="Password" value={password}
-              onChange={(e) => setPassword(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="email" placeholder="Company email" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+
+            <LoginRadio>
+            <label>
+              <InputField 
+                type="radio" 
+                value="customer" 
+                checked={dashboard === 'customer'} 
+                onChange={() => setDashboard('customer')} 
+              />
+               Customer Dashboard
+              </label>
+              <label>
+
+              
+              <InputField 
+                type="radio" 
+                value="partnership" 
+                checked={dashboard === 'partnership'} 
+                onChange={() => setDashboard('partnership')} 
+              />
+              Partnership Dashboard
+              </label>
+            </LoginRadio>
+
+            {/* <InputField className='border-2 rounded-md' type="text" placeholder="Dashboard" value={dashboard} onChange={(e) => setDashboard(e.target.value)} /> */}
+
+            {/* <InputField className='border-2 rounded-md' type="text" placeholder="Industry" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="text" placeholder="Company" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="text" placeholder="Designation" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
+            <InputField className='border-2 rounded-md' type="text" placeholder="Country" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} /> */}
             {error && <div style={{ color: 'red' }}>{error}</div>}
             <div className='text-center mt-3'>
               <a href="javascript:void(0)" className='text-blue-500' rel="noopener noreferrer">Forgot Password?</a>
             </div>
-            <PrimaryButton className='w-8/12' onClick={handleLogin}>LOGIN</PrimaryButton>
+            <PrimaryButton className='mt-5 bg-[#55c1e3] text-white font-bold text-2xl py-2 px-6 rounded-full' onClick={handleLogin}>Login</PrimaryButton>
           </ModalContent>
         </ModalContainer>
       )}

@@ -8,6 +8,13 @@
   font-weight: normal;
   src: local('Adobe'), url('.././src//assets/adobefont/AdobeCleanRegular.otf') format('woff');
 }
+
+@font-face {
+  font-family: 'bahnschrift';
+  font-style: normal;
+  font-weight: normal;
+  src: local('bahnschrift'), url('.././src/fonts/bahnschrift_1.ttf') format('woff');
+}
  
 @layer base {
   :root {
