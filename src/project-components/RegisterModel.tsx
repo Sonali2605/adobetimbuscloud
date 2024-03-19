@@ -118,6 +118,13 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
     id: '',
     username: '',
     password: '',
+    dashboardId:'',
+    industryId:'',
+    companyId:'',
+    designationId:'',
+    countryId:'',
+
+
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -183,7 +190,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
       });
 
       // Handle API response
-      console.log(response.data);
+     //  console.log(response.data);
       // Close modal and show success message if API call is successful
       if (response.data.success) {
         onClose(); // Close modal
@@ -231,38 +238,38 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
         />
         <InputField className='border-2 rounded-md'
           type="text"
-          value={formData.id}
+          value={formData.industryId}
           onChange={handleChange}
-          name="id"
+          name="industryId"
           placeholder="Industry"
         />
         <InputField className='border-2 rounded-md'
           type="text"
-          value={formData.id}
+          value={formData.companyId}
           onChange={handleChange}
-          name="id"
+          name="companyId"
           placeholder="Company"
         />
         <InputField className='border-2 rounded-md'
           type="text"
-          value={formData.id}
+          value={formData.designationId}
           onChange={handleChange}
-          name="id"
+          name="designationId"
           placeholder="Designation"
         />
         <InputField className='border-2 rounded-md'
           type="text"
-          value={formData.id}
+          value={formData.countryId}
           onChange={handleChange}
-          name="id"
+          name="countryId"
           placeholder="Country"
         />
 
       <InputField className='border-2 rounded-md'
           type="text"
-          value={formData.id}
+          value={formData.dashboardId}
           onChange={handleChange}
-          name="id"
+          name="dashboardId"
           placeholder="Dashboard"
         />
 
