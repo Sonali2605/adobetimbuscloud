@@ -198,9 +198,9 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
      //  console.log(response.data);
       // Close modal and show success message if API call is successful
       if (response.data.success) {
-        onClose(); // Close modal
-        alert('Registration successful!');
         setShowCompletionPopup(true);
+        // onClose(); // Close modal
+        alert('Registration successful!');
       } else {
         // Handle API response indicating failure
         alert('Registration failed. Please try again.');
@@ -286,7 +286,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
     </ModalContainer>
 
     {showCompletionPopup && (
- <CompletionPopup showCompletionPopup={true} onClose={handleClosePopup} />
+ <CompletionPopup onClose={handleClosePopup} />
     )}
 </>
   );
