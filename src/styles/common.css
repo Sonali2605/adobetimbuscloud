@@ -44,3 +44,98 @@
   transform: rotateY(180deg);
 }
 
+.min-w-xs{
+  min-width: 20rem;
+}
+
+/*** Dashboard Partnership Page CSS ***/
+.heroSection {
+  display: flex;
+  gap: 46px;
+  padding: 50px 30px 20px 30px;
+}
+.d-flex {
+  display: flex;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.align-items-center{
+  align-items: center;
+}
+.userDetails {
+  background-image: url(./images/customer_Heading1.png);
+    background-color: #131313;
+    padding: 30px 35px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 280px;
+    border-radius: 10px;
+}
+.userAvatar {
+  width: 120px;
+  height: 120px;
+border: 1px solid #707070;
+border-radius: 50%;
+margin-right: 35px;
+}
+.userDetails h1 {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.shadowBox {
+  background: #FFFFFF;
+  box-shadow: 0px 3px 6px #00000014;
+  border: 1px solid #EFEFEF;
+  border-radius: 10px;
+}
+.myLearning {
+  height: 280px;
+  flex: 2;
+  padding: 15px;
+}
+.myLearning .course-card {
+  width: 100%;
+  margin: 0;
+}
+.cardView {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 47px;
+}
+.customCard {
+  background: #fff;
+}
+.customCard h2 {
+  font-size: 18px;
+  color: #383838;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.course-details {
+  background-color: rgba(0, 0, 0, 0.5);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.enroll-link {
+  bottom: 15px !important;
+}
+.submenu {
+  background-color: #ffffff !important;
+}
+.submenu .adobe-font {
+  color: #000000 !important;
+}
+.recommended-course {
+   padding-left: 30px;
+   padding-right: 30px;
+}
+
+/*** Dashboard Partnership Page CSS ***/
