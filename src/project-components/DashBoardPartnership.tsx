@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './Header';
 import axios from 'axios';
 import CourseExplore from './ExploreCourse';
@@ -14,123 +14,122 @@ interface Certificate {
 }
 
 const DashBoardPartnership = () => {
-    const [ ,setCertificate] = useState<Certificate | null>(null);
-    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-    const courses = [
-      { name: "React Fundamentals", imageUrl: "./images/Peers/img1.png" },
-      { name: "JavaScript Basics", imageUrl: "./images/Peers/img2.png" },
-      { name: "HTML5 Essentials", imageUrl: "./images/Peers/img3.png" },
-      { name: "CSS Styling", imageUrl: "./images/Peers/img4.png" },
-      { name: "Web Design", imageUrl: "./images/Peers/img5.png" }
-    ];
-    useEffect(() => {
-      const token = localStorage.getItem("access_token");
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(
-            'https://learningmanager.adobe.com/primeapi/v2/learningObjects?include=subLOs&page[limit]=1&filter.loTypes=certification&sort=-date&filter.ignoreEnhancedLP=true',
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-  
-          const certificateData = response.data?.data?.[0];
-          if (certificateData) {
-            const certificateName = certificateData.attributes.localizedMetadata.find(
-              (metadata: { name: string }) => metadata.name === 'Consultative Selling'
-            );
-  
-            if (certificateName) {
-              const imageUrl = certificateData.attributes.imageUrl;
-              const name = certificateName.name;
-              const description = certificateName.description;
-  
-              setCertificate({ imageUrl, name, description });
-            }
+  const [, setCertificate] = useState<Certificate | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const courses = [
+    { name: "React Fundamentals", imageUrl: "./images/Peers/img1.png" },
+    { name: "JavaScript Basics", imageUrl: "./images/Peers/img2.png" },
+    { name: "HTML5 Essentials", imageUrl: "./images/Peers/img3.png" },
+    { name: "CSS Styling", imageUrl: "./images/Peers/img4.png" },
+    { name: "Web Design", imageUrl: "./images/Peers/img5.png" }
+  ];
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          'https://learningmanager.adobe.com/primeapi/v2/learningObjects?include=subLOs&page[limit]=1&filter.loTypes=certification&sort=-date&filter.ignoreEnhancedLP=true',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        } catch (error) {
-          console.error('Error fetching certificate:', error);
+        );
+
+        const certificateData = response.data?.data?.[0];
+        if (certificateData) {
+          const certificateName = certificateData.attributes.localizedMetadata.find(
+            (metadata: { name: string }) => metadata.name === 'Consultative Selling'
+          );
+
+          if (certificateName) {
+            const imageUrl = certificateData.attributes.imageUrl;
+            const name = certificateName.name;
+            const description = certificateName.description;
+
+            setCertificate({ imageUrl, name, description });
+          }
         }
-      };
-  
-      fetchData();
-    }, []);
-  
-    const handleDateChange = (date: Date | null) => {
-      setSelectedDate(date);
+      } catch (error) {
+        console.error('Error fetching certificate:', error);
+      }
     };
-  
-    return (
-      <>
-        <Header isLogin={false} />
-        <div className="mt-5 justify-center text-center">
-          <div className="flex mt-4">
-            {/* <div style={{width:"60%"}}>
+
+    fetchData();
+  }, []);
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
+
+  return (
+    <>
+      <Header isLogin={false} />
+      <div className="mt-5 justify-center text-center">
+        <div className="flex mt-4">
+          {/* <div style={{width:"60%"}}>
               <Network/>
             </div> */}
-            <div className="ml-4 flex-grow px-0 ml-0" style={{marginTop: "-45px"}}>
-            <div className='mt-4 mb-10 justify-center ' style={{ display: 'flex'}}>
-          <div className='mt-14' style= {{ width: '30%' }} >
-          <div style={{backgroundImage: 'url("./images/customer_Heading1.png")', backgroundColor: 'black', padding: '30px 35px', position: 'relative', display: 'flex', alignItems: 'center'}}>
-          <img
-            className="w-20 h-20 rounded-full"
-            src="./images/maryJaneStewart.png"
-            alt="Profile"
-          />
-  <div style={{ marginLeft: '20px' }}>
-    <h1 className="text-white text-xl mb-2 mt-4">Welcome, <br/>Olivia Clarke</h1>
-    <div className='text-white inline'>
-      <img src="/images/level.png" alt="Level" className='w-10 h-15'/>
-      <p>Level 1</p>
-      <p className='font-bold'>Starter</p>
-    </div>
-  </div>
-</div>
-
-            </div>
-                <div style={{ width: '25%', marginRight: '10px' }} className='mt-10'>
-                  <MyLearning isCustomer={true}/>
-                </div>
-                <div style={{ width: '30%', marginTop:'60px' }}>
-                  <Calendar
-                    onChange={handleDateChange as any} // Explicitly cast to any to avoid TypeScript error
-                    value={selectedDate}
-                    calendarType="US"
-                    locale="en-US"
+          <div>
+            <div className='heroSection'>
+                <div className="userDetails">
+                  <img
+                    className="userAvatar"
+                    src="./images/maryJaneStewart.png"
+                    alt="Profile"
                   />
+                  <div>
+                    <h1 className="adobe-font">Welcome, <br />Olivia Clarke</h1>
+                    <div className='text-white d-flex align-items-center mt-3'>
+                      <img src="/images/level.png" alt="Level" className='w-10 h-15' />
+                      <div>
+                        <p>Level 1</p>
+                        <p className='font-bold'>Starter</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              <div className='myLearning shadowBox'>
+                <MyLearning isCustomer={true} />
               </div>
-              <div className='mt-4 bg-[#1a4789] py-6 px-12'>              
-                <CourseExplore isCustomer= {true}/>
-                <div className="mt-4">
-          <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Courses Taken By Your Peers</h2>
-          <div className="grid grid-cols-4 gap-24">
-            {courses.map((course, index) => (
-              <div key={index} className="max-w-xs overflow-hidden shadow-lg rounded-lg px-6">
-                <img
-                  className="w-full h-40 object-cover mb-4 rounded-t-lg"
-                  src={course.imageUrl}
-                  alt={course.name}
+              <div style={{ width: '30%', marginTop: '0px', padding: '15px' }} className="shadowBox">
+                <Calendar
+                  onChange={handleDateChange as any} // Explicitly cast to any to avoid TypeScript error
+                  value={selectedDate}
+                  calendarType="US"
+                  locale="en-US"
                 />
-                <div className="px-3">
-                  <div className="text-sm mb-2 text-center">{course.name}</div>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded w-full text-sm mb-3">
-                    Explore
-                  </button>
+              </div>
+            </div>
+            <div className='mt-4 bg-[#1a4789] py-6 recommended-course'>
+              <CourseExplore isCustomer={true} />
+              <div className="mt-4">
+                <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Courses Taken By Your Peers</h2>
+                <div className="cardView">
+                  {courses.map((course, index) => (
+                    <div key={index} className="max-w-xs overflow-hidden rounded-lg customCard">
+                      <img
+                        className="w-full h-40 object-cover mb-4 rounded-t-lg"
+                        src={course.imageUrl}
+                        alt={course.name}
+                      />
+                      <div className="px-3">
+                        <h2 className="text-center">{course.name}</h2>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full text-md mb-3">
+                          Explore
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-              </div>
-              
             </div>
+
           </div>
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
+}
 
 export default DashBoardPartnership;

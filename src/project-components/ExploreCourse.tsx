@@ -149,10 +149,12 @@ const CourseExplore = ({ isCustomer }: { isCustomer: boolean }) => {
                 src={course?.attributes?.imageUrl}
                 alt={course?.attributes?.localizedMetadata?.[0]?.name || ''}
               />
-              <div className="course-details">
-                <h2 className="course-title">{course?.attributes?.localizedMetadata?.[0]?.name}</h2>
+              <div className="myCustomCard">
+                <div className="course-details">
+                  <h2 className="course-title">{course?.attributes?.localizedMetadata?.[0]?.name}</h2>
+                </div>
+                <button className="enroll-link" onClick={()=>EnrollHandle(course?.id)}>ENROLL</button>
               </div>
-              <button className="enroll-link" onClick={()=>EnrollHandle(course?.id)}>ENROLL</button>
             </div>
           ))}
         </div>
