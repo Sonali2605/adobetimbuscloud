@@ -12,25 +12,44 @@ interface Course {
   state?: string; // Define 'state' as an optional property
 }
 
-const CourseExplore = ({ isCustomer }: { isCustomer: boolean }) => {
+
+const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
   const [courseData, setCourseData] = useState<Course[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getCoursestoExplore();
+    getMyLearningData();
   }, []);
 
-  async function getCoursestoExplore() {
+  async function getMyLearningData() {
     try {
       const token = localStorage.getItem("access_token");
       const config = {
         headers: { Authorization: `oauth ${token}` },
       };
+      let limit;
+      if (isCustomer){
+        limit = 1
+      } else {
+        limit = 10
+      }
       const response = await axios.get(
-        `https://learningmanager.adobe.com/primeapi/v2/learningObjects?page[limit]=20&filter.catalogIds=174313&sort=name&filter.learnerState=notenrolled&filter.ignoreEnhancedLP=true`,
+        `https://learningmanager.adobe.com/primeapi/v2/learningObjects?include=enrollment&page[limit]=${limit}&filter.catalogIds=174313&sort=name&filter.learnerState=enrolled&filter.learnerState=started&filter.learnerState=completed&filter.ignoreEnhancedLP=true`,
         config
       );
       const result = response?.data?.data;
+      for (const item of result) {
+        const enrollment = item.relationships?.enrollment?.data;
+        let state = null;
+      
+        if (enrollment) {
+          const enrollmentId = enrollment.id;
+          const includedItem = response?.data?.included.find(included => included.id === enrollmentId);
+          state = includedItem?.attributes?.state || null;
+        }
+      
+        item.state = state;
+      }
       setCourseData(result);
     } catch (error) {
       console.error("Error fetching learning objects:", error);
@@ -110,35 +129,17 @@ const CourseExplore = ({ isCustomer }: { isCustomer: boolean }) => {
    const course = (courseData as any).find(obj => obj?.id === cid);
     const Iid =  course.relationships?.instances?.data?.[0].id;
     
-    console.log("nnnnnnn", course, Iid)
-    const token = localStorage.getItem("access_token")
     try {
-        const response = await fetch('https://learningmanager.adobe.com/primeapi/v2/enrollments?loId=' + cid + '&loInstanceId=' + encodeURIComponent(Iid), {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        });
-
-        if (!response.ok) {
-            navigate('/')
-            throw new Error('Failed to enroll');
-        } else {
           navigate(`/learning_object/${cid}/instance/${Iid}/isLearning=false/isCustomer=${isCustomer}/detailspage`);
-        }
+        
     } catch (error) {
-        console.log(error)
+      console.log("error")
     }
    
   }
   return (
     <div>
-      {isCustomer? 
-       <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Courses Taken By Your Peers</h2>
-       :
-      <h2 className="text-lg font-bold mb-4">Courses to Explore</h2>
-      }
+      <h2 className="text-lg font-bold mb-4">My Learning</h2>
       <style>{customStyles}</style>
       <div className="course-carousel-container">
         <div className="course-carousel">
@@ -152,7 +153,7 @@ const CourseExplore = ({ isCustomer }: { isCustomer: boolean }) => {
               <div className="course-details">
                 <h2 className="course-title">{course?.attributes?.localizedMetadata?.[0]?.name}</h2>
               </div>
-              <button className="enroll-link" onClick={()=>EnrollHandle(course?.id)}>ENROLL</button>
+              <button className="enroll-link" onClick={()=>EnrollHandle(course?.id)}>{course?.state}</button>
             </div>
           ))}
         </div>
@@ -161,4 +162,4 @@ const CourseExplore = ({ isCustomer }: { isCustomer: boolean }) => {
   );
 };
 
-export default CourseExplore;
+export default MyLearning;

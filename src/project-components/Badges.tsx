@@ -10,20 +10,20 @@ const Badges = () => {
     }, []);
 
     const callApi = async () => {
-        const userId = localStorage.getItem("userId");
         const token = localStorage.getItem("access_token");
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
 
         try {
-            const response = await axios.get(`${base_adobe_url}/primeapi/v2/users/${userId}/userBadges?include=badge&page[limit]=10&sort=dateAchieved`, config);
-            const badgeData = response.data?.included;
+            const response = await axios.get(`${base_adobe_url}/primeapi/v2/badges?page[offset]=0&page[limit]=2&sort=name`, config);
+            const badgeData = response.data.data;
             
-            if (badgeData?.length > 0) {
-                // Limiting to only 2 badges
-                setBadges(badgeData.slice(0, 2));
-            }
+            // if (badgeData?.length > 0) {
+            //     // Limiting to only 2 badges
+            //     setBadges(badgeData.slice(0, 2));
+            // }
+            setBadges(badgeData)
         } catch (error) {
             console.error("Error fetching badges:", error);
         }

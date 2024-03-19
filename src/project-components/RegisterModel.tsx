@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import CompletionPopup from './CompletionPopup';
 import ".././styles/common.css";
 
 const ModalContainer = styled.div`
@@ -31,9 +32,9 @@ const ModalHeader = styled.div`
 const ModalCloseButton = styled.button`
   position: absolute;
   top: -30px;
-  right: -13px;
+  right: -8px;
   background: none;
-  border: 2px solid rgba(142, 161, 180, 1);
+  border: 1px solid rgba(142, 161, 180, 1);
   cursor: pointer;
   font-size: 14px;
   width: 23px;
@@ -84,36 +85,40 @@ const Button = styled.button`
 `;
 
 const SecondaryButton = styled(Button)`
-background-color: #2d9dd8;
-color: #ffffff;
-border: 1px solid #000;
-padding: 0px 60px;
+border-radius: 9999px;
+padding: 0.5rem 3rem;
 `;
 
-const LoginLineRight = styled.span`
-display: inline-block;
-    width: 95px;
-    height: 2px;
-    background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
-    opacity: 1;
-    vertical-align: middle;
-    margin: 0 10px;
-`;
-const LoginLineLeft = styled.span`
-display: inline-block;
-    width: 95px;
-    height: 2px;
-    background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
-    opacity: 1;
-    vertical-align: middle;
-    margin: 0 10px;
-`;
+// const LoginLineRight = styled.span`
+// display: inline-block;
+//     width: 95px;
+//     height: 2px;
+//     background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+//     opacity: 1;
+//     vertical-align: middle;
+//     margin: 0 10px;
+// `;
+// const LoginLineLeft = styled.span`
+// display: inline-block;
+//     width: 95px;
+//     height: 2px;
+//     background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+//     opacity: 1;
+//     vertical-align: middle;
+//     margin: 0 10px;
+// `;
 
 interface RegisterModalProps {
   onClose: () => void; // Define the type of onClose prop
 }
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
+  const [showCompletionPopup, setShowCompletionPopup] = useState(false);
+ 
+  const handleClosePopup = () => {
+    setShowCompletionPopup(false);
+  };
+
   const [formData, setFormData] = useState({
     id: '',
     username: '',
@@ -195,6 +200,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
       if (response.data.success) {
         onClose(); // Close modal
         alert('Registration successful!');
+        setShowCompletionPopup(true);
       } else {
         // Handle API response indicating failure
         alert('Registration failed. Please try again.');
@@ -207,6 +213,8 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
   };
 
   return (
+    <>
+   
     <ModalContainer>
       <ModalContent>
         <ModalHeader>
@@ -265,17 +273,22 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
           placeholder="Country"
         />
 
-      <InputField className='border-2 rounded-md'
+      {/* <InputField className='border-2 rounded-md'
           type="text"
           value={formData.dashboardId}
           onChange={handleChange}
           name="dashboardId"
           placeholder="Dashboard"
-        />
+        /> */}
 
-        <SecondaryButton onClick={handleSubmit}>Submit</SecondaryButton>
+        <SecondaryButton className="px-10 py-3 text-2xl rounded-full bg-[#55c1e3] text-white font-bold" onClick={handleSubmit}>Submit</SecondaryButton>
       </ModalContent>
     </ModalContainer>
+
+    {showCompletionPopup && (
+ <CompletionPopup showCompletionPopup={true} onClose={handleClosePopup} />
+    )}
+</>
   );
 };
 

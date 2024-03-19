@@ -3,23 +3,39 @@ import styled from 'styled-components';
 import axios from 'axios';
 import RegisterModal from './RegisterModel';
 import { clientId, clientSecreat, refreshToken, base_adobe_url } from "../AppConfig"
+import { useLocation } from 'react-router-dom'; // Import the useLocation hook
 import ".././styles/common.css";
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.div<{ isLogin: boolean }>`
   position: relative;
   z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  margin: 1px 15px;
   color: #ffffff;
+  background-color: ${(props) => (props.isLogin ? 'transparent' : '#000')}; /* Conditionally set background color */
 `;
 
 const Logo = styled.div`
   font-weight: bold;
   font: normal normal 24px Impact;
 `;
+
+const LoginRadio = styled.div`
+display: flex;
+color: #000;
+justify-content: center;
+& > label:nth-child(2) {
+  margin-left: 15px;
+}
+& > label > input {
+  width: auto;
+  margin-right: 8px;
+  top: 2px;
+  position: relative;
+}
+`
 
 const Menu = styled.div`
   display: flex;
@@ -64,8 +80,6 @@ const Menu = styled.div`
   }
 `;
 
-
-
 const MenuItem = styled.div`
   cursor: pointer;
 `;
@@ -86,7 +100,7 @@ const ModalContent = styled.div`
   background-color: white;
   padding: 40px 20px;
   border-radius: 8px;
-  width: 660px; /* Adjust the width as needed */
+  width: 500px; /* Adjust the width as needed */
 `;
 
 const ModalHeader = styled.div`
@@ -97,9 +111,9 @@ const ModalHeader = styled.div`
 const ModalCloseButton = styled.button`
   position: absolute;
   top: -30px;
-  right: -13px;
+  right: -8px;
   background: none;
-  border: 2px solid rgba(142, 161, 180, 1);
+  border: 1px solid rgba(142, 161, 180, 1);
   cursor: pointer;
   font-size: 14px;
   width: 23px;
@@ -143,38 +157,29 @@ const Button = styled.button`
 `;
 
 const PrimaryButton = styled(Button)`
-background-color: #2d9dd8;
-color: #ffffff;
-border: 1px solid #000;
-padding: 0px 60px;
+border-radius: 9999px;
+padding: 0.5rem 3rem;
 `;
 
-const SecondaryButton = styled(Button)`
-  background-color: #ffffff;
-  color: #4471e8;
-  border: 1px solid #4471e8;
-  padding: 10px 40px;
-`;
+// const LoginLineRight = styled.span`
+//   display: inline-block;
+//   width: 95px;
+//   height: 2px;
+//   background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+//   opacity: 1;
+//   vertical-align: middle;
+//   margin: 0 10px;
+// `;
 
-const LoginLineRight = styled.span`
-  display: inline-block;
-  width: 95px;
-  height: 2px;
-  background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
-  opacity: 1;
-  vertical-align: middle;
-  margin: 0 10px;
-`;
-
-const LoginLineLeft = styled.span`
-  display: inline-block;
-  width: 95px;
-  height: 2px;
-  background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
-  opacity: 1;
-  vertical-align: middle;
-  margin: 0 10px;
-`;
+// const LoginLineLeft = styled.span`
+//   display: inline-block;
+//   width: 95px;
+//   height: 2px;
+//   background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+//   opacity: 1;
+//   vertical-align: middle;
+//   margin: 0 10px;
+// `;
 
 const Header = ({ isLogin }: { isLogin: boolean }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -183,7 +188,8 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string>('');
-  const [dashboard, setDashboard] = useState('');
+  const [dashboard, setDashboard] = useState('customer'); // Default selection
+  const location = useLocation(); // Get the current location
 
   const handleLogin = async () => {
     try {
@@ -226,7 +232,7 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
         `${base_adobe_url}/primeapi/v2/users?page[offset]=0&page[limit]=10&sort=id&ids=email:${username}`,
         {
           headers: {
-            Authorization: `Bearer dea088ff9bbdca4e8cbbd5fa7de2d290`,
+            Authorization: `Bearer ${tokenData.access_token}`,
           },
         }
       );
@@ -234,13 +240,13 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
       const userId = userDataResponse.data?.data?.[0]?.id;
 
       localStorage.setItem('userId', userId);
-      const isManager = userDataResponse.data?.data?.[0]?.attributes?.roles.includes('Manager');
+      // const isManager = userDataResponse.data?.data?.[0]?.attributes?.roles.includes('Manager');
 
-      const newPath = isManager ? '/managerDashboard' : '/dashboard';
+      const newPath = dashboard === 'customer' ? '/dashboard' : '/dashboardPartnership';
 
-      if (location.pathname !== newPath) {
+     if (location.pathname !== newPath) {
         window.location.href = newPath;
-      }
+      } 
 
       console.log('Login successful', response.data);
       setShowLoginModal(false);
@@ -256,40 +262,77 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
 
   return (
     <HeaderContainer>
-      <Logo>TIMBUS CLOUD</Logo>
-      <Menu >
-        <MenuItem className='products-menu'>
-          PRODUCTS
-          <div className="submenu">
-            <MenuItem className=''>Product 1</MenuItem>
-            <MenuItem className=''>Product 2</MenuItem>
-            {/* Add more submenu items as needed */}
-          </div>
-        </MenuItem>
-
-        <MenuItem className='  products-menu'>SOLUTIONS
-          <div className="submenu">
-            <MenuItem className=' '>Google</MenuItem>
-            <MenuItem className=' '>Microsoft</MenuItem>
-            {/* Add more submenu items as needed */}
-          </div>
-        </MenuItem>
-
-        <MenuItem className='  products-menu'>DEVELOPER ACADEMY
-          <div className="submenu">
-            <MenuItem className=' '>Facebook</MenuItem>
-            <MenuItem className=' '>Twitter</MenuItem>
-            {/* Add more submenu items as needed */}
-          </div>
-        </MenuItem>
-        <MenuItem className='  products-menu'>PRICING
-          <div className="submenu">
-            <MenuItem className=' '>Pricing</MenuItem>
-            {/* Add more submenu items as needed */}
-          </div>
-        </MenuItem>
-        <MenuItem className='  products-menu' onClick={() => setShowLoginModal(true)}>Login</MenuItem>
-      </Menu>
+      {location.pathname.toLowerCase().includes('dashboardpartnership') ? (
+        <> <Logo>Timbus Cloud Partner Pod</Logo>
+        <Menu >
+          <MenuItem className='products-menu'>
+            PRODUCTS
+            <div className="submenu">
+              <MenuItem className=''>Product 1</MenuItem>
+              <MenuItem className=''>Product 2</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+  
+          <MenuItem className='  products-menu'>SOLUTIONS
+            <div className="submenu">
+              <MenuItem className=' '>Google</MenuItem>
+              <MenuItem className=' '>Microsoft</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+  
+          <MenuItem className='  products-menu'>Learning
+            <div className="submenu">
+              <MenuItem className=' '>Facebook</MenuItem>
+              <MenuItem className=' '>Twitter</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+            {/* <div className="submenu">
+              <MenuItem className=' '>Pricing</MenuItem>
+            </div> */}
+          <MenuItem className='products-menu' onClick={() => setShowLoginModal(true)}>Sign Up</MenuItem>
+        </Menu>
+        </>
+      ):(
+        <> <Logo>TIMBUS CLOUD</Logo>
+        <Menu >
+          <MenuItem className='products-menu'>
+            PRODUCTS
+            <div className="submenu">
+              <MenuItem className=''>Product 1</MenuItem>
+              <MenuItem className=''>Product 2</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+  
+          <MenuItem className='  products-menu'>SOLUTIONS
+            <div className="submenu">
+              <MenuItem className=' '>Google</MenuItem>
+              <MenuItem className=' '>Microsoft</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+  
+          <MenuItem className='  products-menu'>DEVELOPER ACADEMY
+            <div className="submenu">
+              <MenuItem className=' '>Facebook</MenuItem>
+              <MenuItem className=' '>Twitter</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+          <MenuItem className='  products-menu'>PRICING
+            <div className="submenu">
+              <MenuItem className=' '>Pricing</MenuItem>
+              {/* Add more submenu items as needed */}
+            </div>
+          </MenuItem>
+          <MenuItem className='products-menu' onClick={() => setShowLoginModal(true)}>LOGIN</MenuItem>
+        </Menu>
+        </>
+      )}
+     
 
       {showLoginModal && (
         <ModalContainer>
@@ -305,7 +348,31 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
             </ModalHeader>
             <InputField className='border-2 rounded-md' type="email" placeholder="Company email" value={username} onChange={(e) => setUsername(e.target.value)} />
             <InputField className='border-2 rounded-md' type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <InputField className='border-2 rounded-md' type="text" placeholder="Dashboard" value={dashboard} onChange={(e) => setDashboard(e.target.value)} />
+
+            <LoginRadio>
+            <label>
+              <InputField 
+                type="radio" 
+                value="customer" 
+                checked={dashboard === 'customer'} 
+                onChange={() => setDashboard('customer')} 
+              />
+               Customer Dashboard
+              </label>
+              <label>
+
+              
+              <InputField 
+                type="radio" 
+                value="partnership" 
+                checked={dashboard === 'partnership'} 
+                onChange={() => setDashboard('partnership')} 
+              />
+              Partnership Dashboard
+              </label>
+            </LoginRadio>
+
+            {/* <InputField className='border-2 rounded-md' type="text" placeholder="Dashboard" value={dashboard} onChange={(e) => setDashboard(e.target.value)} /> */}
 
             {/* <InputField className='border-2 rounded-md' type="text" placeholder="Industry" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
             <InputField className='border-2 rounded-md' type="text" placeholder="Company" value={agencyId} onChange={(e) => setAgencyId(e.target.value)} />
@@ -315,7 +382,7 @@ const Header = ({ isLogin }: { isLogin: boolean }) => {
             <div className='text-center mt-3'>
               <a href="javascript:void(0)" className='text-blue-500' rel="noopener noreferrer">Forgot Password?</a>
             </div>
-            <PrimaryButton className='w-8/12' onClick={handleLogin}>LOGIN</PrimaryButton>
+            <PrimaryButton className='mt-5 bg-[#55c1e3] text-white font-bold text-2xl py-2 px-6 rounded-full' onClick={handleLogin}>Login</PrimaryButton>
           </ModalContent>
         </ModalContainer>
       )}

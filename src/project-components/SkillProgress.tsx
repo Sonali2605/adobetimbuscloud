@@ -10,9 +10,9 @@ const SkillProgress = () => {
 
   return (
     <div className="max-w-xs mx-auto bg-white overflow-hidden shadow-lg p-4 mt-4 pb-6 rounded-md">
-      <h2 className="text-lg font-bold mb-4">Skill Progress</h2>
+      <h2 className="text-lg font-bold mb-6">Skill Progress</h2>
       {products.map((product, index) => (
-        <div key={index} className="flex justify-between items-center border-b pb-2 mb-1">
+        <div key={index} className="flex justify-between items-center border-b pb-2 mb-2">
           <div className="flex items-center">
             <div className="px-3 py-2">
               <div className="text-sm mb-1">{product.name}</div>

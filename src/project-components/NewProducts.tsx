@@ -15,10 +15,10 @@ const NewProduct = () => {
 
   return (
     <div className="max-w-lg mt-4">
-      <div className="bg-white shadow-lg p-4 mb-4">
-        <h2 className="font-bold text-md mb-7">New Products</h2> {/* Move the heading inside the product container */}
+      <div className="bg-white shadow-lg p-4 mb-4 mx-auto bg-white overflow-hidden shadow-lg p-4 mt-4 pb-6 rounded-md">
+        <h2 className="font-bold text-md mb-9">New Products</h2> {/* Move the heading inside the product container */}
         {products.map((product, index) => (
-          <div key={index} className="flex items-center justify-between mb-5">
+          <div key={index} className="flex items-center justify-between mb-6">
             <div className="w-1/4 mr-4">
               <img className="w-full" src={product.imageUrl} alt={product.name} />
             </div>
