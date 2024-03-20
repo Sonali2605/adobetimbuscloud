@@ -108,6 +108,7 @@ justify-content: center;
   position: relative;
 }
 `
+
 // const LoginLineRight = styled.span`
 //   display: inline-block;
 //   width: 95px;
@@ -138,7 +139,7 @@ const Login = () => {
   const [error, setError] = useState<string>('');
   const [, setAgencyId] = useState('');
 
-  const [showCompletePopup, setShowCompletionPopup] = useState(false);
+  const [showCompletePopup, setShowCompletionPopup] = useState(true);
   function handleFlipcardClick() {
     setShowLoginModal(true);
     // setShowCompletionPopup(true);
@@ -605,21 +606,6 @@ const Login = () => {
       {/* Modal for Register */}
       {showRegisterModal && (
         <RegisterModal onClose={() => setShowRegisterModal(false)} />
-      )}
-
-      {/* Modal for Login */}
-      {showCompletePopup && (
-        <ModalContainer>
-          <ModalContent>
-            <ModalHeader>
-              <ModalTitle>Congrats on joining the Nimbus Academy. You can now start with your courses.</ModalTitle>
-              <SecondaryButton onClick={handleGoToAcademy}>Go to Academy</SecondaryButton>
-            </ModalHeader>
-
-          </ModalContent>
-
-        </ModalContainer>
-
       )}
 
     </div>

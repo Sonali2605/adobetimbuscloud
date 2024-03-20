@@ -6,18 +6,31 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import ".././styles/common.css";
 import MyLearning from './MyLearning';
-
+import {useNavigate } from "react-router-dom";
 interface Certificate {
   imageUrl: string;
   name: string;
   description: string;
 }
 
+interface Course {
+  id: string; // Assuming 'id' is a required property in your data
+  attributes: {
+    imageUrl: string;
+    localizedMetadata?: {
+      name: string;
+    }[];
+  };
+  state?: string; // Define 'state' as an optional property
+}
+
 const DashBoardPartnership = () => {
   const [, setCertificate] = useState<Certificate | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [courseData, setCourseData] = useState<Course[]>([]);
+  const navigate = useNavigate();
   const courses = [
-    { name: "React Fundamentals", imageUrl: "./images/Peers/img1.png" },
+    { name: "React Fundamentals 1", imageUrl: "./images/Peers/img1.png" },
     { name: "JavaScript Basics", imageUrl: "./images/Peers/img2.png" },
     { name: "HTML5 Essentials", imageUrl: "./images/Peers/img3.png" },
     { name: "CSS Styling", imageUrl: "./images/Peers/img4.png" },
@@ -56,11 +69,57 @@ const DashBoardPartnership = () => {
     };
 
     fetchData();
+    getCoursestoExplore();
+
   }, []);
+
+  async function getCoursestoExplore() {
+    try {
+      const token = localStorage.getItem("access_token");
+      const config = {
+        headers: { Authorization: `oauth ${token}` },
+      };
+      const response = await axios.get(
+        `https://learningmanager.adobe.com/primeapi/v2/learningObjects?page[limit]=20&filter.catalogIds=174772&sort=name&filter.ignoreEnhancedLP=true`,
+        config
+      );
+      const result = response?.data?.data;
+      setCourseData(result);
+    } catch (error) {
+      console.error("Error fetching learning objects:", error);
+    }
+  }
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
   };
+
+  const  EnrollHandle = async(cid:string) =>{
+    const course = (courseData as any).find(obj => obj?.id === cid);
+     const Iid =  course.relationships?.instances?.data?.[0].id;
+     
+     console.log("nnnnnnn", course, Iid)
+     const token = localStorage.getItem("access_token")
+     try {
+         const response = await fetch('https://learningmanager.adobe.com/primeapi/v2/enrollments?loId=' + cid + '&loInstanceId=' + encodeURIComponent(Iid), {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': `Bearer ${token}`
+             },
+         });
+ 
+         if (!response.ok) {
+             navigate('/')
+             throw new Error('Failed to enroll');
+         } else {
+           navigate(`/learning_object/${cid}/instance/${Iid}/isLearning=false/isCustomer=true/detailspage`);
+         }
+     } catch (error) {
+         console.log(error)
+     }
+    
+   }
 
   return (
     <>
@@ -104,18 +163,20 @@ const DashBoardPartnership = () => {
             <div className='mt-4 bg-[#1a4789] py-6 recommended-course'>
               <CourseExplore isCustomer={true} />
               <div className="mt-4">
-                <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Courses Taken By Your Peers</h2>
+               
+                <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Recommended by Timbus</h2>
+               
                 <div className="cardView">
-                  {courses.map((course, index) => (
+                {courseData.map((course, index) => (
                     <div key={index} className="max-w-xs overflow-hidden rounded-lg customCard">
                       <img
                         className="w-full h-40 object-cover mb-4 rounded-t-lg"
-                        src={course.imageUrl}
-                        alt={course.name}
+                        src={course?.attributes?.imageUrl}
+                        alt={course?.attributes?.localizedMetadata?.[0]?.name || ''}
                       />
                       <div className="px-3">
-                        <h2 className="text-center">{course.name}</h2>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full text-md mb-3">
+                        <h2 className="text-center">{course?.attributes?.localizedMetadata?.[0]?.name}</h2>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full text-md mb-3" onClick={()=>EnrollHandle(course?.id)}>
                           Explore
                         </button>
                       </div>
