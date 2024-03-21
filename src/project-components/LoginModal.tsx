@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { clientId, clientSecreat, refreshToken, base_adobe_url } from "../AppConfig"
@@ -53,13 +53,13 @@ const ModalTitle = styled.div`
   font: normal normal normal 24px Impact;
 `;
 
-const ModalSubheader = styled.div`
-  font-size: 18px;
-  margin-top: 10px;
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 10px;
-`;
+// const ModalSubheader = styled.div`
+//   font-size: 18px;
+//   margin-top: 10px;
+//   text-align: center;
+//   margin-top: 5px;
+//   margin-bottom: 10px;
+// `;
 
 const InputField = styled.input`
   width: 93%;
@@ -85,31 +85,31 @@ const PrimaryButton = styled(Button)`
   padding: 10px 40px;
 `;
 
-const SecondaryButton = styled(Button)`
-  background-color: #FFFFFF;
-  color: #4471E8;
-  border: 1px solid #4471E8;
-  padding: 10px 40px;
-`;
+// const SecondaryButton = styled(Button)`
+//   background-color: #FFFFFF;
+//   color: #4471E8;
+//   border: 1px solid #4471E8;
+//   padding: 10px 40px;
+// `;
 
-const LoginLineRight = styled.span`
-display: inline-block;
-    width: 95px;
-    height: 2px;
-    background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
-    opacity: 1;
-    vertical-align: middle;
-    margin: 0 10px;
-`;
-const LoginLineLeft = styled.span`
-display: inline-block;
-    width: 95px;
-    height: 2px;
-    background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
-    opacity: 1;
-    vertical-align: middle;
-    margin: 0 10px;
-`;
+// const LoginLineRight = styled.span`
+// display: inline-block;
+//     width: 95px;
+//     height: 2px;
+//     background: linear-gradient(90deg, hsla(210, 39%, 75%, 1) 0%, hsla(0, 0%, 100%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+//     opacity: 1;
+//     vertical-align: middle;
+//     margin: 0 10px;
+// `;
+// const LoginLineLeft = styled.span`
+// display: inline-block;
+//     width: 95px;
+//     height: 2px;
+//     background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(210, 39%, 75%, 1) 100%, hsla(0, 0%, 100%, 1) 100%);
+//     opacity: 1;
+//     vertical-align: middle;
+//     margin: 0 10px;
+// `;
 
 interface LoginModalProps {
   onClose: () => void; // Define the type of onClose prop

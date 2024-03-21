@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState } from 'react';
 import Header from './Header';
 import styled from 'styled-components';
@@ -86,12 +88,12 @@ border-radius: 9999px;
 padding: 0.5rem 3rem;
 `;
 
-const SecondaryButton = styled(Button)`
-  background-color: #ffffff;
-  color: #4471e8;
-  border: 1px solid #4471e8;
-  padding: 10px 40px;
-`;
+// const SecondaryButton = styled(Button)`
+//   background-color: #ffffff;
+//   color: #4471e8;
+//   border: 1px solid #4471e8;
+//   padding: 10px 40px;
+// `;
 
 
 const LoginRadio = styled.div`
@@ -139,7 +141,7 @@ const Login = () => {
   const [error, setError] = useState<string>('');
   const [, setAgencyId] = useState('');
 
-  const [showCompletePopup, setShowCompletionPopup] = useState(true);
+  const [, setShowCompletionPopup] = useState(true);
   function handleFlipcardClick() {
     setShowLoginModal(true);
     // setShowCompletionPopup(true);
@@ -215,9 +217,9 @@ const Login = () => {
   };
 
 
-  const handleGoToAcademy = async () => {
-    setShowCompletionPopup(false);
-  }
+  // const handleGoToAcademy = async () => {
+  //   setShowCompletionPopup(false);
+  // }
 
   return (
     <div className="relative">

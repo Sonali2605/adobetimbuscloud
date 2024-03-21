@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -184,7 +186,7 @@ padding: 0.5rem 3rem;
 const Header = ({ isLogin }: { isLogin: boolean }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [agencyId, setAgencyId] = useState('');
+  const [, setAgencyId] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string>('');

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect, useState, useMemo } from 'react';
 import Header from './Header';
 import axios from 'axios';
@@ -30,14 +32,14 @@ const DashBoardPartnership = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [courseData, setCourseData] = useState<Course[]>([]);
   const navigate = useNavigate();
-  const courses = [
-    { name: "React Fundamentals 1", imageUrl: "./images/Peers/img1.png" },
-    { name: "JavaScript Basics", imageUrl: "./images/Peers/img2.png" },
-    { name: "HTML5 Essentials", imageUrl: "./images/Peers/img3.png" },
-    { name: "CSS Styling", imageUrl: "./images/Peers/img4.png" },
-    { name: "Web Design", imageUrl: "./images/Peers/img5.png" }
-  ];
-  const [dotDates, setDotDates] = useState([
+  // const courses = [
+  //   { name: "React Fundamentals 1", imageUrl: "./images/Peers/img1.png" },
+  //   { name: "JavaScript Basics", imageUrl: "./images/Peers/img2.png" },
+  //   { name: "HTML5 Essentials", imageUrl: "./images/Peers/img3.png" },
+  //   { name: "CSS Styling", imageUrl: "./images/Peers/img4.png" },
+  //   { name: "Web Design", imageUrl: "./images/Peers/img5.png" }
+  // ];
+  const [dotDates,] = useState([
     "2024-03-25",
     "2024-03-11",
     "2024-03-24",

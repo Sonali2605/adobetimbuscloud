@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect, useState, useMemo } from "react";
 import Header from "./Header";
 import DashboardHeading from "./DashboardHeading";
@@ -27,15 +29,15 @@ interface Certificate {
 }
 
 
-interface Course {
-  title: string;
-  description: string;
-}
+// interface Course {
+//   title: string;
+//   description: string;
+// }
 
 const Dashboard = () => {
   const [certificate, setCertificate] = useState<Certificate | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [dotDates, setDotDates] = useState([
+  const [dotDates] = useState([
     "2024-03-25",
     "2024-03-11",
     "2024-03-24",

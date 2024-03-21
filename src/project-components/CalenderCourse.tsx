@@ -1,13 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
-interface CalendarCourseProps {
-  dotDates: string[];
-  selectedDate: Date | null;
-  isDottedDate: Date | null;
+// interface CalendarCourseProps {
+//   dotDates: string[];
+//   selectedDate: Date | null;
+//   isDottedDate: Date | null;
+// }
+
+interface Course {
+  title: string;
+  description: string;
+  // Add other properties as needed
 }
-
-
 
 const CalendarCourse = ({ selectedDate, selectedCourse }: { selectedDate: Date | null; selectedCourse: Course | null }) => {
   

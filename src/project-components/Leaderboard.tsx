@@ -34,13 +34,13 @@ const Leaderboard = () => {
   ];
 
   // Dummy data for courses taken by peers
-  const courses = [
-    { name: "React Fundamentals", imageUrl: "./images/Peers/img1.png" },
-    { name: "JavaScript Basics", imageUrl: "./images/Peers/img2.png" },
-    { name: "HTML5 Essentials", imageUrl: "./images/Peers/img3.png" },
-    { name: "CSS Styling", imageUrl: "./images/Peers/img4.png" },
-    { name: "Web Design", imageUrl: "./images/Peers/img5.png" }
-  ];
+  // const courses = [
+  //   { name: "React Fundamentals", imageUrl: "./images/Peers/img1.png" },
+  //   { name: "JavaScript Basics", imageUrl: "./images/Peers/img2.png" },
+  //   { name: "HTML5 Essentials", imageUrl: "./images/Peers/img3.png" },
+  //   { name: "CSS Styling", imageUrl: "./images/Peers/img4.png" },
+  //   { name: "Web Design", imageUrl: "./images/Peers/img5.png" }
+  // ];
 
   const [expanded, setExpanded] = useState(false);
 
