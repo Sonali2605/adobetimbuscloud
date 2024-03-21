@@ -148,9 +148,12 @@ const DashBoardPartnership = () => {
                     </div>
                   </div>
                 </div>
-              <div className='myLearning shadowBox'>
+              
+              <div>
                 <MyLearning isCustomer={true} />
               </div>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
               <div style={{ width: '30%', marginTop: '0px', padding: '15px' }} className="shadowBox">
                 <Calendar
                   onChange={handleDateChange as any} // Explicitly cast to any to avoid TypeScript error
