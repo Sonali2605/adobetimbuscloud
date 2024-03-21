@@ -152,7 +152,7 @@ const Dashboard = () => {
           <div className="min-w-xs">
             <Network />
           </div>
-          <div className="ml-4 flex-grow" style={{ marginTop: "-45px" }}>
+          <div className="ml-4 flex-grow" style={{ marginTop: "-45px", maxWidth:"72%" }}>
             <Leaderboard />
             <div className="mt-4">
               <CourseExplore isCustomer={false} />

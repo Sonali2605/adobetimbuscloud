@@ -135,7 +135,7 @@ const CourseExplore = ({ isCustomer }: { isCustomer: boolean }) => {
   return (
     <div>
       {isCustomer? 
-       <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Courses Taken By Your Peers</h2>
+       <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Recommended by Timbus</h2>
        :
       <h2 className="text-lg font-bold mb-4">Courses to Explore</h2>
       }
