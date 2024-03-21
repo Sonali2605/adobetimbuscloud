@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Header from './Header';
 import axios from 'axios';
 import CourseExplore from './ExploreCourse';
@@ -7,6 +7,7 @@ import 'react-calendar/dist/Calendar.css';
 import ".././styles/common.css";
 import MyLearning from './MyLearning';
 import {useNavigate } from "react-router-dom";
+import CalendarCourse from "./CalenderCourse";
 interface Certificate {
   imageUrl: string;
   name: string;
@@ -36,6 +37,20 @@ const DashBoardPartnership = () => {
     { name: "CSS Styling", imageUrl: "./images/Peers/img4.png" },
     { name: "Web Design", imageUrl: "./images/Peers/img5.png" }
   ];
+  const [dotDates, setDotDates] = useState([
+    "2024-03-25",
+    "2024-03-11",
+    "2024-03-24",
+    new Date()
+  ]);
+
+  // Assuming you have course data available
+  const courseDataCalender = {
+    "2024-03-25": { title: "Achieving Peak Performance in Insurance Sale", description: "Check out this webinar to see how peak performers at Premier Protect read body language and keywords to pursue their customers." },
+    "2024-03-11": { title: "Negotiation Techniques for Closing More Deals", description: "Learn how to effectively negotiate with clients and close more deals with confidence." },
+    "2024-03-24": { title: "Building Rapport and Trust with Clients", description: "Discover strategies for building rapport and trust with your clients to create long-term relationships." },
+    "2024-03-21": { title: "Building Rapport and Trust with Clients 1", description: "Discover strategies for building rapport and trust with your clients to create long-term relationships." },
+  };
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     const fetchData = async () => {
@@ -89,11 +104,6 @@ const DashBoardPartnership = () => {
       console.error("Error fetching learning objects:", error);
     }
   }
-
-  const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
-  };
-
   const  EnrollHandle = async(cid:string) =>{
     const course = (courseData as any).find(obj => obj?.id === cid);
      const Iid =  course.relationships?.instances?.data?.[0].id;
@@ -120,6 +130,34 @@ const DashBoardPartnership = () => {
      }
     
    }
+   const isDottedDate = useMemo(() => {
+    const formattedDates = dotDates.map(date => new Date(date).toDateString()); // Convert to Date object and extract only date portion
+    return date => formattedDates.includes(date.toDateString());
+  }, [dotDates]);
+  
+
+   const tileClassName = ({ date }) => {
+    if (isDottedDate(date)) {
+      return "calendar-dot";
+    }
+    return "";
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
+
+   const getSelectedCourse = () => {
+    if (!selectedDate) return null;
+  
+    const year = selectedDate.getFullYear();
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0'); // Add leading zero for single-digit months
+    const day = String(selectedDate.getDate()).padStart(2, '0'); // Add leading zero for single-digit days
+  
+    const formattedDate = `${year}-${month}-${day}`;
+  
+    return courseDataCalender[formattedDate];
+  };
 
   return (
     <>
@@ -148,23 +186,46 @@ const DashBoardPartnership = () => {
                     </div>
                   </div>
                 </div>
-              <div className='myLearning shadowBox'>
+              
+              <div>
                 <MyLearning isCustomer={true} />
               </div>
-              <div style={{ width: '30%', marginTop: '0px', padding: '15px' }} className="shadowBox">
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+              {/*<div style={{ width: '30%', marginTop: '0px', padding: '15px' }} className="shadowBox">
                 <Calendar
                   onChange={handleDateChange as any} // Explicitly cast to any to avoid TypeScript error
                   value={selectedDate}
                   calendarType="US"
                   locale="en-US"
                 />
+          </div>*/}
+          <div className="mt-4 mb-10" style={{ display: "flex" }}>
+              <div style={{ width: "40%", marginRight: "10px" }}>
+                {selectedDate && (
+              <CalendarCourse
+                selectedDate={selectedDate}
+                selectedCourse={getSelectedCourse()}
+              />
+            )}
               </div>
+              <div style={{ marginTop: '5px', padding: '50px' }}>
+              <Calendar
+              onChange={handleDateChange}
+              value={selectedDate}
+              calendarType="US"
+              locale="en-US"
+              // Add custom tileClassName prop to apply styles based on isDottedDate
+              tileClassName={tileClassName}            
+              />
+        </div>
+            </div>
             </div>
             <div className='mt-4 bg-[#1a4789] py-6 recommended-course'>
               <CourseExplore isCustomer={true} />
               <div className="mt-4">
                
-                <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Recommended by Timbus</h2>
+                <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Courses Taken By Your Peers</h2>
                
                 <div className="cardView">
                 {courseData.map((course, index) => (

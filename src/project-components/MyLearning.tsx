@@ -29,7 +29,7 @@ const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
       };
       let limit;
       if (isCustomer){
-        limit = 1
+        limit = 10
       } else {
         limit = 10
       }
@@ -137,9 +137,14 @@ const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
     }
    
   }
+  console.log(courseData)
   return (
     <div>
+      {isCustomer ?
+      <h2 className="text-lg font-bold" style={{marginBottom:"45px"}}>My Learning List</h2>
+      :
       <h2 className="text-lg font-bold mb-4">My Learning</h2>
+      }
       <style>{customStyles}</style>
       <div className="course-carousel-container">
         <div className="course-carousel">

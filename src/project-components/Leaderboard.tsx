@@ -100,7 +100,7 @@ const Leaderboard = () => {
       <h2 className="text-md font-bold mb-2">Leaderboard</h2>
       <div className="grid grid-cols-5 gap-4">
         {networkMembers.slice(0, 5).map((member, index) => (
-          <div key={index} className="flex flex-col items-center">
+          <div key={index} className="flex flex-col items-center" style={{maxWidth:"50%"}}>
             <div className="relative rounded-full overflow-hidden w-12 h-12">
               <img
                 className="object-cover w-full h-full"
@@ -128,7 +128,7 @@ const Leaderboard = () => {
       {expanded && (
         <div className="mt-4">
           <h2 className="text-md font-bold mt-10 mb-8">Courses Taken By Your Peers</h2>
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-5 gap-4">
           {courseData.map((course, index) => (
               <div key={index} className="max-w-xs bg-white overflow-hidden shadow-lg rounded-lg px-4">
                 <img

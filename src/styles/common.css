@@ -51,7 +51,7 @@
 /*** Dashboard Partnership Page CSS ***/
 .heroSection {
   display: flex;
-  gap: 46px;
+  gap: 24px;
   padding: 50px 30px 20px 30px;
 }
 .d-flex {
@@ -70,6 +70,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    min-width: 20rem;    
     height: 280px;
     border-radius: 10px;
 }
@@ -92,6 +93,7 @@ margin-right: 35px;
   box-shadow: 0px 3px 6px #00000014;
   border: 1px solid #EFEFEF;
   border-radius: 10px;
+  padding: 1rem;
 }
 .myLearning {
   height: 280px;
@@ -139,3 +141,25 @@ margin-right: 35px;
 }
 
 /*** Dashboard Partnership Page CSS ***/
+.react-calendar__tile--now{
+color: #000000 !important;
+}  
+.react-calendar__tile--active{
+  color: #000000 !important;
+  }  
+.calendar-dot {
+  position: relative;
+}
+
+.calendar-dot::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 5px;
+  left: 53%;
+  transform: translateX(-50%);
+}
