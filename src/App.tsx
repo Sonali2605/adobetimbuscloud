@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Detailspage from "./project-components/Detailspage";
 import ManagerDashboard from "./project-components/ManagerDashboard";
 import ProfilePage from "./project-components/profilePage";
-import DashBoardPartnership from "./project-components/DashBoardPartnership";
+import DashboardCustomer from "./project-components/DashboardCustomer";
 import FluidicPlayer from "./project-components/FluidicPlayer";
 
 export default function App() {
@@ -19,7 +19,7 @@ export default function App() {
           <Route path="/learning_object/:courseId/instance/:instanceId/:isLearning/:isCustomer/detailspage" element={<Detailspage />} />
           <Route path="/managerDashboard" element={<ManagerDashboard />} />
           <Route path="/profile" element={<ProfilePage/>} />
-          <Route path="/DashBoardPartnership" element={<DashBoardPartnership/>} />
+          <Route path="/DashboardCustomer" element={<DashboardCustomer/>} />
           <Route path="/fludicPlayer" element={<FluidicPlayer/>}/>
         </Routes>
       </BrowserRouter>

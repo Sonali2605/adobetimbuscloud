@@ -183,7 +183,7 @@ const Detailspage = () => {
       navigate(`/fludicPlayer?cid=${id}&mid=${iId}&back_url=${window.location.pathname}`)
     } else {
       if(isCustomerValue === "true"){
-        navigate('/DashBoardPartnership')
+        navigate('/DashboardCustomer')
       }else {
        navigate('/dashboard')
       }
@@ -195,6 +195,7 @@ const Detailspage = () => {
     setActiveTab(tabNumber);
   };
   console.log(enrollmentData,author, "progressPercentage");
+  console.log(isCustomerValue)
   return (
     <>
       <Header isLogin={false} />

@@ -66,12 +66,12 @@
 .userDetails {
   background-image: url(./images/customer_Heading1.png);
     background-color: #131313;
-    padding: 30px 35px;
+    padding: 26px 22px;
     position: relative;
     display: flex;
     align-items: center;
     min-width: 20rem;    
-    height: 280px;
+    height: 255px;
     border-radius: 10px;
 }
 .userAvatar {
@@ -148,6 +148,9 @@ margin-right: 35px;
 .react-calendar__tile--now{
 color: #000000 !important;
 }  
+.react-calendar{
+  border-radius: 8px !important;
+}
 .react-calendar__tile--active{
   color: #000000 !important;
   }  

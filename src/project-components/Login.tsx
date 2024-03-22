@@ -62,13 +62,15 @@ const ModalTitle = styled.div`
 
 const InputField = styled.input`
 width: 80%;
-padding: 1px;
+padding: 6px;
 margin-top: 10px;
 text-align: center;
 transform: translateX(12%);
-border: 1px solid #000;
-border-radius: 0;
-color: #000
+border: 1px solid #ada7a7;
+background: #fff;
+border-radius: 20px;
+color: #000;
+margin-bottom: 0.7rem
 `;
 
 const Button = styled.button`
@@ -198,7 +200,7 @@ const Login = () => {
       localStorage.setItem('userId', userId);
       // const isManager = userDataResponse.data?.data?.[0]?.attributes?.roles.includes('Manager');
 
-      const newPath = dashboard === 'customer' ? '/dashboard' : '/dashboardPartnership';
+      const newPath = dashboard === 'customer' ? '/DashboardCustomer' : '/dashboard';
 
      if (location.pathname !== newPath) {
         window.location.href = newPath;
@@ -252,19 +254,19 @@ const Login = () => {
         <div className="grid grid-cols-3 gap-4">
           <div className="col-span-1">
             <div className="bg-[#1a4789] text-white p-8">
-              <p>#1</p>
+              <p style={{fontSize: '3rem', marginBottom: '0.6rem'}}>#1</p>
               <p>in IaaS usability</p>
             </div>
           </div>
           <div className="col-span-1">
             <div className="p-8">
-              <p>20</p>
+              <p style={{fontSize: '3rem', marginBottom: '0.6rem'}}>20</p>
               <p>globally distributed data centers</p>
             </div>
           </div>
           <div className="col-span-1">
             <div className="bg-[#1a4789] text-white p-8">
-              <p>99.9%</p>
+              <p style={{fontSize: '3rem', marginBottom: '0.6rem'}}>99.9%</p>
               <p>uptime SLA for droplets</p>
             </div>
           </div>
@@ -286,7 +288,7 @@ const Login = () => {
           </div>
 
           {/* Image */}
-          <img className="w-1/3 h-80" src="/images/Login/NC/Image11.jpg" alt="Image" />
+          <img className="w-1/3 rounded-3xl" style={{height: '21.8rem'}} src="/images/Login/NC/Image11.jpg" alt="Image" />
         </div>
       </div>
       <div className="relative z-10 bg-[#1a4789] text-white text-center py-10">

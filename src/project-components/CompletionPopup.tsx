@@ -70,25 +70,27 @@ justify-content: center;
 `;
 const InputField = styled.input`
 width: 80%;
-padding: 1px;
+padding: 6px;
 margin-top: 10px;
 text-align: center;
 transform: translateX(12%);
-border: 1px solid #000;
-border-radius: 0;
-color: #000
+border: 1px solid #ada7a7;
+background: #fff;
+border-radius: 20px;
+color: #000;
+margin-bottom: 0.7rem
 `;
 
 
-const CompletionPopup = ({ onClose }) => {
+const CompletionPopup = ({ onClose, navigatedashboard }) => {
   const [dashboard, setDashboard] = useState('customer'); // Default selection
   const handleGoToAcademy = () => {
-    const newPath = dashboard === 'customer' ? '/dashboard' : '/dashboardPartnership';
+    // onClose();
+    const newPath = navigatedashboard === 'customer' ? '/dashboard' : '/DashboardCustomer';
 
     if (location.pathname !== newPath) {
        window.location.href = newPath;
      } 
-    onClose();
     // Any additional logic when "Go to Academy" button is clicked
   };
   
@@ -99,28 +101,7 @@ const CompletionPopup = ({ onClose }) => {
         <ModalContent>
           <ModalHeader>
             <ModalTitle>Congrats on joining the Nimbus Academy. You can now start with your courses.</ModalTitle>
-            <LoginRadio>
-            <label>
-              <InputField 
-                type="radio" 
-                value="customer" 
-                checked={dashboard === 'customer'} 
-                onChange={() => setDashboard('customer')} 
-              />
-               Customer Dashboard
-              </label>
-              <label>
-
-              
-              <InputField 
-                type="radio" 
-                value="partnership" 
-                checked={dashboard === 'partnership'} 
-                onChange={() => setDashboard('partnership')} 
-              />
-              Partnership Dashboard
-              </label>
-            </LoginRadio>            
+                       
             <SecondaryButton onClick={handleGoToAcademy}>Go to Academy</SecondaryButton>
           </ModalHeader>
         </ModalContent>
