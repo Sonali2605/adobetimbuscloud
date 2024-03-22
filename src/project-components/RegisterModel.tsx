@@ -62,14 +62,16 @@ const ModalSubheader = styled.div`
 `;
 
 const InputField = styled.input`
-  width: 80%;
-  padding: 1px;
-  margin-top: 10px;
-  text-align: center;
-  transform: translateX(12%);
-  border: 1px solid #000;
-  border-radius: 0;
-  color: #000;
+width: 80%;
+padding: 6px;
+margin-top: 10px;
+text-align: center;
+transform: translateX(12%);
+border: 1px solid #ada7a7;
+background: #fff;
+border-radius: 20px;
+color: #000;
+margin-bottom: 0.7rem
 `;
 
 const Button = styled.button`
@@ -84,9 +86,36 @@ const Button = styled.button`
   margin-top: 20px;
 `;
 
+const LoginRadio = styled.div`
+display: flex;
+color: #000;
+justify-content: center;
+& > label:nth-child(2) {
+  margin-left: 15px;
+}
+& > label > input {
+  width: auto;
+  margin-right: 8px;
+  top: 2px;
+  position: relative;
+}
+`;
 const SecondaryButton = styled(Button)`
 border-radius: 9999px;
 padding: 0.5rem 3rem;
+`;
+
+const Select = styled.select`
+width: 80%;
+padding: 6px;
+margin-top: 10px;
+text-align: center;
+transform: translateX(12%);
+border: 1px solid #ada7a7;
+background: #fff;
+border-radius: 20px;
+color: #000;
+margin-bottom: 0.7rem
 `;
 
 // const LoginLineRight = styled.span`
@@ -114,7 +143,8 @@ interface RegisterModalProps {
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
   const [showCompletionPopup, setShowCompletionPopup] = useState(false);
-
+  const [selectedOption, setSelectedOption] = useState('customer');   
+  
   const handleClosePopup = () => {
     setShowCompletionPopup(false);
   };
@@ -131,6 +161,10 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
 
 
   });
+
+  const handleSelect= (option) => {    
+    setSelectedOption(option);    
+  }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -168,6 +202,8 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
   };
 
   const handleSubmit = async () => {
+    console.log(selectedOption);
+
     // Validation: Check if any field is empty
     if (formData.username === '' || formData.password === '') {
       alert('Please fill in all fields.');
@@ -198,8 +234,8 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
       //  console.log(response.data);
       // Close modal and show success message if API call is successful
       if (response.data.success) {
-        setShowCompletionPopup(true);
         // onClose(); // Close modal
+        setShowCompletionPopup(true);
         alert('Registration successful!');
       } else {
         // Handle API response indicating failure
@@ -273,6 +309,33 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
               placeholder="Country"
             />
 
+            <Select  name="dashboard" className='dropdown' value={selectedOption}onChange={(e)=> handleSelect(e.target.value)}>
+              <option selected value="customer"> Customer Dashboard </option>
+              <option  value="partnership">Partnership Dashboard</option>
+            </Select>
+
+{/* <LoginRadio>
+            <label>
+              <InputField 
+                type="radio" 
+                value="customer" 
+                checked={dashboard === 'customer'} 
+                onChange={() => setDashboard('customer')} 
+              />
+               Customer Dashboard
+              </label>
+              <label>
+
+              
+              <InputField 
+                type="radio" 
+                value="partnership" 
+                checked={dashboard === 'partnership'} 
+                onChange={() => setDashboard('partnership')} 
+              />
+              Partnership Dashboard
+              </label>
+            </LoginRadio>  */}
             {/* <InputField className='border-2 rounded-md'
           type="text"
           value={formData.dashboardId}
@@ -286,7 +349,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
         </ModalContainer>
       )}
       {showCompletionPopup && (
-        <CompletionPopup onClose={handleClosePopup} />
+        <CompletionPopup navigatedashboard={selectedOption} onClose={handleClosePopup} />
       )}
     </>
   );

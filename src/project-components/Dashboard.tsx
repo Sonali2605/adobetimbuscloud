@@ -37,11 +37,15 @@ interface Certificate {
 const Dashboard = () => {
   const [certificate, setCertificate] = useState<Certificate | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const currentDate = new Date();
+
+  const formattedCurrentDate = currentDate.toISOString().split('T')[0]; // Format date as "YYYY-MM-DD"
+
   const [dotDates] = useState([
     "2024-03-25",
     "2024-03-11",
     "2024-03-24",
-    new Date()
+    formattedCurrentDate
   ]);
 
   // Assuming you have course data available
@@ -49,7 +53,7 @@ const Dashboard = () => {
     "2024-03-25": { title: "Achieving Peak Performance in Insurance Sale", description: "Check out this webinar to see how peak performers at Premier Protect read body language and keywords to pursue their customers." },
     "2024-03-11": { title: "Negotiation Techniques for Closing More Deals", description: "Learn how to effectively negotiate with clients and close more deals with confidence." },
     "2024-03-24": { title: "Building Rapport and Trust with Clients", description: "Discover strategies for building rapport and trust with your clients to create long-term relationships." },
-    "2024-03-21": { title: "Building Rapport and Trust with Clients 1", description: "Discover strategies for building rapport and trust with your clients to create long-term relationships." },
+    [formattedCurrentDate]: { title: "Building Rapport and Trust with Clients 1", description: "Discover strategies for building rapport and trust with your clients to create long-term relationships." },
   };
 
   useEffect(() => {
@@ -163,7 +167,7 @@ const Dashboard = () => {
               <MyLearning isCustomer={false} />
             </div>
             <div className="mt-4 mb-10" style={{ display: "flex" }}>
-              <div style={{ width: "40%", marginRight: "10px" }}>
+              <div style={{ minWidth: '20rem', width: "40%", marginRight: "10px" }}>
                 {selectedDate && (
               <CalendarCourse
                 selectedDate={selectedDate}
@@ -171,7 +175,7 @@ const Dashboard = () => {
               />
             )}
               </div>
-              <div style={{ width: '30%', marginTop: '0px', padding: '15px' }}>
+              <div style={{ width: '40%', marginTop: '5%', padding: '15px' }}>
               <Calendar
               onChange={handleDateChange}
               value={selectedDate}

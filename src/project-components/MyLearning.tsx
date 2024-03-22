@@ -75,7 +75,7 @@ const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
     }
 
     .course-card {
-      width: calc(20% - 20px); /* Adjust spacing between cards as needed */
+      width: calc(20% + 25px); /* Adjust spacing between cards as needed */
       margin-right: 20px;
       flex-shrink: 0;
       position: relative;
@@ -141,9 +141,9 @@ const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
   return (
     <div>
       {isCustomer ?
-      <h2 className="text-lg font-bold" style={{marginBottom:"45px"}}>My Learning List</h2>
+      <h2 className="font-bold text-left" style={{marginBottom:"18px", fontSize: '1.5rem'}}>My Learning List</h2>
       :
-      <h2 className="text-lg font-bold mb-4">My Learning</h2>
+      <h2 className="font-bold mb-4" style={{marginBottom:"18px", fontSize: '1.5rem'}}>My Learning</h2>
       }
       <style>{customStyles}</style>
       <div className="course-carousel-container">

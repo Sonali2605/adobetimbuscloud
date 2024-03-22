@@ -66,12 +66,12 @@
 .userDetails {
   background-image: url(./images/customer_Heading1.png);
     background-color: #131313;
-    padding: 30px 35px;
+    padding: 26px 22px;
     position: relative;
     display: flex;
     align-items: center;
     min-width: 20rem;    
-    height: 280px;
+    height: 255px;
     border-radius: 10px;
 }
 .userAvatar {
@@ -103,6 +103,7 @@ margin-right: 35px;
 .myLearning .course-card {
   width: 100%;
   margin: 0;
+  min-width: 14rem;
 }
 .cardView {
   display: grid;
@@ -141,9 +142,15 @@ margin-right: 35px;
 }
 
 /*** Dashboard Partnership Page CSS ***/
+.react-calendar__tile{
+  padding: 3px 6.6667px !important;
+}
 .react-calendar__tile--now{
 color: #000000 !important;
 }  
+.react-calendar{
+  border-radius: 8px !important;
+}
 .react-calendar__tile--active{
   color: #000000 !important;
   }  
@@ -159,7 +166,7 @@ color: #000000 !important;
   background-color: red;
   border-radius: 50%;
   position: absolute;
-  bottom: 5px;
+  bottom: 0px;
   left: 53%;
   transform: translateX(-50%);
 }
