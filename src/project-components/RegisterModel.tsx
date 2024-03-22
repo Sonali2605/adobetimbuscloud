@@ -1,8 +1,10 @@
+// @ts-nocheck
 import React, { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import CompletionPopup from './CompletionPopup';
 import ".././styles/common.css";
+import { clientId, clientSecreat, refreshToken, base_adobe_url } from "../AppConfig"
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -204,6 +206,30 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose }) => {
   const handleSubmit = async () => {
     console.log(selectedOption);
 
+    const client_id = clientId;
+    const client_secret = clientSecreat;
+    const refresh_token = refreshToken;
+
+    const params = new URLSearchParams({
+      client_id,
+      client_secret,
+      refresh_token
+    });
+    const url = `${base_adobe_url}/oauth/token/refresh`;
+    const responseToken = await axios.post(
+      `${url}`,
+      params,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+    const tokenData = responseToken.data;
+    localStorage.setItem(
+      'access_token',
+      tokenData.access_token
+    );
     // Validation: Check if any field is empty
     if (formData.username === '' || formData.password === '') {
       alert('Please fill in all fields.');

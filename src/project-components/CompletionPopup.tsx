@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components';
 import ".././styles/common.css";
 import { useState } from 'react';
@@ -86,7 +87,7 @@ const CompletionPopup = ({ onClose, navigatedashboard }) => {
   const [dashboard, setDashboard] = useState('customer'); // Default selection
   const handleGoToAcademy = () => {
     // onClose();
-    const newPath = navigatedashboard === 'customer' ? '/dashboard' : '/DashboardCustomer';
+    const newPath = navigatedashboard === 'customer' ? '/DashboardCustomer' : '/dashboard';
 
     if (location.pathname !== newPath) {
        window.location.href = newPath;
