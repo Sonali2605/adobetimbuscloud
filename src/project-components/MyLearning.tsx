@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useNavigate } from "react-router-dom";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 interface Course {
   id: string; // Assuming 'id' is a required property in your data
   attributes: {
@@ -137,16 +140,44 @@ const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
     }
    
   }
+
+  const scrollLeft = () => {
+    const carousel = document.querySelector('.learning .course-carousel');
+    carousel?.scrollBy({
+      left: -300, // Adjust this value to control the scroll distance
+      behavior: 'smooth',
+    });
+  };
+
+  const scrollRight = () => {
+    const carousel = document.querySelector('.learning .course-carousel');
+    carousel?.scrollBy({
+      left: 300, // Adjust this value to control the scroll distance
+      behavior: 'smooth',
+    });
+  };
   console.log(courseData)
   return (
     <div>
       {isCustomer ?
+      <>
       <h2 className="font-bold text-left" style={{marginBottom:"18px", fontSize: '1.5rem'}}>My Learning List</h2>
+      <div className="scroll-arrows" style={{marginTop: "-46px",marginLeft: "-446px"}}>
+          <FontAwesomeIcon icon={faChevronLeft} onClick={scrollLeft} />
+          <FontAwesomeIcon icon={faChevronRight} onClick={scrollRight} />
+        </div>
+      </>
       :
-      <h2 className="font-bold mb-4" style={{marginBottom:"18px", fontSize: '1.5rem'}}>My Learning</h2>
+      <>
+      <h2 className="text-lg font-bold mb-4" >My Learning</h2>
+      <div className="scroll-arrows" style={{marginTop: "-40px",marginLeft: "108px"}}>
+          <FontAwesomeIcon icon={faChevronLeft} onClick={scrollLeft} />
+          <FontAwesomeIcon icon={faChevronRight} onClick={scrollRight} />
+        </div>
+      </>
       }
       <style>{customStyles}</style>
-      <div className="course-carousel-container">
+      <div className="course-carousel-container learning pt-4" >
         <div className="course-carousel">
           {courseData.map((course, index) => (
             <div key={index} className="course-card">

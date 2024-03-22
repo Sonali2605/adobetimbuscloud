@@ -245,7 +245,7 @@ const DashboardCustomer = () => {
                       <div className="px-3">
                         <h2 className="text-center">{course?.attributes?.localizedMetadata?.[0]?.name}</h2>
                         <button className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full text-md mb-3" onClick={()=>EnrollHandle(course?.id)}>
-                          Explore
+                            EXPLORE
                         </button>
                       </div>
                     </div>

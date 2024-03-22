@@ -138,8 +138,8 @@ const Leaderboard = () => {
                 />
                 <div className="px-3">
                   <div className="text-sm mb-2 text-center">{course?.attributes?.localizedMetadata?.[0]?.name}</div>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded w-full text-sm mb-3" onClick={()=>EnrollHandle(course?.id)}>
-                    Explore
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded w-full text-sm mb-3 capitalize" onClick={()=>EnrollHandle(course?.id)}>
+                    EXPLORE
                   </button>
                 </div>
               </div>

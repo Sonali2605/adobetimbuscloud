@@ -94,3 +94,7 @@
   font-size: 16px;
   letter-spacing: 1.5px;
 }
+
+button{
+  text-transform: capitalize;
+}

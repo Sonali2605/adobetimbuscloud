@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 interface Course {
   id: string; // Assuming 'id' is a required property in your data
   attributes: {
@@ -131,16 +133,43 @@ const CourseExplore = ({ isCustomer }: { isCustomer: boolean }) => {
         console.log(error)
     }
    
-  }
+  } 
+  const scrollLeft = () => {
+    const carousel = document.querySelector('.customerExplore .course-carousel');
+    carousel?.scrollBy({
+      left: -300, // Adjust this value to control the scroll distance
+      behavior: 'smooth',
+    });
+  };
+
+  const scrollRight = () => {
+    const carousel = document.querySelector('.customerExplore .course-carousel');
+    carousel?.scrollBy({
+      left: 300, // Adjust this value to control the scroll distance
+      behavior: 'smooth',
+    });
+  };
   return (
     <div>
       {isCustomer? 
-       <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Recommended by Timbus</h2>
+      <>
+       <h2 className="text-2xl text-white font-bold mt-10 mb-8 text-left">Recommended by Timbus</h2> 
+       <div className="scroll-arrows" style={{marginTop: "-57px",marginLeft: "280px", textAlign:"left", color:"white"}}>
+          <FontAwesomeIcon icon={faChevronLeft} onClick={scrollLeft} />
+          <FontAwesomeIcon icon={faChevronRight} onClick={scrollRight} />
+        </div>
+      </>
        :
+       <>
       <h2 className="text-lg font-bold mb-4">Courses to Explore</h2>
+        <div className="scroll-arrows" style={{marginTop: "-40px",marginLeft: "150px"}}>
+          <FontAwesomeIcon icon={faChevronLeft} onClick={scrollLeft} />
+          <FontAwesomeIcon icon={faChevronRight} onClick={scrollRight} />
+        </div>
+       </>
       }
       <style>{customStyles}</style>
-      <div className="course-carousel-container">
+      <div className="course-carousel-container customerExplore pt-4">
         <div className="course-carousel">
           {courseData.map((course, index) => (
             <div key={index} className="course-card">
