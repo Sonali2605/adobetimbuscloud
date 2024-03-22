@@ -203,7 +203,7 @@ const DashBoardPartnership = () => {
                 />
           </div>*/}
           <div className="mt-4 mb-10" style={{ display: "flex" }}>
-              <div style={{ width: "40%", marginRight: "10px" }}>
+              <div style={{minWidth: '20rem', width: "40%", marginRight: "10px" }}>
                 {selectedDate && (
               <CalendarCourse
                 selectedDate={selectedDate}
@@ -211,7 +211,7 @@ const DashBoardPartnership = () => {
               />
             )}
               </div>
-              <div style={{ marginTop: '5px', padding: '50px' }}>
+              <div style={{ width: '50%', marginTop: '5%', padding: '15px' }}>
               <Calendar
               onChange={handleDateChange}
               value={selectedDate}

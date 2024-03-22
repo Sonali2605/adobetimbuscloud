@@ -75,7 +75,7 @@ const MyLearning = ({ isCustomer }: { isCustomer: boolean }) => {
     }
 
     .course-card {
-      width: calc(20% - 20px); /* Adjust spacing between cards as needed */
+      width: calc(20% + 25px); /* Adjust spacing between cards as needed */
       margin-right: 20px;
       flex-shrink: 0;
       position: relative;

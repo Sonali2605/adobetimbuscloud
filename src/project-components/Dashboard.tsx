@@ -163,7 +163,7 @@ const Dashboard = () => {
               <MyLearning isCustomer={false} />
             </div>
             <div className="mt-4 mb-10" style={{ display: "flex" }}>
-              <div style={{ width: "40%", marginRight: "10px" }}>
+              <div style={{ minWidth: '20rem', width: "40%", marginRight: "10px" }}>
                 {selectedDate && (
               <CalendarCourse
                 selectedDate={selectedDate}
@@ -171,7 +171,7 @@ const Dashboard = () => {
               />
             )}
               </div>
-              <div style={{ width: '30%', marginTop: '0px', padding: '15px' }}>
+              <div style={{ width: '40%', marginTop: '5%', padding: '15px' }}>
               <Calendar
               onChange={handleDateChange}
               value={selectedDate}
